@@ -1049,6 +1049,129 @@ p {
   min-height: 320px;
 }
 
+/* ——— Experiences API list ——— */
+.esperienze-list-wrap {
+  padding-top: 0.5rem;
+}
+
+.esperienze-list {
+  min-height: 240px;
+}
+
+.esperienze-list__status {
+  margin: 0;
+  padding: 2rem 0;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+.esperienze-list__fallback {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 1.5rem 0 0.5rem;
+  text-align: center;
+}
+
+.esperienze-list__fallback p {
+  margin: 0 0 0.5rem;
+  color: var(--ink-soft);
+}
+
+.esperienze-list__fallback .btn-row {
+  justify-content: center;
+}
+
+.esperienze-list__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.esperienze-card {
+  display: grid;
+  grid-template-columns: minmax(160px, 280px) 1fr;
+  gap: 0;
+  background: var(--white);
+  border: 1px solid rgba(74, 107, 62, 0.14);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.esperienze-card--soon {
+  opacity: 0.92;
+}
+
+.esperienze-card__media {
+  min-height: 180px;
+  background: var(--cream-deep);
+}
+
+.esperienze-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 4 / 3;
+}
+
+.esperienze-card__media--empty {
+  background:
+    linear-gradient(145deg, rgba(74, 107, 62, 0.12), transparent 55%),
+    var(--cream-deep);
+}
+
+.esperienze-card__body {
+  padding: 1.15rem 1.25rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.esperienze-card__body h3 {
+  margin: 0 0 0.45rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2vw, 1.35rem);
+  line-height: 1.25;
+  color: var(--green-dark);
+}
+
+.esperienze-card__desc {
+  margin: 0 0 0.65rem;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.esperienze-card__dates {
+  margin: 0 0 0.85rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--green-mid);
+  line-height: 1.45;
+}
+
+.esperienze-card__dates-label {
+  font-weight: 700;
+  color: var(--green-dark);
+}
+
+.esperienze-card__dates--soon {
+  color: var(--accent);
+}
+
+.esperienze-card__actions {
+  margin-top: auto;
+}
+
+@media (max-width: 720px) {
+  .esperienze-card {
+    grid-template-columns: 1fr;
+  }
+
+  .esperienze-card__media img {
+    aspect-ratio: 16 / 9;
+    max-height: 220px;
+  }
+}
+
 /* ——— Planyo map embed ——— */
 .planyo-map {
   max-width: 720px;
