@@ -1140,12 +1140,18 @@ a.btn.btn-primary:hover {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
+  grid-template-columns: 1.3fr 1fr 1fr 1.15fr;
   gap: 2rem;
   margin-bottom: 2rem;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
   .footer-grid {
     grid-template-columns: 1fr;
   }

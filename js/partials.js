@@ -63,6 +63,11 @@
       '<li><a href="come-funziona.html">Come funziona</a></li>' +
       '<li><a href="privacy.html">Privacy e cookie</a></li>' +
       '<li><a href="credits.html">Credits</a></li>' +
+      "</ul></div>" +
+      "<div><h3>Portali di informazione</h3><ul>" +
+      '<li><a href="https://macugnaga-monterosa.com/home" target="_blank" rel="noopener">Associazione Turistica Pro Loco Macugnaga (info, eventi e ricettività)</a></li>' +
+      '<li><a href="https://macugnagamonterosaski.com/" target="_blank" rel="noopener">Impianti di risalita</a></li>' +
+      '<li><a href="https://www.comune.macugnaga.vb.it/it-it/home" target="_blank" rel="noopener">Comune di Macugnaga</a></li>' +
       "</ul></div></div>" +
       '<div class="container footer-disclaimer">' +
       "<p>Informazioni, prezzi e disponibilità riportati dal portale di prenotazione sono indicati dai gestori delle esperienze. Con la prenotazione online riceverai i contatti diretti degli organizzatori, da contattare per ogni ulteriore informazione. " +
