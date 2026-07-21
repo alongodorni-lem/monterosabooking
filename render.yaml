@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: monterosabooking
+    runtime: python
+    plan: free
+    buildCommand: ""
+    startCommand: python serve.py
+    envVars:
+      - key: PLANYO_API_KEY
+        sync: false
+      - key: PYTHON_VERSION
+        value: "3.12.8"

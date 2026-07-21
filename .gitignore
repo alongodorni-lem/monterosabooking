@@ -1,0 +1,27 @@
+# Secrets - never commit
+js/planyo-config.js
+assets/API PLANYO.txt
+api/planyo-secrets.php
+.env
+.env.*
+
+# Local / agent / tooling (not needed on Render)
+tools/
+.planyo-diag/
+*.pyc
+__pycache__/
+.DS_Store
+Thumbs.db
+
+# Huge originals and drafts (pages use assets/web/ + stemma + video)
+assets/FOTO MINIERA/
+assets/widget *.txt
+assets/widget*.txt
+assets/*.png
+assets/*.jpg
+assets/*.jpeg
+assets/*.JPG
+!assets/stemma.png
+!assets/CAPOLAV-ORO1.mp4
+# Keep optimized web set
+!assets/web/
