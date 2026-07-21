@@ -64,6 +64,11 @@
       '<li><a href="privacy.html">Privacy e cookie</a></li>' +
       '<li><a href="credits.html">Credits</a></li>' +
       "</ul></div></div>" +
+      '<div class="container footer-disclaimer">' +
+      "<p>Informazioni, prezzi e disponibilità riportati dal portale di prenotazione sono indicati dai gestori delle esperienze. Con la prenotazione online riceverai i contatti diretti degli organizzatori, da contattare per ogni ulteriore informazione. " +
+      '<a href="https://www.raccontidigitali.it" target="_blank" rel="noopener">Lem s.r.l.</a> non è in alcun modo responsabile della gestione delle attività. ' +
+      '<a href="credits.html">Credits</a> · <a href="privacy.html">Privacy</a></p>' +
+      "</div>" +
       '<div class="container footer-bottom">' +
       "<span>© Mountain Experience Monterosa Macugnaga</span>" +
       '<span><a href="https://www.raccontidigitali.it" target="_blank" rel="noopener">Credits · raccontidigitali.it</a></span>' +
