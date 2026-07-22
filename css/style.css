@@ -1339,6 +1339,17 @@ p {
   }
 }
 
+/* Planyo lightbox above sticky header / search (li.css defaults are ~990–1000) */
+.planyo_lb_bg_hider {
+  z-index: 3000 !important;
+}
+.planyo_lb_window {
+  z-index: 3001 !important;
+}
+.planyo_lb_close {
+  z-index: 3002 !important;
+}
+
 /* Planyo lightbox booking CTA (Casa Walser etc.) */
 a.btn.btn-primary,
 a.btn.btn-primary:link,
