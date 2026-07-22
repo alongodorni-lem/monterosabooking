@@ -3,7 +3,7 @@
   "use strict";
 
   var SITE_ID = 70864;
-  var CACHE_KEY = "mem_esperienze_list_v1";
+  var CACHE_KEY = "mem_esperienze_list_v2";
   var CACHE_MS = 20 * 60 * 1000;
   var MAX_DATE_LABELS = 5;
   var DESC_MAX = 220;
@@ -13,9 +13,15 @@
     "253398": true /* Casa Museo Walser */,
     "252705": true /* Miniera d'Oro della Guia */,
   };
+  /* Richer local landings; used for Dettagli when present. */
   var DETAIL_PAGES = {
     "253398": "casa-museo-walser.html",
     "252705": "miniera-oro.html",
+  };
+  /* Reliable local images when Planyo photo is missing/broken (e.g. huge S3 PNGs). */
+  var PHOTO_FALLBACKS = {
+    "252382": "assets/web/forest-bathing.jpg",
+    "253390": "assets/web/forest-bathing.jpg",
   };
 
   function getApiKey() {
@@ -222,14 +228,85 @@
     });
   }
 
-  function firstPhotoUrl(resource) {
+  function absoluteMediaUrl(raw) {
+    var u = String(raw || "").trim();
+    if (!u || u === "null" || u === "undefined") return "";
+    if (/^\/\//.test(u)) u = "https:" + u;
+    if (/^https?:\/\//i.test(u)) {
+      return u.replace(/^http:\/\//i, "https://");
+    }
+    if (u.charAt(0) === "/") {
+      return "https://www.planyo.com" + u;
+    }
+    /* Bare Planyo/S3 object key or relative media path */
+    if (/^\d+_/.test(u) || /\.(jpe?g|png|webp|gif)(\?|$)/i.test(u)) {
+      if (u.indexOf("/") === -1) {
+        return "https://planyo-ch.s3.eu-central-2.amazonaws.com/" + u;
+      }
+      return "https://www.planyo.com/" + u.replace(/^\.\//, "");
+    }
+    return "";
+  }
+
+  function photoCandidateUrl(entry) {
+    if (!entry) return "";
+    if (typeof entry === "string") return absoluteMediaUrl(entry);
+    if (typeof entry !== "object") return "";
+    return absoluteMediaUrl(
+      entry.path ||
+        entry.url ||
+        entry.src ||
+        entry.image ||
+        entry.photo ||
+        entry.filename ||
+        ""
+    );
+  }
+
+  function firstPhotoUrl(resource, resourceId) {
+    var id = String(
+      resourceId || (resource && (resource.id || resource.resource_id)) || ""
+    );
+    /* Known local overrides first (reliable card thumbnails). */
+    if (id && PHOTO_FALLBACKS[id]) return PHOTO_FALLBACKS[id];
+
     var photos = resource && resource.photos;
     var list = asList(photos);
-    if (!list.length) return "";
-    var first = list[0];
-    if (!first) return "";
-    if (typeof first === "string") return first;
-    return String(first.path || first.url || "");
+    var i;
+    for (i = 0; i < list.length; i++) {
+      var url = photoCandidateUrl(list[i]);
+      if (url) return url;
+    }
+    var props = (resource && resource.properties) || {};
+    var fromProps = absoluteMediaUrl(
+      props.image ||
+        props.Image ||
+        props.photo ||
+        props.Photo ||
+        props.picture ||
+        props.main_image ||
+        ""
+    );
+    if (fromProps) return fromProps;
+    return "";
+  }
+
+  function detailPageUrl(resourceId) {
+    var id = String(resourceId || "");
+    if (!id) return "";
+    if (DETAIL_PAGES[id]) return DETAIL_PAGES[id];
+    /* Planyo public resource description (not the reserve form). */
+    return (
+      "https://www.planyo.com/booking.php?calendar=" +
+      encodeURIComponent(getSiteId()) +
+      "&mode=resource_desc&resource_id=" +
+      encodeURIComponent(id) +
+      "&presentation_mode=1&planyo_lang=IT"
+    );
+  }
+
+  function isExternalUrl(url) {
+    return /^https?:\/\//i.test(String(url || ""));
   }
 
   function resourceDescription(resource) {
@@ -367,13 +444,16 @@
       var name = String(r.name || "");
       if (!id || !name) return Promise.resolve(null);
 
+      var photo = firstPhotoUrl(r, id);
+      var detailUrl = detailPageUrl(id);
       var special = augustMode && isSpecialResource(id, name);
       if (special) {
         return Promise.resolve({
           resourceId: id,
           name: name,
           description: resourceDescription(r),
-          photo: firstPhotoUrl(r),
+          photo: photo,
+          detailUrl: detailUrl,
           sortKey: today,
           dateLabels: [AUGUST_LABEL],
           upcoming: true,
@@ -388,7 +468,8 @@
             resourceId: id,
             name: name,
             description: resourceDescription(r),
-            photo: firstPhotoUrl(r),
+            photo: photo,
+            detailUrl: detailUrl,
             sortKey: "9999-12-31",
             dateLabels: ["Prossimamente"],
             upcoming: false,
@@ -399,7 +480,8 @@
           resourceId: id,
           name: name,
           description: resourceDescription(r),
-          photo: firstPhotoUrl(r),
+          photo: photo,
+          detailUrl: detailUrl,
           sortKey: days[0],
           dateLabels: days.map(formatItDay),
           upcoming: true,
@@ -451,12 +533,13 @@
   }
 
   function renderItem(item) {
-    var detailHref = DETAIL_PAGES[item.resourceId];
     var reserve = reserveUrl(item.resourceId);
-    var img = item.photo
+    var detailHref = item.detailUrl || detailPageUrl(item.resourceId);
+    var photoSrc = item.photo || PHOTO_FALLBACKS[String(item.resourceId)] || "";
+    var img = photoSrc
       ? '<div class="esperienze-card__media"><img src="' +
-        escapeHtml(item.photo) +
-        '" alt="" width="640" height="400" loading="lazy"></div>'
+        escapeHtml(photoSrc) +
+        '" alt="" width="640" height="400" loading="lazy" data-photo-fallback="1"></div>'
       : '<div class="esperienze-card__media esperienze-card__media--empty" aria-hidden="true"></div>';
 
     var datesClass =
@@ -469,19 +552,18 @@
       escapeHtml(item.dateLabels.join(" · ")) +
       "</p>";
 
-    var detailBtn;
+    /* Dettagli: resource page only — never the reserve lightbox. */
+    var detailBtn = "";
     if (detailHref) {
+      var detailAttrs = isExternalUrl(detailHref)
+        ? ' target="_blank" rel="noopener"'
+        : "";
       detailBtn =
         '<a class="btn btn--outline" href="' +
         escapeHtml(detailHref) +
-        '">Dettagli</a>';
-    } else {
-      detailBtn =
-        '<a class="btn btn--outline" href="' +
-        escapeHtml(reserve) +
-        '" data-resource-id="' +
-        escapeHtml(item.resourceId) +
-        '" data-action="reserve">Dettagli</a>';
+        '"' +
+        detailAttrs +
+        ">Dettagli</a>";
     }
 
     var bookBtn =
@@ -537,6 +619,23 @@
     el.querySelectorAll('[data-action="reserve"]').forEach(function (a) {
       a.addEventListener("click", function (evt) {
         openReserve(a.getAttribute("data-resource-id"), evt);
+      });
+    });
+
+    el.querySelectorAll("img[data-photo-fallback]").forEach(function (imgEl) {
+      imgEl.addEventListener("error", function () {
+        var card = imgEl.closest("[data-resource-id]");
+        var rid = card ? card.getAttribute("data-resource-id") : "";
+        var fb = rid ? PHOTO_FALLBACKS[String(rid)] : "";
+        if (fb && imgEl.getAttribute("src") !== fb) {
+          imgEl.src = fb;
+          return;
+        }
+        var media = imgEl.parentNode;
+        if (media) {
+          media.classList.add("esperienze-card__media--empty");
+          imgEl.remove();
+        }
       });
     });
   }
