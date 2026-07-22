@@ -3,8 +3,10 @@
   "use strict";
 
   var SITE_ID = 70864;
-  var CACHE_KEY = "mem_esperienze_list_v4";
-  var CACHE_MS = 30 * 60 * 1000;
+  /* Hard TTL in localStorage. Force refresh after Planyo admin changes: bump
+     CACHE_KEY (e.g. v6), or clear localStorage key mem_esperienze_list_*. */
+  var CACHE_KEY = "mem_esperienze_list_v5";
+  var CACHE_MS = 12 * 60 * 60 * 1000;
   var EVENT_TIMES_CONCURRENCY = 6;
   var MAX_DATE_LABELS = 5;
   var DESC_MAX = 220;
@@ -142,7 +144,7 @@
 
   function readCache() {
     try {
-      var raw = sessionStorage.getItem(CACHE_KEY);
+      var raw = localStorage.getItem(CACHE_KEY);
       if (!raw) return null;
       var parsed = JSON.parse(raw);
       if (!parsed || !parsed.ts || !Array.isArray(parsed.items)) return null;
@@ -155,7 +157,7 @@
 
   function writeCache(items) {
     try {
-      sessionStorage.setItem(
+      localStorage.setItem(
         CACHE_KEY,
         JSON.stringify({ ts: Date.now(), items: items })
       );

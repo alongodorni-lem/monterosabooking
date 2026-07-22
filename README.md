@@ -15,6 +15,8 @@ python serve.py
 
 Default port is `8765`. Override with `PORT` / `HOST` env vars.
 
+**API cache:** `serve.py` caches safe Planyo reads for **12 hours** by default (`PROXY_CACHE_TTL_SEC`). Browser list/ticker use **localStorage** with the same 12h hard TTL. After admin changes to activities/calendar: bump the `CACHE_KEY` in `js/esperienze-list.js` / `js/availability-bar.js`, clear those `localStorage` keys, restart `serve.py` (or hit `/api/planyo-cache-purge`), or lower `PROXY_CACHE_TTL_SEC`.
+
 ## Secrets
 
 Never commit:

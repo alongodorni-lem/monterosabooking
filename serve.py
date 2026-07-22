@@ -12,8 +12,12 @@ Also accepts /api/planyo-proxy.php?... for parity with PHP hosting.
 Injects PLANYO_API_KEY from the environment when the client omits api_key
 (so the key need not be committed to the repo).
 
-Short in-memory cache (PROXY_CACHE_TTL_SEC, default 90s) for repeated
-list_resources / get_event_times / resource_search GETs.
+Long-lived in-memory cache (PROXY_CACHE_TTL_SEC, default 12h) for safe
+read methods: list_resources / get_event_times / get_resource_info /
+resource_search. api_test is never cached. Cache key = method + sorted
+query params (api_key excluded). Cleared on process restart, or via
+GET /api/planyo-cache-purge. After Planyo admin changes: bump client
+cache keys, clear localStorage, restart serve, or POST/GET the purge URL.
 """
 
 from __future__ import annotations
@@ -43,7 +47,8 @@ CACHEABLE_METHODS = {
     "get_event_times",
     "get_resource_info",
 }
-PROXY_CACHE_TTL_SEC = int(os.environ.get("PROXY_CACHE_TTL_SEC", "90"))
+# Experiences/calendar change rarely — default 12 hours (set PROXY_CACHE_TTL_SEC to override).
+PROXY_CACHE_TTL_SEC = int(os.environ.get("PROXY_CACHE_TTL_SEC", str(12 * 60 * 60)))
 PROXY_CACHE_MAX_ENTRIES = int(os.environ.get("PROXY_CACHE_MAX_ENTRIES", "256"))
 
 _cache_lock = threading.Lock()
@@ -89,9 +94,20 @@ def _cache_set(key: str, body: bytes) -> None:
         _cache[key] = (now, body)
 
 
+def _cache_purge() -> int:
+    with _cache_lock:
+        n = len(_cache)
+        _cache.clear()
+        return n
+
+
 class Handler(SimpleHTTPRequestHandler):
     def do_GET(self):  # noqa: N802
         parsed = urllib.parse.urlparse(self.path)
+        if parsed.path in ("/api/planyo-cache-purge", "/api/planyo-cache-purge/"):
+            cleared = _cache_purge()
+            self.send_json(200, {"ok": True, "cleared": cleared})
+            return
         if parsed.path in ("/api/planyo", "/api/planyo-proxy.php"):
             self.proxy_planyo(parsed.query)
             return

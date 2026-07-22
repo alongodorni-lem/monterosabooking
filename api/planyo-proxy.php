@@ -3,17 +3,23 @@
  * Same-origin CORS proxy for the booking REST API (static + PHP hosting).
  * Forwards only safe read methods. API key comes from the client query string
  * (js/planyo-config.js) or optionally from api/planyo-secrets.php.
+ * No server-side response cache here — rely on client localStorage (12h) or
+ * use serve.py (PROXY_CACHE_TTL_SEC) for in-memory proxy caching.
  */
 header('Content-Type: application/json; charset=UTF-8');
-header('Cache-Control: private, max-age=0');
 
 $allowed = array('resource_search', 'list_resources', 'get_event_times', 'get_resource_info', 'api_test');
+$cacheable = array('resource_search', 'list_resources', 'get_event_times', 'get_resource_info');
 $method = isset($_GET['method']) ? (string) $_GET['method'] : '';
 if (!in_array($method, $allowed, true)) {
   http_response_code(400);
   echo json_encode(array('response_code' => 3, 'response_message' => 'Method not allowed via proxy'));
   exit;
 }
+
+/* Hint browsers/CDNs; primary long cache is client localStorage + serve.py. */
+$ttl = in_array($method, $cacheable, true) ? 43200 : 0;
+header('Cache-Control: private, max-age=' . $ttl);
 
 $params = $_GET;
 if (empty($params['api_key']) && is_readable(__DIR__ . '/planyo-secrets.php')) {
