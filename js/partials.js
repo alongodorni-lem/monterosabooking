@@ -94,8 +94,6 @@
       '<li><a href="funivia-seggiovia.html">Impianti</a></li>' +
       '<li><a href="mappa.html">Mappa esperienze</a></li>' +
       '<li><a href="come-funziona.html">Come funziona</a></li>' +
-      '<li><a href="privacy.html">Privacy e cookie</a></li>' +
-      '<li><a href="credits.html">Credits</a></li>' +
       "</ul></div>" +
       "<div><h3>Portali di informazione</h3><ul>" +
       '<li><a href="https://macugnaga-monterosa.com/home" target="_blank" rel="noopener">Associazione Turistica Pro Loco Macugnaga (info, eventi e ricettività)</a></li>' +
@@ -109,7 +107,7 @@
       "</div>" +
       '<div class="container footer-bottom">' +
       "<span>© Mountain Experience Monterosa Macugnaga</span>" +
-      '<span><a href="https://www.raccontidigitali.it" target="_blank" rel="noopener">Credits · raccontidigitali.it</a></span>' +
+      '<span><a href="privacy.html">Privacy</a> · <a href="credits.html">Credits</a></span>' +
       "</div></footer>";
   }
 
