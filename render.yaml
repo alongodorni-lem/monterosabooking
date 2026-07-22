@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: monterosabooking
+    name: macugnagabooking
     runtime: python
     plan: starter
     buildCommand: ""
