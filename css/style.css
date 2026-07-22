@@ -1295,6 +1295,12 @@ p {
   color: var(--accent);
 }
 
+.esperienze-card__dates--loading {
+  color: var(--ink-soft);
+  font-weight: 500;
+  font-style: italic;
+}
+
 .esperienze-card__actions {
   margin-top: auto;
 }

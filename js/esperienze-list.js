@@ -3,11 +3,13 @@
   "use strict";
 
   var SITE_ID = 70864;
-  var CACHE_KEY = "mem_esperienze_list_v3";
-  var CACHE_MS = 20 * 60 * 1000;
+  var CACHE_KEY = "mem_esperienze_list_v4";
+  var CACHE_MS = 30 * 60 * 1000;
+  var EVENT_TIMES_CONCURRENCY = 6;
   var MAX_DATE_LABELS = 5;
   var DESC_MAX = 220;
   var AUGUST_LABEL = "Tutto Agosto";
+  var DATES_LOADING_LABEL = "Caricamento date…";
   var REST_URL = "https://www.planyo.com/rest/";
   var SPECIAL_RESOURCE_IDS = {
     "253398": true /* Casa Museo Walser */,
@@ -43,6 +45,7 @@
   }
 
   var resolvedEndpoint = null;
+  var endpointDiscovery = null;
 
   function mountEl() {
     return document.getElementById("esperienze-list");
@@ -110,14 +113,22 @@
       .replace(/"/g, "&quot;");
   }
 
+  /* Regex strip — avoids creating a DOM node per card description. */
   function stripHtml(html) {
-    var tmp = document.createElement("div");
-    tmp.innerHTML = String(html || "");
-    var text = (tmp.textContent || tmp.innerText || "")
+    return String(html || "")
+      .replace(/<script[\s\S]*?<\/script>/gi, " ")
+      .replace(/<style[\s\S]*?<\/style>/gi, " ")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/&nbsp;/gi, " ")
+      .replace(/&#160;/gi, " ")
+      .replace(/&amp;/g, "&")
+      .replace(/&lt;/g, "<")
+      .replace(/&gt;/g, ">")
+      .replace(/&quot;/g, '"')
+      .replace(/&#39;/g, "'")
       .replace(/\u00a0/g, " ")
       .replace(/\s+/g, " ")
       .trim();
-    return text;
   }
 
   function truncateText(text, max) {
@@ -167,7 +178,7 @@
     return fetch(url, {
       method: "GET",
       credentials: "omit",
-      cache: "no-store",
+      cache: "default",
     }).then(function (res) {
       if (!res.ok) throw new Error("HTTP " + res.status);
       return res.json();
@@ -178,8 +189,16 @@
     if (resolvedEndpoint) {
       return fetchJson(buildUrl(resolvedEndpoint, params));
     }
+
+    /* Share one endpoint discovery so parallel callers don't each walk candidates. */
+    if (endpointDiscovery) {
+      return endpointDiscovery.then(function (base) {
+        return fetchJson(buildUrl(base, params));
+      });
+    }
+
     var candidates = getEndpointCandidates();
-    var tryNext = function (i) {
+    var discover = (function tryNext(i) {
       if (i >= candidates.length) {
         return Promise.reject(new Error("No API endpoint available"));
       }
@@ -187,14 +206,61 @@
       return fetchJson(buildUrl(base, params)).then(
         function (json) {
           resolvedEndpoint = base;
-          return json;
+          return { base: base, json: json };
         },
         function () {
           return tryNext(i + 1);
         }
       );
-    };
-    return tryNext(0);
+    })(0);
+
+    endpointDiscovery = discover
+      .then(function (found) {
+        return found.base;
+      })
+      .catch(function (err) {
+        endpointDiscovery = null;
+        throw err;
+      });
+
+    return discover.then(function (found) {
+      return found.json;
+    });
+  }
+
+  function mapPool(items, concurrency, worker) {
+    var results = new Array(items.length);
+    var next = 0;
+    var active = 0;
+
+    return new Promise(function (resolve, reject) {
+      var kick = function () {
+        if (next >= items.length && active === 0) {
+          resolve(results);
+          return;
+        }
+        while (active < concurrency && next < items.length) {
+          (function (index) {
+            active++;
+            Promise.resolve()
+              .then(function () {
+                return worker(items[index], index);
+              })
+              .then(function (value) {
+                results[index] = value;
+                active--;
+                kick();
+              })
+              .catch(reject);
+          })(next++);
+        }
+      };
+      if (!items.length) {
+        resolve(results);
+        return;
+      }
+      kick();
+    });
   }
 
   function loadScript(src) {
@@ -441,65 +507,101 @@
       });
   }
 
-  function buildItems(resources, apiKey) {
-    var today = romeYmd(0);
-    var augustMode = isThroughAugustPeriod();
-
-    var jobs = resources.map(function (r) {
-      var id = String(r.id || r.resource_id || "");
-      var name = String(r.name || "");
-      if (!id || !name) return Promise.resolve(null);
-
-      var photo = firstPhotoUrl(r, id);
-      var special = augustMode && isSpecialResource(id, name);
-      if (special) {
-        return Promise.resolve({
-          resourceId: id,
-          name: name,
-          description: resourceDescription(r),
-          photo: photo,
-          sortKey: today,
-          dateLabels: [AUGUST_LABEL],
-          upcoming: true,
-          specialAugust: true,
-        });
-      }
-
-      return getEventTimes(apiKey, id).then(function (times) {
-        var days = uniqueUpcomingDays(times, today);
-        if (!days.length) {
-          return {
-            resourceId: id,
-            name: name,
-            description: resourceDescription(r),
-            photo: photo,
-            sortKey: "9999-12-31",
-            dateLabels: ["Prossimamente"],
-            upcoming: false,
-            specialAugust: false,
-          };
-        }
-        return {
-          resourceId: id,
-          name: name,
-          description: resourceDescription(r),
-          photo: photo,
-          sortKey: days[0],
-          dateLabels: days.map(formatItDay),
-          upcoming: true,
-          specialAugust: false,
-        };
-      });
+  function sortItems(items) {
+    return items.slice().sort(function (a, b) {
+      if (a.sortKey < b.sortKey) return -1;
+      if (a.sortKey > b.sortKey) return 1;
+      return String(a.name).localeCompare(String(b.name), "it");
     });
+  }
 
-    return Promise.all(jobs).then(function (items) {
-      return items
-        .filter(Boolean)
-        .sort(function (a, b) {
-          if (a.sortKey < b.sortKey) return -1;
-          if (a.sortKey > b.sortKey) return 1;
-          return String(a.name).localeCompare(String(b.name), "it");
-        });
+  function stubFromResource(r, today, augustMode) {
+    var id = String(r.id || r.resource_id || "");
+    var name = String(r.name || "");
+    if (!id || !name) return null;
+
+    var photo = firstPhotoUrl(r, id);
+    var special = augustMode && isSpecialResource(id, name);
+    if (special) {
+      return {
+        resourceId: id,
+        name: name,
+        description: resourceDescription(r),
+        photo: photo,
+        sortKey: today,
+        dateLabels: [AUGUST_LABEL],
+        upcoming: true,
+        specialAugust: true,
+        datesPending: false,
+      };
+    }
+
+    return {
+      resourceId: id,
+      name: name,
+      description: resourceDescription(r),
+      photo: photo,
+      sortKey: "9999-12-30",
+      dateLabels: [DATES_LOADING_LABEL],
+      upcoming: true,
+      specialAugust: false,
+      datesPending: true,
+    };
+  }
+
+  function applyEventTimes(item, times, today) {
+    var days = uniqueUpcomingDays(times, today);
+    if (!days.length) {
+      item.sortKey = "9999-12-31";
+      item.dateLabels = ["Prossimamente"];
+      item.upcoming = false;
+    } else {
+      item.sortKey = days[0];
+      item.dateLabels = days.map(formatItDay);
+      item.upcoming = true;
+    }
+    item.datesPending = false;
+    return item;
+  }
+
+  function patchCardDates(item) {
+    var el = mountEl();
+    if (!el) return;
+    var card = el.querySelector(
+      '.esperienze-card[data-resource-id="' + item.resourceId + '"]'
+    );
+    if (!card) return;
+    var datesEl = card.querySelector(".esperienze-card__dates");
+    if (!datesEl) return;
+    datesEl.className =
+      "esperienze-card__dates" +
+      (item.upcoming ? "" : " esperienze-card__dates--soon") +
+      (item.datesPending ? " esperienze-card__dates--loading" : "");
+    datesEl.innerHTML =
+      '<span class="esperienze-card__dates-label">Prossime date:</span> ' +
+      escapeHtml(item.dateLabels.join(" · "));
+    if (item.upcoming) {
+      card.classList.remove("esperienze-card--soon");
+    } else {
+      card.classList.add("esperienze-card--soon");
+    }
+  }
+
+  function enrichPendingDates(items, apiKey) {
+    var today = romeYmd(0);
+    var pending = items.filter(function (item) {
+      return item && item.datesPending;
+    });
+    if (!pending.length) return Promise.resolve(items);
+
+    return mapPool(pending, EVENT_TIMES_CONCURRENCY, function (item) {
+      return getEventTimes(apiKey, item.resourceId).then(function (times) {
+        applyEventTimes(item, times, today);
+        patchCardDates(item);
+        return item;
+      });
+    }).then(function () {
+      return items;
     });
   }
 
@@ -552,7 +654,8 @@
 
     var datesClass =
       "esperienze-card__dates" +
-      (item.upcoming ? "" : " esperienze-card__dates--soon");
+      (item.upcoming ? "" : " esperienze-card__dates--soon") +
+      (item.datesPending ? " esperienze-card__dates--loading" : "");
     var datesHtml =
       '<p class="' +
       datesClass +
@@ -598,25 +701,7 @@
     );
   }
 
-  function render(items) {
-    var el = mountEl();
-    if (!el) return;
-    if (!items || !items.length) {
-      el.innerHTML =
-        '<p class="esperienze-list__status">Nessuna esperienza disponibile al momento.</p>';
-      return;
-    }
-    el.innerHTML =
-      '<div class="esperienze-list__grid" role="list">' +
-      items
-        .map(function (item) {
-          return (
-            '<div role="listitem">' + renderItem(item) + "</div>"
-          );
-        })
-        .join("") +
-      "</div>";
-
+  function bindListInteractions(el) {
     el.querySelectorAll('[data-action="reserve"]').forEach(function (a) {
       a.addEventListener("click", function (evt) {
         openReserve(a.getAttribute("data-resource-id"), evt);
@@ -647,23 +732,68 @@
     });
   }
 
+  function render(items) {
+    var el = mountEl();
+    if (!el) return;
+    if (!items || !items.length) {
+      el.innerHTML =
+        '<p class="esperienze-list__status">Nessuna esperienza disponibile al momento.</p>';
+      return;
+    }
+    el.innerHTML =
+      '<div class="esperienze-list__grid" role="list">' +
+      items
+        .map(function (item) {
+          return (
+            '<div role="listitem">' + renderItem(item) + "</div>"
+          );
+        })
+        .join("") +
+      "</div>";
+
+    bindListInteractions(el);
+  }
+
   function fetchAndRender() {
     var apiKey = getApiKey();
-    return listResources(apiKey, getSiteId())
-      .then(function (resources) {
-        return buildItems(resources, apiKey);
-      })
-      .then(function (items) {
-        writeCache(items);
-        render(items);
+    var today = romeYmd(0);
+    var augustMode = isThroughAugustPeriod();
+
+    return listResources(apiKey, getSiteId()).then(function (resources) {
+      var stubs = resources
+        .map(function (r) {
+          return stubFromResource(r, today, augustMode);
+        })
+        .filter(Boolean)
+        .sort(function (a, b) {
+          return String(a.name).localeCompare(String(b.name), "it");
+        });
+
+      /* First paint: cards + CTAs as soon as list_resources returns. */
+      render(stubs);
+
+      return enrichPendingDates(stubs, apiKey).then(function (items) {
+        var sorted = sortItems(items).map(function (item) {
+          return {
+            resourceId: item.resourceId,
+            name: item.name,
+            description: item.description,
+            photo: item.photo,
+            sortKey: item.sortKey,
+            dateLabels: item.dateLabels,
+            upcoming: item.upcoming,
+            specialAugust: item.specialAugust,
+          };
+        });
+        writeCache(sorted);
+        render(sorted);
       });
+    });
   }
 
   function boot(forceRefresh) {
     var el = mountEl();
     if (!el) return;
-
-    renderLoading();
 
     ensureConfig()
       .then(function () {
@@ -674,6 +804,7 @@
             return;
           }
         }
+        renderLoading();
         return fetchAndRender();
       })
       .catch(function () {
