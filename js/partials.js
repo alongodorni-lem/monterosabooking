@@ -21,7 +21,10 @@
     el.innerHTML =
       '<div class="site-header">' +
       '<div class="site-header__top">' +
-      '<button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>' +
+      '<button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Apri menu">' +
+      '<span class="nav-toggle__bars" aria-hidden="true">' +
+      "<span></span><span></span><span></span>" +
+      "</span></button>" +
       '<nav class="site-nav" id="site-nav" aria-label="Principale">' +
       navLink("index.html", "Home", page) +
       navLink("esperienze.html", "Esperienze", page) +
@@ -35,6 +38,36 @@
       navLink("faq.html", "FAQ", page) +
       '<a class="nav-cta" href="esperienze.html">Prenota online</a>' +
       "</nav></div></div>";
+
+    initMobileNav();
+  }
+
+  function initMobileNav() {
+    var toggle = document.querySelector(".nav-toggle");
+    var nav = document.getElementById("site-nav");
+    if (!toggle || !nav || toggle.dataset.navBound === "1") return;
+    toggle.dataset.navBound = "1";
+
+    function setOpen(open) {
+      nav.classList.toggle("is-open", open);
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      toggle.setAttribute("aria-label", open ? "Chiudi menu" : "Apri menu");
+    }
+
+    toggle.addEventListener("click", function () {
+      setOpen(!nav.classList.contains("is-open"));
+    });
+
+    nav.addEventListener("click", function (e) {
+      if (e.target && e.target.closest("a")) setOpen(false);
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && nav.classList.contains("is-open")) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
   }
 
   function renderFooter() {

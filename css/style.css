@@ -160,13 +160,51 @@ p {
   display: none;
   margin-left: auto;
   border: 1px solid var(--green);
-  background: transparent;
+  background: var(--cream);
   color: var(--green-dark);
-  padding: 0.4rem 0.7rem;
+  width: 2.6rem;
+  height: 2.6rem;
+  padding: 0;
   border-radius: var(--radius);
-  font-family: var(--font-body);
-  font-weight: 600;
   cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-toggle:hover,
+.nav-toggle:focus-visible {
+  background: var(--cream-deep);
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+.nav-toggle__bars {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 1.15rem;
+}
+
+.nav-toggle__bars span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--green-dark);
+  border-radius: 1px;
+  transition: transform 0.2s var(--ease), opacity 0.2s var(--ease);
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle__bars span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle__bars span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle__bars span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 .site-nav {
@@ -261,6 +299,84 @@ p {
   border-color: #734c28 !important;
 }
 
+@media (max-width: 720px) {
+  .site-search {
+    padding: 0.45rem 0;
+  }
+
+  .site-search .container {
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+
+  .site-search .planyo.horizontal-widget {
+    width: 100%;
+  }
+
+  .site-search #box_search_form {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0.45rem;
+    width: 100%;
+    text-align: left;
+  }
+
+  .site-search .planyo-form-item-group,
+  .site-search .form-group,
+  .site-search #row_box_start_date,
+  .site-search #row_box_end_date,
+  .site-search #res_form_buttons {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    float: none !important;
+    text-align: left !important;
+  }
+
+  .site-search #box_search_form label,
+  .site-search .control-label {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 0 0.2rem !important;
+    padding: 0 !important;
+    float: none !important;
+    text-align: left !important;
+    font-size: 0.78rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .site-search .input-group,
+  .site-search .form-control,
+  .site-search input[type="text"] {
+    width: 100% !important;
+    max-width: none !important;
+    text-align: left !important;
+  }
+
+  .site-search .form-control,
+  .site-search input[type="text"] {
+    height: 2.15rem !important;
+    min-height: 2.15rem !important;
+    padding: 0.3rem 0.55rem !important;
+    font-size: 0.88rem !important;
+  }
+
+  .site-search #res_form_buttons label {
+    display: none !important;
+  }
+
+  .site-search #box_submit_button,
+  .site-search .btn-primary {
+    width: 100% !important;
+    height: 2.25rem !important;
+    min-height: 2.25rem !important;
+    padding: 0.35rem 0.75rem !important;
+    font-size: 0.9rem !important;
+    line-height: 1.2 !important;
+  }
+}
+
 /* ——— Availability highlight (1-line news ticker, 15 date slots) ——— */
 .availability-bar {
   background: var(--accent);
@@ -309,7 +425,7 @@ p {
   align-items: center;
   gap: 0;
   width: max-content;
-  animation: availability-ticker 110s linear infinite;
+  animation: availability-ticker 75s linear infinite;
 }
 
 .availability-bar__viewport:hover .availability-bar__track {
@@ -413,6 +529,10 @@ p {
     gap: 0.65rem;
   }
 
+  .availability-bar__track {
+    animation-duration: 40s;
+  }
+
   .availability-bar__item {
     font-size: 0.82rem;
     padding: 0.15rem 1rem;
@@ -425,23 +545,41 @@ p {
 
 @media (max-width: 860px) {
   .nav-toggle {
-    display: inline-block;
+    display: inline-flex;
   }
 
   .site-nav {
     display: none;
     width: 100%;
     flex-direction: column;
-    align-items: flex-start;
-    padding-bottom: 1rem;
+    align-items: stretch;
+    gap: 0;
+    padding: 0.35rem 0 0.85rem;
+    border-top: 1px solid rgba(74, 107, 62, 0.12);
+    margin-top: 0.15rem;
   }
 
   .site-nav.is-open {
     display: flex;
   }
 
+  .site-nav a {
+    width: 100%;
+    padding: 0.65rem 0.15rem;
+    border-bottom: 1px solid rgba(74, 107, 62, 0.08);
+    font-size: 1rem;
+  }
+
+  .site-nav .nav-cta {
+    margin-top: 0.55rem;
+    text-align: center;
+    border-bottom: none;
+  }
+
   .site-header__top {
     flex-wrap: wrap;
+    justify-content: flex-end;
+    padding-block: 0.35rem;
   }
 }
 

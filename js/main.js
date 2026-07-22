@@ -4,17 +4,6 @@
 
   var COOKIE_KEY = "mem_macugnaga_cookie_consent";
 
-  function initNav() {
-    var toggle = document.querySelector(".nav-toggle");
-    var nav = document.getElementById("site-nav");
-    if (!toggle || !nav) return;
-
-    toggle.addEventListener("click", function () {
-      var open = nav.classList.toggle("is-open");
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
-    });
-  }
-
   function initCookieBanner() {
     var banner = document.getElementById("cookie-banner");
     if (!banner) return;
@@ -76,7 +65,6 @@
   }
 
   function boot() {
-    initNav();
     initCookieBanner();
     initReveal();
     initHero();
@@ -84,15 +72,9 @@
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", function () {
-      // partials may run first; slight delay for injected header
       setTimeout(boot, 0);
     });
   } else {
     setTimeout(boot, 0);
   }
-
-  // Re-init nav after partials inject (partials is sync for header)
-  document.addEventListener("DOMContentLoaded", function () {
-    setTimeout(initNav, 50);
-  });
 })();
