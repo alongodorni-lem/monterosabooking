@@ -78,7 +78,7 @@
       '<footer class="site-footer">' +
       '<div class="container footer-grid">' +
       '<div class="footer-brand">' +
-      '<img src="assets/stemma.png" width="64" height="64" alt="Stemma Unione Montana Valli dell\'Ossola">' +
+      '<img src="assets/stemma.png" width="64" height="64" alt="Stemma Unione Montana Valli dell\'Ossola" loading="lazy">' +
       "<div><strong>Unione Montana Valli dell'Ossola</strong>" +
       "<p>FOSMIT · Fondo Sviluppo Montagne Italiane — Regione Piemonte</p>" +
       '<p>Booking engine sviluppato da <a href="https://www.raccontidigitali.it" target="_blank" rel="noopener">Lem s.r.l.</a> per Unione Montana Valli dell\'Ossola e operatori locali.</p>' +
@@ -274,7 +274,7 @@
         /* missing config: bar stays hidden */
       })
       .then(function () {
-        return loadScript("js/availability-bar.js");
+        return loadScript("js/availability-bar.js?v=6");
       })
       .catch(function () {
         /* quiet fail */

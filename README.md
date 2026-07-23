@@ -37,7 +37,8 @@ Blueprint: `render.yaml` (service name **macugnagabooking**).
 2. Set env var **`PLANYO_API_KEY`** to your Planyo API key.
 3. Start command: `python serve.py` (binds `0.0.0.0:$PORT`).
 
-Expected URL: https://macugnagabooking.onrender.com
+**Canonical / live domain:** https://www.macugnagabooking.it  
+Render service URL (fallback): https://macugnagabooking.onrender.com
 
 **Renaming an existing service (subdomain):** Render matches Blueprint services by `name`. Change the live service name *before* (or together with) applying a Blueprint that uses the new name — otherwise Render may create a second service. Prefer Dashboard → service **Settings → Name** → `macugnagabooking`, or `render services update monterosabooking --name macugnagabooking`. Do not delete the service. Env vars (`PLANYO_API_KEY`), plan, and custom domains stay on the same service. After rename, the old `monterosabooking.onrender.com` hostname is usually freed and stops working.
 

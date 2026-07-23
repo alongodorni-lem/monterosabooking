@@ -4,8 +4,8 @@
 
   var SITE_ID = 70864;
   /* Hard TTL in localStorage. Force refresh after Planyo admin changes: bump
-     CACHE_KEY (e.g. v6), or clear localStorage key mem_esperienze_list_*. */
-  var CACHE_KEY = "mem_esperienze_list_v5";
+     CACHE_KEY (e.g. v7), or clear localStorage key mem_esperienze_list_*. */
+  var CACHE_KEY = "mem_esperienze_list_v6";
   var CACHE_MS = 12 * 60 * 60 * 1000;
   var EVENT_TIMES_CONCURRENCY = 6;
   var MAX_DATE_LABELS = 5;

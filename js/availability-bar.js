@@ -4,8 +4,8 @@
 
   var SITE_ID = 70864;
   /* Hard TTL in localStorage. Force refresh after Planyo admin changes: bump
-     CACHE_KEY (e.g. v7), or clear localStorage key mem_avail_bar_*. */
-  var CACHE_KEY = "mem_avail_bar_v6_ticker15";
+     CACHE_KEY (e.g. v8), or clear localStorage key mem_avail_bar_*. */
+  var CACHE_KEY = "mem_avail_bar_v7_ticker15";
   var CACHE_MS = 12 * 60 * 60 * 1000;
   var MAX_ITEMS = 15;
   var MIN_DAYS = 7;
@@ -414,6 +414,29 @@
         openReserve(a.getAttribute("data-resource-id"), evt);
       });
     });
+
+    /* Touch: pause while interacting so a tap can land on a moving link */
+    var viewport = el.querySelector(".availability-bar__viewport");
+    var resumeTimer = null;
+    function pauseForTouch() {
+      if (resumeTimer) {
+        clearTimeout(resumeTimer);
+        resumeTimer = null;
+      }
+      el.classList.add("is-interacting");
+    }
+    function scheduleResume() {
+      if (resumeTimer) clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(function () {
+        el.classList.remove("is-interacting");
+        resumeTimer = null;
+      }, 900);
+    }
+    if (viewport) {
+      viewport.addEventListener("touchstart", pauseForTouch, { passive: true });
+      viewport.addEventListener("touchend", scheduleResume, { passive: true });
+      viewport.addEventListener("touchcancel", scheduleResume, { passive: true });
+    }
   }
 
   function boot() {

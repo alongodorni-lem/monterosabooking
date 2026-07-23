@@ -425,10 +425,13 @@ p {
   align-items: center;
   gap: 0;
   width: max-content;
-  animation: availability-ticker 75s linear infinite;
+  animation: availability-ticker 130s linear infinite;
 }
 
-.availability-bar__viewport:hover .availability-bar__track {
+/* Pause so users can hover/focus and click activity links */
+.availability-bar:hover .availability-bar__track,
+.availability-bar:focus-within .availability-bar__track,
+.availability-bar.is-interacting .availability-bar__track {
   animation-play-state: paused;
 }
 
@@ -530,7 +533,7 @@ p {
   }
 
   .availability-bar__track {
-    animation-duration: 40s;
+    animation-duration: 100s;
   }
 
   .availability-bar__item {
