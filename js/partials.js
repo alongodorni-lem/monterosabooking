@@ -85,7 +85,6 @@
       "</div></div>" +
       "<div><h3>Contatti</h3><ul>" +
       '<li><a href="mailto:macugnagabooking@gmail.com">macugnagabooking@gmail.com</a></li>' +
-      "<li>P.I. IT02380720033</li>" +
       "</ul></div>" +
       "<div><h3>Portale di prenotazione</h3><ul>" +
       '<li><a href="esperienze.html">Prenota esperienze</a></li>' +
