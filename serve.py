@@ -140,10 +140,8 @@ class Handler(SimpleHTTPRequestHandler):
             if cached is not None:
                 self.send_response(200)
                 self.send_header("Content-Type", "application/json; charset=UTF-8")
-                self.send_header(
-                    "Cache-Control",
-                    f"private, max-age={max(0, PROXY_CACHE_TTL_SEC)}",
-                )
+                # no-store: avoid browser HTTP cache of stale empty event times
+                self.send_header("Cache-Control", "private, no-store")
                 self.send_header("X-Proxy-Cache", "HIT")
                 self.send_header("Content-Length", str(len(cached)))
                 self.end_headers()
@@ -168,10 +166,7 @@ class Handler(SimpleHTTPRequestHandler):
                     _cache_set(ckey, body)
                 self.send_response(200)
                 self.send_header("Content-Type", "application/json; charset=UTF-8")
-                self.send_header(
-                    "Cache-Control",
-                    f"private, max-age={max(0, PROXY_CACHE_TTL_SEC) if use_cache else 0}",
-                )
+                self.send_header("Cache-Control", "private, no-store")
                 self.send_header("X-Proxy-Cache", "MISS")
                 self.send_header("Content-Length", str(len(body)))
                 self.end_headers()

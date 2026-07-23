@@ -9,7 +9,6 @@
 header('Content-Type: application/json; charset=UTF-8');
 
 $allowed = array('resource_search', 'list_resources', 'get_event_times', 'get_resource_info', 'api_test');
-$cacheable = array('resource_search', 'list_resources', 'get_event_times', 'get_resource_info');
 $method = isset($_GET['method']) ? (string) $_GET['method'] : '';
 if (!in_array($method, $allowed, true)) {
   http_response_code(400);
@@ -17,9 +16,10 @@ if (!in_array($method, $allowed, true)) {
   exit;
 }
 
-/* Hint browsers/CDNs; primary long cache is client localStorage + serve.py. */
-$ttl = in_array($method, $cacheable, true) ? 43200 : 0;
-header('Cache-Control: private, max-age=' . $ttl);
+/* Do not HTTP-cache API JSON in the browser — stale empty get_event_times
+   would keep showing "Prossimamente" after Planyo dates change.
+   Long cache lives in client localStorage + serve.py in-memory. */
+header('Cache-Control: private, no-store');
 
 $params = $_GET;
 if (empty($params['api_key']) && is_readable(__DIR__ . '/planyo-secrets.php')) {
