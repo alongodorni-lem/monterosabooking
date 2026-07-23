@@ -1,0 +1,37 @@
+# Mountain Experience Monterosa Macugnaga — llm.txt
+
+Site: Mountain Experience Portale di prenotazione Monterosa Macugnaga
+Canonical URL: https://www.macugnagabooking.it/
+Language: Italian (it)
+
+## What this site is
+Public booking portal for mountain experiences in Macugnaga (Monterosa, Ossola Valley, Piedmont, Italy). Visitors can browse and book guided activities, cultural visits, and themed itineraries online (payment via the booking system). Content and availability are provided by local operators.
+
+The online booking system is developed by Lem s.r.l. (https://www.raccontidigitali.it) for Unione Montana Valli dell’Ossola and local operators. Lem s.r.l. is not responsible for the management of the activities themselves.
+
+## Contact
+Email: macugnagabooking@gmail.com
+Privacy: https://www.macugnagabooking.it/privacy.html
+
+## Key pages
+- Home: https://www.macugnagabooking.it/
+- All experiences (catalog): https://www.macugnagabooking.it/esperienze.html
+- Map: https://www.macugnagabooking.it/mappa.html
+- Weekend: https://www.macugnagabooking.it/weekend.html
+- Families: https://www.macugnagabooking.it/famiglie.html
+- Couples: https://www.macugnagabooking.it/coppie.html
+- Seniors: https://www.macugnagabooking.it/senior.html
+- City escape: https://www.macugnagabooking.it/fuga-citta.html
+- Discover Macugnaga: https://www.macugnagabooking.it/scopri-macugnaga.html
+- Gold mine: https://www.macugnagabooking.it/miniera-oro.html
+- Casa Museo Walser: https://www.macugnagabooking.it/casa-museo-walser.html
+- Cableways / chairlifts (context, not ticket sales): https://www.macugnagabooking.it/funivia-seggiovia.html
+- How it works: https://www.macugnagabooking.it/come-funziona.html
+- FAQ: https://www.macugnagabooking.it/faq.html
+- Credits: https://www.macugnagabooking.it/credits.html
+- Privacy & cookies: https://www.macugnagabooking.it/privacy.html
+
+## Machine-readable index
+Sitemap: https://www.macugnagabooking.it/sitemap.xml
+Also see: https://www.macugnagabooking.it/ai.txt
+https://www.macugnagabooking.it/robots.txt
