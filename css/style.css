@@ -296,16 +296,20 @@ p {
   outline-offset: 1px;
 }
 
-.footer-translation-note {
-  padding: 0.75rem 0 0;
-  font-size: 0.85rem;
-  color: rgba(40, 48, 36, 0.72);
+/* Translation disclaimer — light content area (not inside dark footer) */
+.translation-note {
+  padding: 1.25rem 0 1.75rem;
+  background: var(--cream);
+  color: var(--ink-soft);
+  font-size: 0.88rem;
   font-style: italic;
+  line-height: 1.45;
 }
 
-.footer-translation-note p {
+.translation-note p {
   margin: 0;
-  max-width: 48rem;
+  max-width: 42rem;
+  color: var(--ink-soft);
 }
 
 .nav-toggle {

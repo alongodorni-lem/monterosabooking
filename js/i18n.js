@@ -54,7 +54,8 @@
       cookieAccept: "Accetta",
       cookieEssential: "Solo essenziali",
       langLabel: "Lingua",
-      translationNote: "",
+      translationNote:
+        "Traduzione automatica dalla versione ufficiale in lingua italiana",
       calPrev: "precedente",
       calNext: "successivo",
       calToday: "oggi",
@@ -185,7 +186,7 @@
       cookieEssential: "Essential only",
       langLabel: "Language",
       translationNote:
-        "Traduzione automatica dalla versione ufficiale in lingua italiana",
+        "Automatic translation from the official Italian version.",
       calPrev: "previous",
       calNext: "next",
       calToday: "today",
@@ -316,7 +317,7 @@
       cookieEssential: "Essentiels uniquement",
       langLabel: "Langue",
       translationNote:
-        "Traduzione automatica dalla versione ufficiale in lingua italiana",
+        "Traduction automatique à partir de la version officielle en italien.",
       calPrev: "précédent",
       calNext: "suivant",
       calToday: "aujourd’hui",
@@ -449,7 +450,7 @@
       cookieEssential: "Nur notwendige",
       langLabel: "Sprache",
       translationNote:
-        "Traduzione automatica dalla versione ufficiale in lingua italiana",
+        "Automatische Übersetzung der offiziellen italienischen Fassung.",
       calPrev: "zurück",
       calNext: "weiter",
       calToday: "heute",
@@ -605,6 +606,8 @@
     return UI[lang] || UI.it;
   }
 
+  var langPref = global.MB_LANG_PREF || null;
+
   global.MB_I18N = {
     SUPPORTED: SUPPORTED,
     SITE: SITE,
@@ -617,5 +620,8 @@
     pageUrl: pageUrl,
     localHref: localHref,
     t: t,
+    getPreferredLang: langPref ? langPref.getPreferredLang : function () { return null; },
+    setPreferredLang: langPref ? langPref.setPreferredLang : function () {},
+    detectBrowserLang: langPref ? langPref.detectBrowserLang : function () { return "it"; },
   };
 })(typeof window !== "undefined" ? window : this);

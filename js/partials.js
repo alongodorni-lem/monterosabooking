@@ -116,6 +116,19 @@
     if (!sel || sel.dataset.langBound === "1") return;
     sel.dataset.langBound = "1";
     sel.addEventListener("change", function () {
+      var opt = sel.options[sel.selectedIndex];
+      var code = opt && opt.getAttribute("lang");
+      if (code) {
+        if (window.MB_LANG_PREF && window.MB_LANG_PREF.setPreferredLang) {
+          window.MB_LANG_PREF.setPreferredLang(code);
+        } else {
+          try {
+            localStorage.setItem("site_lang", code);
+          } catch (e) {
+            /* ignore */
+          }
+        }
+      }
       var url = sel.value;
       if (url) location.href = url;
     });
@@ -153,17 +166,32 @@
     });
   }
 
+  function renderTranslationNote() {
+    var L = ui();
+    if (!L.translationNote || lang() === "it") return;
+    var existing = document.querySelector(".translation-note");
+    if (existing) existing.remove();
+    var wrap = document.createElement("div");
+    wrap.className = "translation-note";
+    wrap.setAttribute("role", "note");
+    wrap.innerHTML =
+      '<div class="container"><p>' + L.translationNote + "</p></div>";
+    var main = document.getElementById("main") || document.querySelector("main");
+    if (main) {
+      main.appendChild(wrap);
+      return;
+    }
+    var footerHost = document.getElementById("site-footer");
+    if (footerHost && footerHost.parentNode) {
+      footerHost.parentNode.insertBefore(wrap, footerHost);
+    }
+  }
+
   function renderFooter() {
     var el = document.getElementById("site-footer");
     if (!el) return;
     var L = ui();
     var p = prefix();
-    var note =
-      L.translationNote && lang() !== "it"
-        ? '<div class="container footer-translation-note"><p>' +
-          L.translationNote +
-          "</p></div>"
-        : "";
 
     el.innerHTML =
       '<footer class="site-footer">' +
@@ -226,7 +254,6 @@
       (L.comune || "") +
       "</a></li>" +
       "</ul></div></div>" +
-      note +
       '<div class="container footer-disclaimer">' +
       "<p>" +
       (L.footerDisclaimer || "") +
@@ -487,6 +514,7 @@
 
   localizeSkipLink();
   renderHeader();
+  renderTranslationNote();
   renderFooter();
   renderCookieBanner();
   mountSearchWidget().then(function () {
