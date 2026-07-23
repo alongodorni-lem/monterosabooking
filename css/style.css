@@ -1219,8 +1219,13 @@ h1.hero__claim {
   counter-reset: step;
 }
 
+.steps--four {
+  grid-template-columns: repeat(2, 1fr);
+}
+
 @media (max-width: 800px) {
-  .steps {
+  .steps,
+  .steps--four {
     grid-template-columns: 1fr;
   }
 }
@@ -1548,13 +1553,24 @@ a.btn.btn-primary:hover {
   align-items: flex-start;
 }
 
+/* Stemma Unione Montana: graphic fills PNG edges — pad inside white box */
+.stemma-mark,
 .footer-brand img {
-  width: 64px;
-  height: auto;
+  width: 72px;
+  height: 72px;
   flex-shrink: 0;
+  padding: 0.65rem;
+  object-fit: contain;
+  object-position: center;
   background: rgba(255, 255, 255, 0.95);
   border-radius: 8px;
-  padding: 0.35rem;
+  overflow: visible;
+}
+
+.stemma-mark--lg {
+  width: 160px;
+  height: 160px;
+  padding: 1.15rem;
 }
 
 .footer-brand p {
@@ -1607,6 +1623,13 @@ a.btn.btn-primary:hover {
   justify-content: space-between;
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-bottom__links {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.35rem;
+  align-items: center;
 }
 
 /* ——— Cookie banner ——— */

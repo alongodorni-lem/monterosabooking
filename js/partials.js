@@ -34,7 +34,6 @@
       navLink("mappa.html", "Mappa", page) +
       navLink("weekend.html", "Weekend", page) +
       navLink("scopri-macugnaga.html", "Scopri Macugnaga", page) +
-      navLink("chi-siamo.html", "Chi siamo", page) +
       navLink("come-funziona.html", "Come funziona", page) +
       navLink("faq.html", "FAQ", page) +
       '<a class="nav-cta" href="esperienze.html">Prenota online</a>' +
@@ -79,7 +78,7 @@
       '<footer class="site-footer">' +
       '<div class="container footer-grid">' +
       '<div class="footer-brand">' +
-      '<img src="assets/stemma.png" width="64" height="64" alt="Stemma Unione Montana Valli dell\'Ossola" loading="lazy">' +
+      '<img class="stemma-mark" src="assets/stemma.png" width="72" height="72" alt="Stemma Unione Montana Valli dell\'Ossola" loading="lazy">' +
       "<div><strong>Unione Montana Valli dell'Ossola</strong>" +
       "<p>FOSMIT · Fondo Sviluppo Montagne Italiane — Regione Piemonte</p>" +
       '<p>Booking engine sviluppato da <a href="https://www.raccontidigitali.it" target="_blank" rel="noopener">Lem s.r.l.</a> per Unione Montana Valli dell\'Ossola e operatori locali.</p>' +
@@ -94,7 +93,6 @@
       '<li><a href="miniera-oro.html">Miniera d’oro</a></li>' +
       '<li><a href="funivia-seggiovia.html">Impianti</a></li>' +
       '<li><a href="mappa.html">Mappa esperienze</a></li>' +
-      '<li><a href="chi-siamo.html">Chi siamo / Il progetto</a></li>' +
       '<li><a href="come-funziona.html">Come funziona</a></li>' +
       "</ul></div>" +
       "<div><h3>Portali di informazione</h3><ul>" +
@@ -109,7 +107,7 @@
       "</div>" +
       '<div class="container footer-bottom">' +
       "<span>© Macugnaga Booking – Esperienze ai piedi del Monte Rosa</span>" +
-      '<span><a href="privacy.html">Privacy</a> · <a href="credits.html">Credits</a></span>' +
+      '<span class="footer-bottom__links"><a href="chi-siamo.html">Il progetto</a> · <a href="privacy.html">Privacy</a> · <a href="credits.html">Credits</a></span>' +
       "</div></footer>";
   }
 
