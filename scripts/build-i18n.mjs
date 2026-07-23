@@ -7,8 +7,10 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { PHRASES, PAGE_META, NAV_SEO } from "./i18n-dict.mjs";
 import { PHRASES_MORE } from "./i18n-dict-more.mjs";
+import { PHRASES_BODIES } from "./i18n-dict-bodies.mjs";
+import { PHRASES_BODIES_2 } from "./i18n-dict-bodies2.mjs";
 
-const ALL_PHRASES = Object.assign({}, PHRASES, PHRASES_MORE);
+const ALL_PHRASES = Object.assign({}, PHRASES, PHRASES_MORE, PHRASES_BODIES, PHRASES_BODIES_2);
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -16,9 +18,9 @@ const SITE = "https://www.macugnagabooking.it";
 const LANGS = ["en", "fr", "de"];
 const OG_LOCALE = { en: "en_GB", fr: "fr_FR", de: "de_DE", it: "it_IT" };
 const TRANSLATION_NOTE = {
-  en: "This page is an automated translation from the Italian original.",
-  fr: "Cette page est une traduction automatique depuis l’italien.",
-  de: "Diese Seite ist eine automatische Übersetzung aus dem Italienischen.",
+  en: "Traduzione automatica dalla versione ufficiale in lingua italiana",
+  fr: "Traduzione automatica dalla versione ufficiale in lingua italiana",
+  de: "Traduzione automatica dalla versione ufficiale in lingua italiana",
 };
 
 const PAGES = fs
@@ -95,14 +97,14 @@ function injectScripts(html, lang) {
   );
   out = out.replace(
     /<script src="(\.\.\/)?js\/partials\.js\?v=\d+"><\/script>/g,
-    `<script src="${prefix}js/i18n.js?v=1"></script>\n  <script src="${prefix}js/partials.js?v=8"></script>`
+    `<script src="${prefix}js/i18n.js?v=2"></script>\n  <script src="${prefix}js/partials.js?v=9"></script>`
   );
   out = out.replace(
     /(\.\.\/)?js\/esperienze-list\.js\?v=\d+/g,
-    `${prefix}js/esperienze-list.js?v=8`
+    `${prefix}js/esperienze-list.js?v=9`
   );
   out = out.replace(/(\.\.\/)?js\/main\.js/g, `${prefix}js/main.js`);
-  out = out.replace(/(\.\.\/)?css\/style\.css\?v=\d+/g, `${prefix}css/style.css?v=9`);
+  out = out.replace(/(\.\.\/)?css\/style\.css\?v=\d+/g, `${prefix}css/style.css?v=10`);
   return out;
 }
 
@@ -206,7 +208,12 @@ function addTranslationNotePlaceholder(html, lang) {
   /* Footer note is rendered by partials.js; keep a noscript fallback before footer mount */
   const note = TRANSLATION_NOTE[lang];
   if (!note) return html;
-  if (html.includes("footer-translation-note")) return html;
+  if (html.includes("footer-translation-note")) {
+    return html.replace(
+      /<p class="footer-translation-note container"[^>]*>[\s\S]*?<\/p>/,
+      `<p class="footer-translation-note container" hidden>${note}</p>`
+    );
+  }
   return html.replace(
     /<div id="site-footer"><\/div>/,
     `<p class="footer-translation-note container" hidden>${note}</p>\n  <div id="site-footer"></div>`
@@ -249,13 +256,20 @@ function patchItalian(srcHtml, file) {
   if (!html.includes("js/i18n.js")) {
     html = html.replace(
       /<script src="js\/partials\.js\?v=\d+"><\/script>/g,
-      '<script src="js/i18n.js?v=1"></script>\n  <script src="js/partials.js?v=8"></script>'
+      '<script src="js/i18n.js?v=2"></script>\n  <script src="js/partials.js?v=9"></script>'
     );
   } else {
-    html = html.replace(/js\/partials\.js\?v=\d+/g, "js/partials.js?v=8");
+    html = html.replace(/js\/i18n\.js\?v=\d+/g, "js/i18n.js?v=2");
+    html = html.replace(/js\/partials\.js\?v=\d+/g, "js/partials.js?v=9");
   }
-  html = html.replace(/js\/esperienze-list\.js\?v=\d+/g, "js/esperienze-list.js?v=8");
-  html = html.replace(/css\/style\.css\?v=\d+/g, "css/style.css?v=9");
+  html = html.replace(/js\/esperienze-list\.js\?v=\d+/g, "js/esperienze-list.js?v=9");
+  html = html.replace(/css\/style\.css\?v=\d+/g, "css/style.css?v=10");
+  /* Shorter nav label in static seo fallback */
+  html = html.replace(
+    /(<nav class="seo-nav-fallback"[\s\S]*?>)([\s\S]*?)(<\/nav>)/,
+    (_, open, body, close) =>
+      open + body.replace(/>Scopri Macugnaga</g, ">Macugnaga<") + close
+  );
   return html;
 }
 

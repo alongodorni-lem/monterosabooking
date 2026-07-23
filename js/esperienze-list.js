@@ -5,7 +5,7 @@
   var SITE_ID = 70864;
   /* Hard TTL in localStorage. Force refresh after Planyo admin changes: bump
      CACHE_KEY (e.g. v8), or clear localStorage key mem_esperienze_list_*. */
-  var CACHE_KEY_BASE = "mem_esperienze_list_v8";
+  var CACHE_KEY_BASE = "mem_esperienze_list_v9";
   var CACHE_MS = 12 * 60 * 60 * 1000;
   var EVENT_TIMES_CONCURRENCY = 6;
   var MAX_DATE_LABELS = 5;
@@ -595,9 +595,16 @@
     });
   }
 
+  /* Prefer Planyo language-specific title; `name` stays in the site default language. */
+  function resourceDisplayName(r) {
+    var translated = String((r && r.translated_name) || "").trim();
+    if (translated) return translated;
+    return String((r && r.name) || "").trim();
+  }
+
   function stubFromResource(r, today, augustMode) {
     var id = String(r.id || r.resource_id || "");
-    var name = String(r.name || "");
+    var name = resourceDisplayName(r);
     if (!id || !name) return null;
     var L = ui();
 
@@ -871,7 +878,7 @@
       return listResources(apiKey, getSiteId()).then(function (resources) {
         if (wanted === "IT") return resources;
         var missing = resources.filter(function (r) {
-          return !(r && String(r.name || "").trim());
+          return !(r && resourceDisplayName(r));
         });
         if (!missing.length) return resources;
         /* Fallback IT names/descriptions when target language is empty */
@@ -895,7 +902,10 @@
             var id = String(r.id || r.resource_id || "");
             var it = itMap[id];
             if (!it) return r;
-            if (!String(r.name || "").trim()) r.name = it.name;
+            if (!resourceDisplayName(r)) {
+              r.translated_name = "";
+              r.name = it.translated_name || it.name || "";
+            }
             var props = r.properties || {};
             var itProps = it.properties || {};
             if (

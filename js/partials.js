@@ -44,31 +44,32 @@
       { code: "fr", label: "FR" },
       { code: "de", label: "DE" },
     ];
-    var links = codes
+    var options = codes
       .map(function (item) {
         var url = i18n() ? i18n().localHref(item.code, page) : item.code + "/";
-        var active = item.code === cur;
         return (
-          '<a class="lang-switcher__link' +
-          (active ? " is-active" : "") +
-          '" href="' +
+          '<option value="' +
           url +
-          '" hreflang="' +
-          item.code +
           '"' +
-          (active ? ' aria-current="true"' : "") +
-          ">" +
+          (item.code === cur ? " selected" : "") +
+          " lang=\"" +
+          item.code +
+          '">' +
           item.label +
-          "</a>"
+          "</option>"
         );
       })
-      .join('<span class="lang-switcher__sep" aria-hidden="true">|</span>');
+      .join("");
     return (
-      '<nav class="lang-switcher" aria-label="' +
+      '<div class="lang-switcher">' +
+      '<label class="lang-switcher__label" for="lang-switcher-select">' +
+      (L.langLabel || "Language") +
+      "</label>" +
+      '<select id="lang-switcher-select" class="lang-switcher__select" aria-label="' +
       (L.langLabel || "Language") +
       '">' +
-      links +
-      "</nav>"
+      options +
+      "</select></div>"
     );
   }
 
@@ -107,6 +108,17 @@
       "</nav></div></div>";
 
     initMobileNav();
+    initLanguageSwitcher();
+  }
+
+  function initLanguageSwitcher() {
+    var sel = document.getElementById("lang-switcher-select");
+    if (!sel || sel.dataset.langBound === "1") return;
+    sel.dataset.langBound = "1";
+    sel.addEventListener("change", function () {
+      var url = sel.value;
+      if (url) location.href = url;
+    });
   }
 
   function initMobileNav() {
@@ -461,7 +473,7 @@
         /* missing config: bar stays hidden */
       })
       .then(function () {
-        return loadScript(p + "js/availability-bar.js?v=8");
+        return loadScript(p + "js/availability-bar.js?v=9");
       })
       .catch(function () {
         /* quiet fail */

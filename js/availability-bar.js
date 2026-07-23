@@ -5,7 +5,7 @@
   var SITE_ID = 70864;
   /* Hard TTL in localStorage. Force refresh after Planyo admin changes: bump
      CACHE_KEY (e.g. v8), or clear localStorage key mem_avail_bar_*. */
-  var CACHE_KEY_BASE = "mem_avail_bar_v8_ticker15";
+  var CACHE_KEY_BASE = "mem_avail_bar_v9_ticker15";
   var CACHE_MS = 12 * 60 * 60 * 1000;
   var MAX_ITEMS = 15;
   var MIN_DAYS = 7;
@@ -240,11 +240,11 @@
         results.forEach(function (r) {
           if (!r || r.is_unavailable) return;
           var id = r.id || r.resource_id;
-          var name = r.name;
+          var name = String(r.translated_name || r.name || "").trim();
           if (!id || !name) return;
           items.push({
             resourceId: String(id),
-            name: String(name),
+            name: name,
             date: ymd,
             dateLabel: formatItDay(ymd),
           });
