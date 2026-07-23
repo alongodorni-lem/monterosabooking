@@ -5,13 +5,11 @@
   var SITE_ID = 70864;
   /* Hard TTL in localStorage. Force refresh after Planyo admin changes: bump
      CACHE_KEY (e.g. v8), or clear localStorage key mem_esperienze_list_*. */
-  var CACHE_KEY = "mem_esperienze_list_v7";
+  var CACHE_KEY_BASE = "mem_esperienze_list_v8";
   var CACHE_MS = 12 * 60 * 60 * 1000;
   var EVENT_TIMES_CONCURRENCY = 6;
   var MAX_DATE_LABELS = 5;
   var DESC_MAX = 220;
-  var AUGUST_LABEL = "Tutto Agosto";
-  var DATES_LOADING_LABEL = "Caricamento date…";
   var REST_URL = "https://www.planyo.com/rest/";
   var SPECIAL_RESOURCE_IDS = {
     "253398": true /* Casa Museo Walser */,
@@ -22,6 +20,36 @@
     "252382": "assets/web/forest-bathing.jpg",
     "253390": "assets/web/forest-bathing.jpg",
   };
+
+  function siteLang() {
+    return window.MB_I18N ? window.MB_I18N.detectLang() : "it";
+  }
+
+  function planyoLangCode() {
+    return window.MB_I18N ? window.MB_I18N.planyoLang(siteLang()) : "IT";
+  }
+
+  function assetPrefix() {
+    return window.MB_I18N ? window.MB_I18N.assetPrefix(siteLang()) : "";
+  }
+
+  function ui() {
+    return window.MB_I18N ? window.MB_I18N.t(siteLang()) : {};
+  }
+
+  function cacheKey() {
+    return CACHE_KEY_BASE + "_" + siteLang();
+  }
+
+  function localeForDates() {
+    var map = { it: "it-IT", en: "en-GB", fr: "fr-FR", de: "de-DE" };
+    return map[siteLang()] || "it-IT";
+  }
+
+  function photoFallback(id) {
+    var rel = PHOTO_FALLBACKS[String(id)];
+    return rel ? assetPrefix() + rel : "";
+  }
 
   function getApiKey() {
     var key = window.PLANYO_API_KEY || window.planyoApiKey || "";
@@ -88,7 +116,7 @@
 
   function formatItDay(ymd) {
     var d = new Date(ymd + "T12:00:00");
-    var s = d.toLocaleDateString("it-IT", {
+    var s = d.toLocaleDateString(localeForDates(), {
       weekday: "long",
       day: "numeric",
       month: "long",
@@ -144,7 +172,7 @@
 
   function readCache() {
     try {
-      var raw = localStorage.getItem(CACHE_KEY);
+      var raw = localStorage.getItem(cacheKey());
       if (!raw) return null;
       var parsed = JSON.parse(raw);
       if (!parsed || !parsed.ts || !Array.isArray(parsed.items)) return null;
@@ -158,7 +186,7 @@
   function writeCache(items) {
     try {
       localStorage.setItem(
-        CACHE_KEY,
+        cacheKey(),
         JSON.stringify({ ts: Date.now(), items: items })
       );
     } catch (e) {
@@ -288,7 +316,7 @@
     if (window.PLANYO_API_ENDPOINT || window.PLANYO_API_KEY) {
       return Promise.resolve();
     }
-    return loadScript("js/planyo-config.js").catch(function () {
+    return loadScript(assetPrefix() + "js/planyo-config.js").catch(function () {
       /* optional */
     });
   }
@@ -333,7 +361,7 @@
       resourceId || (resource && (resource.id || resource.resource_id)) || ""
     );
     /* Known local overrides first (reliable card thumbnails). */
-    if (id && PHOTO_FALLBACKS[id]) return PHOTO_FALLBACKS[id];
+    if (id && PHOTO_FALLBACKS[id]) return photoFallback(id);
 
     var photos = resource && resource.photos;
     var list = asList(photos);
@@ -362,7 +390,8 @@
       encodeURIComponent(getSiteId()) +
       "&mode=resource_desc&resource_id=" +
       encodeURIComponent(resourceId) +
-      "&presentation_mode=1&planyo_lang=IT"
+      "&presentation_mode=1&planyo_lang=" +
+      encodeURIComponent(planyoLangCode())
     );
   }
 
@@ -459,7 +488,8 @@
       encodeURIComponent(getSiteId()) +
       "&resource_id=" +
       encodeURIComponent(resourceId) +
-      "&ppp_refcode=landing"
+      "&ppp_refcode=landing&planyo_lang=" +
+      encodeURIComponent(planyoLangCode())
     );
   }
 
@@ -500,7 +530,7 @@
       detail_level: "15",
       list_published_only: "true",
       list_reservable_only: "true",
-      language: "IT",
+      language: planyoLangCode(),
       page_size: "100",
     }).then(function (json) {
       if (!json || Number(json.response_code) !== 0) {
@@ -519,7 +549,7 @@
       resource_id: resourceId,
       future_only: "true",
       format: "array",
-      language: "IT",
+      language: planyoLangCode(),
     })
       .then(function (json) {
         if (!json || Number(json.response_code) !== 0) return [];
@@ -536,7 +566,7 @@
       method: "get_resource_info",
       api_key: apiKey,
       resource_id: resourceId,
-      language: "IT",
+      language: planyoLangCode(),
     })
       .then(function (json) {
         if (!json || Number(json.response_code) !== 0) return [];
@@ -557,10 +587,11 @@
   }
 
   function sortItems(items) {
+    var loc = localeForDates();
     return items.slice().sort(function (a, b) {
       if (a.sortKey < b.sortKey) return -1;
       if (a.sortKey > b.sortKey) return 1;
-      return String(a.name).localeCompare(String(b.name), "it");
+      return String(a.name).localeCompare(String(b.name), loc);
     });
   }
 
@@ -568,6 +599,7 @@
     var id = String(r.id || r.resource_id || "");
     var name = String(r.name || "");
     if (!id || !name) return null;
+    var L = ui();
 
     var photo = firstPhotoUrl(r, id);
     var special = augustMode && isSpecialResource(id, name);
@@ -578,7 +610,7 @@
         description: resourceDescription(r),
         photo: photo,
         sortKey: today,
-        dateLabels: [AUGUST_LABEL],
+        dateLabels: [L.augustLabel || "Tutto Agosto"],
         upcoming: true,
         specialAugust: true,
         datesPending: false,
@@ -591,7 +623,7 @@
       description: resourceDescription(r),
       photo: photo,
       sortKey: "9999-12-30",
-      dateLabels: [DATES_LOADING_LABEL],
+      dateLabels: [L.datesLoading || "Caricamento date…"],
       upcoming: true,
       specialAugust: false,
       datesPending: true,
@@ -599,9 +631,10 @@
   }
 
   function applyUpcomingDays(item, days) {
+    var L = ui();
     if (!days || !days.length) {
       item.sortKey = "9999-12-31";
-      item.dateLabels = ["Prossimamente"];
+      item.dateLabels = [L.soon || "Prossimamente"];
       item.upcoming = false;
     } else {
       item.sortKey = days[0];
@@ -615,6 +648,7 @@
   function patchCardDates(item) {
     var el = mountEl();
     if (!el) return;
+    var L = ui();
     var card = el.querySelector(
       '.esperienze-card[data-resource-id="' + item.resourceId + '"]'
     );
@@ -626,7 +660,9 @@
       (item.upcoming ? "" : " esperienze-card__dates--soon") +
       (item.datesPending ? " esperienze-card__dates--loading" : "");
     datesEl.innerHTML =
-      '<span class="esperienze-card__dates-label">Prossime date:</span> ' +
+      '<span class="esperienze-card__dates-label">' +
+      (L.nextDates || "Prossime date:") +
+      "</span> " +
       escapeHtml(item.dateLabels.join(" · "));
     if (item.upcoming) {
       card.classList.remove("esperienze-card--soon");
@@ -656,25 +692,37 @@
   function renderLoading() {
     var el = mountEl();
     if (!el) return;
+    var L = ui();
     el.innerHTML =
-      '<p class="esperienze-list__status">Caricamento esperienze…</p>';
+      '<p class="esperienze-list__status">' +
+      (L.listLoading || "Caricamento esperienze…") +
+      "</p>";
   }
 
   function renderError() {
     var el = mountEl();
     if (!el) return;
+    var L = ui();
     var fallback =
       "https://www.planyo.com/booking.php?calendar=" +
       encodeURIComponent(getSiteId()) +
-      "&mode=resource_list&ppp_refcode=landing";
+      "&mode=resource_list&ppp_refcode=landing&planyo_lang=" +
+      encodeURIComponent(planyoLangCode());
     el.innerHTML =
       '<div class="esperienze-list__fallback" role="alert">' +
-      "<p>Non è stato possibile caricare l’elenco delle esperienze al momento.</p>" +
+      "<p>" +
+      (L.listError ||
+        "Non è stato possibile caricare l’elenco delle esperienze al momento.") +
+      "</p>" +
       '<div class="btn-row">' +
-      '<button type="button" class="btn btn--primary" data-esperienze-retry>Riprova</button>' +
+      '<button type="button" class="btn btn--primary" data-esperienze-retry>' +
+      (L.listRetry || "Riprova") +
+      "</button>" +
       '<a class="btn btn--outline" href="' +
       escapeHtml(fallback) +
-      '" data-action="lightbox-fallback">Apri elenco prenotazioni</a>' +
+      '" data-action="lightbox-fallback">' +
+      (L.listOpenFallback || "Apri elenco prenotazioni") +
+      "</a>" +
       "</div></div>";
     var btn = el.querySelector("[data-esperienze-retry]");
     if (btn) {
@@ -691,9 +739,10 @@
   }
 
   function renderItem(item) {
+    var L = ui();
     var reserve = reserveUrl(item.resourceId);
     var detail = resourceDescUrl(item.resourceId);
-    var photoSrc = item.photo || PHOTO_FALLBACKS[String(item.resourceId)] || "";
+    var photoSrc = item.photo || photoFallback(item.resourceId) || "";
     var img = photoSrc
       ? '<div class="esperienze-card__media"><img src="' +
         escapeHtml(photoSrc) +
@@ -707,7 +756,9 @@
     var datesHtml =
       '<p class="' +
       datesClass +
-      '"><span class="esperienze-card__dates-label">Prossime date:</span> ' +
+      '"><span class="esperienze-card__dates-label">' +
+      (L.nextDates || "Prossime date:") +
+      "</span> " +
       escapeHtml(item.dateLabels.join(" · ")) +
       "</p>";
 
@@ -716,14 +767,18 @@
       escapeHtml(detail) +
       '" data-resource-id="' +
       escapeHtml(item.resourceId) +
-      '" data-action="detail">Dettagli</a>';
+      '" data-action="detail">' +
+      (L.details || "Dettagli") +
+      "</a>";
 
     var bookBtn =
       '<a role="button" class="btn btn-primary btn--primary" href="' +
       escapeHtml(reserve) +
       '" data-resource-id="' +
       escapeHtml(item.resourceId) +
-      '" data-action="reserve">Effettua prenotazione</a>';
+      '" data-action="reserve">' +
+      (L.bookNow || "Effettua prenotazione") +
+      "</a>";
 
     return (
       '<article class="esperienze-card' +
@@ -737,7 +792,7 @@
       escapeHtml(item.name) +
       "</h3>" +
       (item.description
-        ? "<p class=\"esperienze-card__desc\">" +
+        ? '<p class="esperienze-card__desc">' +
           escapeHtml(item.description) +
           "</p>"
         : "") +
@@ -766,7 +821,7 @@
       imgEl.addEventListener("error", function () {
         var card = imgEl.closest("[data-resource-id]");
         var rid = card ? card.getAttribute("data-resource-id") : "";
-        var fb = rid ? PHOTO_FALLBACKS[String(rid)] : "";
+        var fb = rid ? photoFallback(rid) : "";
         if (fb && imgEl.getAttribute("src") !== fb) {
           imgEl.src = fb;
           return;
@@ -783,9 +838,12 @@
   function render(items) {
     var el = mountEl();
     if (!el) return;
+    var L = ui();
     if (!items || !items.length) {
       el.innerHTML =
-        '<p class="esperienze-list__status">Nessuna esperienza disponibile al momento.</p>';
+        '<p class="esperienze-list__status">' +
+        (L.listEmpty || "Nessuna esperienza disponibile al momento.") +
+        "</p>";
       return;
     }
     el.innerHTML =
@@ -806,15 +864,71 @@
     var apiKey = getApiKey();
     var today = romeYmd(0);
     var augustMode = isThroughAugustPeriod();
+    var loc = localeForDates();
+    var wanted = planyoLangCode();
 
-    return listResources(apiKey, getSiteId()).then(function (resources) {
+    function listWithFallback() {
+      return listResources(apiKey, getSiteId()).then(function (resources) {
+        if (wanted === "IT") return resources;
+        var missing = resources.filter(function (r) {
+          return !(r && String(r.name || "").trim());
+        });
+        if (!missing.length) return resources;
+        /* Fallback IT names/descriptions when target language is empty */
+        return apiCall({
+          method: "list_resources",
+          api_key: apiKey,
+          site_id: getSiteId(),
+          detail_level: "15",
+          list_published_only: "true",
+          list_reservable_only: "true",
+          language: "IT",
+          page_size: "100",
+        }).then(function (json) {
+          if (!json || Number(json.response_code) !== 0) return resources;
+          var itMap = {};
+          asList(json.data && json.data.resources).forEach(function (r) {
+            var id = String(r.id || r.resource_id || "");
+            if (id) itMap[id] = r;
+          });
+          return resources.map(function (r) {
+            var id = String(r.id || r.resource_id || "");
+            var it = itMap[id];
+            if (!it) return r;
+            if (!String(r.name || "").trim()) r.name = it.name;
+            var props = r.properties || {};
+            var itProps = it.properties || {};
+            if (
+              !String(
+                props.description ||
+                  props.Description ||
+                  props.desc ||
+                  props.short_description ||
+                  ""
+              ).trim()
+            ) {
+              r.properties = r.properties || {};
+              r.properties.description =
+                itProps.description ||
+                itProps.Description ||
+                itProps.desc ||
+                itProps.short_description ||
+                "";
+            }
+            return r;
+          });
+        });
+      });
+    }
+
+    return listWithFallback().then(function (resources) {
       var stubs = resources
         .map(function (r) {
           return stubFromResource(r, today, augustMode);
         })
         .filter(Boolean)
         .sort(function (a, b) {
-          return String(a.name).localeCompare(String(b.name), "it");
+          return String(a.name).localeCompare(String(b.name), loc);
         });
 
       /* First paint: cards + CTAs as soon as list_resources returns. */

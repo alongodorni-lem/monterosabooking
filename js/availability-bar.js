@@ -5,17 +5,37 @@
   var SITE_ID = 70864;
   /* Hard TTL in localStorage. Force refresh after Planyo admin changes: bump
      CACHE_KEY (e.g. v8), or clear localStorage key mem_avail_bar_*. */
-  var CACHE_KEY = "mem_avail_bar_v7_ticker15";
+  var CACHE_KEY_BASE = "mem_avail_bar_v8_ticker15";
   var CACHE_MS = 12 * 60 * 60 * 1000;
   var MAX_ITEMS = 15;
   var MIN_DAYS = 7;
   var MAX_DAYS = 14;
   var REST_URL = "https://www.planyo.com/rest/";
-  var AUGUST_DAILY_LABEL = "Agosto tutti i giorni";
   var SPECIAL_RESOURCE_IDS = {
     "253398": true, /* Casa Museo Walser */
     "252705": true, /* Miniera d'Oro della Guia */
   };
+
+  function siteLang() {
+    return window.MB_I18N ? window.MB_I18N.detectLang() : "it";
+  }
+
+  function planyoLangCode() {
+    return window.MB_I18N ? window.MB_I18N.planyoLang(siteLang()) : "IT";
+  }
+
+  function ui() {
+    return window.MB_I18N ? window.MB_I18N.t(siteLang()) : {};
+  }
+
+  function cacheKey() {
+    return CACHE_KEY_BASE + "_" + siteLang();
+  }
+
+  function localeForDates() {
+    var map = { it: "it-IT", en: "en-GB", fr: "fr-FR", de: "de-DE" };
+    return map[siteLang()] || "it-IT";
+  }
 
   function getApiKey() {
     var key = window.PLANYO_API_KEY || window.planyoApiKey || "";
@@ -81,7 +101,7 @@
 
   function formatItDay(ymd) {
     var d = new Date(ymd + "T12:00:00");
-    var s = d.toLocaleDateString("it-IT", {
+    var s = d.toLocaleDateString(localeForDates(), {
       weekday: "long",
       day: "numeric",
       month: "long",
@@ -134,7 +154,7 @@
 
   function readCache() {
     try {
-      var raw = localStorage.getItem(CACHE_KEY);
+      var raw = localStorage.getItem(cacheKey());
       if (!raw) return null;
       var parsed = JSON.parse(raw);
       if (!parsed || !parsed.ts || !Array.isArray(parsed.items)) return null;
@@ -148,7 +168,7 @@
   function writeCache(items) {
     try {
       localStorage.setItem(
-        CACHE_KEY,
+        cacheKey(),
         JSON.stringify({ ts: Date.now(), items: items })
       );
     } catch (e) {
@@ -209,7 +229,7 @@
       end_time: ymd + " 23:59",
       quantity: 1,
       range_search: "1",
-      language: "IT",
+      language: planyoLangCode(),
       skip_reason_not_listed: "true",
       skip_pricing_log: "true",
     })
@@ -245,6 +265,8 @@
     var daysThroughAug = augustMode ? daysInclusiveThrough(augustEndYmd()) : 0;
 
     function absorb(dayItems, specialsOnly) {
+      var L = ui();
+      var augustDaily = L.augustDaily || "Agosto tutti i giorni";
       dayItems.forEach(function (item) {
         var special = augustMode && isSpecialResource(item.resourceId, item.name);
         if (specialsOnly && !special) return;
@@ -255,7 +277,7 @@
           seen["special|" + item.resourceId] = true;
           flat.push({
             date: item.date,
-            dateLabel: AUGUST_DAILY_LABEL,
+            dateLabel: augustDaily,
             resourceId: item.resourceId,
             name: item.name,
           });
@@ -323,15 +345,17 @@
   function byDateThenName(a, b) {
     if (a.date < b.date) return -1;
     if (a.date > b.date) return 1;
-    return String(a.name).localeCompare(String(b.name), "it");
+    return String(a.name).localeCompare(String(b.name), localeForDates());
   }
 
   /* Prefer including August daily specials when found; fill the rest soonest-first. */
   function finalizeItems(flat) {
+    var L = ui();
+    var augustDaily = L.augustDaily || "Agosto tutti i giorni";
     var specials = [];
     var regulars = [];
     flat.forEach(function (item) {
-      if (item.dateLabel === AUGUST_DAILY_LABEL) specials.push(item);
+      if (item.dateLabel === augustDaily) specials.push(item);
       else regulars.push(item);
     });
     specials.sort(byDateThenName);
@@ -350,7 +374,8 @@
       encodeURIComponent(getSiteId()) +
       "&resource_id=" +
       encodeURIComponent(resourceId) +
-      "&ppp_refcode=landing"
+      "&ppp_refcode=landing&planyo_lang=" +
+      encodeURIComponent(planyoLangCode())
     );
   }
 
@@ -392,6 +417,7 @@
       return;
     }
 
+    var L = ui();
     var slots = items.slice(0, MAX_ITEMS);
     var row = slots.map(renderItem).join("");
     /* Duplicate for seamless infinite scroll when content is short */
@@ -401,12 +427,16 @@
     el.classList.add("is-visible");
     el.innerHTML =
       '<div class="availability-bar__inner container">' +
-      '<div class="availability-bar__viewport" aria-label="Prossime disponibilità">' +
+      '<div class="availability-bar__viewport" aria-label="' +
+      (L.availAria || "Prossime disponibilità") +
+      '">' +
       '<ul class="availability-bar__track" role="list">' +
       loop +
       "</ul>" +
       "</div>" +
-      '<a class="availability-bar__all" href="esperienze.html">Vedi tutto</a>' +
+      '<a class="availability-bar__all" href="esperienze.html">' +
+      (L.seeAll || "Vedi tutto") +
+      "</a>" +
       "</div>";
 
     el.querySelectorAll("[data-resource-id]").forEach(function (a) {

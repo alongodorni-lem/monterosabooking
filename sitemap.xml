@@ -1,135 +1,319 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- Italian (default) -->
   <url>
     <loc>https://www.macugnagabooking.it/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.macugnagabooking.it/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.macugnagabooking.it/en/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.macugnagabooking.it/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.macugnagabooking.it/de/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.macugnagabooking.it/"/>
     <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.macugnagabooking.it/esperienze.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.macugnagabooking.it/esperienze.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.macugnagabooking.it/en/esperienze.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.macugnagabooking.it/fr/esperienze.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.macugnagabooking.it/de/esperienze.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.macugnagabooking.it/esperienze.html"/>
     <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.macugnagabooking.it/mappa.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.macugnagabooking.it/mappa.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.macugnagabooking.it/en/mappa.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.macugnagabooking.it/fr/mappa.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.macugnagabooking.it/de/mappa.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.macugnagabooking.it/mappa.html"/>
     <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.macugnagabooking.it/weekend.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.macugnagabooking.it/weekend.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.macugnagabooking.it/en/weekend.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.macugnagabooking.it/fr/weekend.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.macugnagabooking.it/de/weekend.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.macugnagabooking.it/weekend.html"/>
     <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.macugnagabooking.it/famiglie.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.macugnagabooking.it/famiglie.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.macugnagabooking.it/en/famiglie.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.macugnagabooking.it/fr/famiglie.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.macugnagabooking.it/de/famiglie.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.macugnagabooking.it/famiglie.html"/>
     <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.macugnagabooking.it/coppie.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.macugnagabooking.it/coppie.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.macugnagabooking.it/en/coppie.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.macugnagabooking.it/fr/coppie.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.macugnagabooking.it/de/coppie.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.macugnagabooking.it/coppie.html"/>
     <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.macugnagabooking.it/senior.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.macugnagabooking.it/senior.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.macugnagabooking.it/en/senior.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.macugnagabooking.it/fr/senior.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.macugnagabooking.it/de/senior.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.macugnagabooking.it/senior.html"/>
     <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.macugnagabooking.it/fuga-citta.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.macugnagabooking.it/fuga-citta.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.macugnagabooking.it/en/fuga-citta.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.macugnagabooking.it/fr/fuga-citta.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.macugnagabooking.it/de/fuga-citta.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.macugnagabooking.it/fuga-citta.html"/>
     <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.macugnagabooking.it/scopri-macugnaga.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.macugnagabooking.it/scopri-macugnaga.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.macugnagabooking.it/en/scopri-macugnaga.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.macugnagabooking.it/fr/scopri-macugnaga.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.macugnagabooking.it/de/scopri-macugnaga.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.macugnagabooking.it/scopri-macugnaga.html"/>
     <lastmod>2026-07-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.macugnagabooking.it/miniera-oro.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.macugnagabooking.it/miniera-oro.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.macugnagabooking.it/en/miniera-oro.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.macugnagabooking.it/fr/miniera-oro.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.macugnagabooking.it/de/miniera-oro.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.macugnagabooking.it/miniera-oro.html"/>
     <lastmod>2026-07-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.macugnagabooking.it/casa-museo-walser.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.macugnagabooking.it/casa-museo-walser.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.macugnagabooking.it/en/casa-museo-walser.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.macugnagabooking.it/fr/casa-museo-walser.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.macugnagabooking.it/de/casa-museo-walser.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.macugnagabooking.it/casa-museo-walser.html"/>
     <lastmod>2026-07-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.macugnagabooking.it/funivia-seggiovia.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.macugnagabooking.it/funivia-seggiovia.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.macugnagabooking.it/en/funivia-seggiovia.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.macugnagabooking.it/fr/funivia-seggiovia.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.macugnagabooking.it/de/funivia-seggiovia.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.macugnagabooking.it/funivia-seggiovia.html"/>
     <lastmod>2026-07-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.macugnagabooking.it/chi-siamo.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.macugnagabooking.it/chi-siamo.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.macugnagabooking.it/en/chi-siamo.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.macugnagabooking.it/fr/chi-siamo.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.macugnagabooking.it/de/chi-siamo.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.macugnagabooking.it/chi-siamo.html"/>
     <lastmod>2026-07-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.macugnagabooking.it/come-funziona.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.macugnagabooking.it/come-funziona.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.macugnagabooking.it/en/come-funziona.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.macugnagabooking.it/fr/come-funziona.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.macugnagabooking.it/de/come-funziona.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.macugnagabooking.it/come-funziona.html"/>
     <lastmod>2026-07-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.macugnagabooking.it/faq.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.macugnagabooking.it/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.macugnagabooking.it/en/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.macugnagabooking.it/fr/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.macugnagabooking.it/de/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.macugnagabooking.it/faq.html"/>
     <lastmod>2026-07-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.macugnagabooking.it/trekking-macugnaga.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.macugnagabooking.it/trekking-macugnaga.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.macugnagabooking.it/en/trekking-macugnaga.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.macugnagabooking.it/fr/trekking-macugnaga.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.macugnagabooking.it/de/trekking-macugnaga.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.macugnagabooking.it/trekking-macugnaga.html"/>
     <lastmod>2026-07-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.macugnagabooking.it/forest-bathing-macugnaga.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.macugnagabooking.it/forest-bathing-macugnaga.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.macugnagabooking.it/en/forest-bathing-macugnaga.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.macugnagabooking.it/fr/forest-bathing-macugnaga.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.macugnagabooking.it/de/forest-bathing-macugnaga.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.macugnagabooking.it/forest-bathing-macugnaga.html"/>
     <lastmod>2026-07-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.macugnagabooking.it/gita-milano-macugnaga.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.macugnagabooking.it/gita-milano-macugnaga.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.macugnagabooking.it/en/gita-milano-macugnaga.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.macugnagabooking.it/fr/gita-milano-macugnaga.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.macugnagabooking.it/de/gita-milano-macugnaga.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.macugnagabooking.it/gita-milano-macugnaga.html"/>
     <lastmod>2026-07-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.macugnagabooking.it/benessere-montagna-macugnaga.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.macugnagabooking.it/benessere-montagna-macugnaga.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.macugnagabooking.it/en/benessere-montagna-macugnaga.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.macugnagabooking.it/fr/benessere-montagna-macugnaga.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.macugnagabooking.it/de/benessere-montagna-macugnaga.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.macugnagabooking.it/benessere-montagna-macugnaga.html"/>
     <lastmod>2026-07-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.macugnagabooking.it/escursioni-famiglie-macugnaga.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.macugnagabooking.it/escursioni-famiglie-macugnaga.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.macugnagabooking.it/en/escursioni-famiglie-macugnaga.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.macugnagabooking.it/fr/escursioni-famiglie-macugnaga.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.macugnagabooking.it/de/escursioni-famiglie-macugnaga.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.macugnagabooking.it/escursioni-famiglie-macugnaga.html"/>
     <lastmod>2026-07-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.macugnagabooking.it/credits.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.macugnagabooking.it/credits.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.macugnagabooking.it/en/credits.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.macugnagabooking.it/fr/credits.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.macugnagabooking.it/de/credits.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.macugnagabooking.it/credits.html"/>
     <lastmod>2026-07-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://www.macugnagabooking.it/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.macugnagabooking.it/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.macugnagabooking.it/en/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.macugnagabooking.it/fr/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.macugnagabooking.it/de/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.macugnagabooking.it/privacy.html"/>
     <lastmod>2026-07-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+
+  <!-- English -->
+  <url><loc>https://www.macugnagabooking.it/en/</loc><lastmod>2026-07-23</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.macugnagabooking.it/en/esperienze.html</loc><lastmod>2026-07-23</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://www.macugnagabooking.it/en/mappa.html</loc><lastmod>2026-07-23</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.macugnagabooking.it/en/weekend.html</loc><lastmod>2026-07-23</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://www.macugnagabooking.it/en/famiglie.html</loc><lastmod>2026-07-23</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://www.macugnagabooking.it/en/coppie.html</loc><lastmod>2026-07-23</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://www.macugnagabooking.it/en/senior.html</loc><lastmod>2026-07-23</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://www.macugnagabooking.it/en/fuga-citta.html</loc><lastmod>2026-07-23</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://www.macugnagabooking.it/en/scopri-macugnaga.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://www.macugnagabooking.it/en/miniera-oro.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.macugnagabooking.it/en/casa-museo-walser.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.macugnagabooking.it/en/funivia-seggiovia.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://www.macugnagabooking.it/en/chi-siamo.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.55</priority></url>
+  <url><loc>https://www.macugnagabooking.it/en/come-funziona.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.55</priority></url>
+  <url><loc>https://www.macugnagabooking.it/en/faq.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.55</priority></url>
+  <url><loc>https://www.macugnagabooking.it/en/trekking-macugnaga.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.45</priority></url>
+  <url><loc>https://www.macugnagabooking.it/en/forest-bathing-macugnaga.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.45</priority></url>
+  <url><loc>https://www.macugnagabooking.it/en/gita-milano-macugnaga.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.45</priority></url>
+  <url><loc>https://www.macugnagabooking.it/en/benessere-montagna-macugnaga.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.45</priority></url>
+  <url><loc>https://www.macugnagabooking.it/en/escursioni-famiglie-macugnaga.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.45</priority></url>
+  <url><loc>https://www.macugnagabooking.it/en/credits.html</loc><lastmod>2026-07-23</lastmod><changefreq>yearly</changefreq><priority>0.25</priority></url>
+  <url><loc>https://www.macugnagabooking.it/en/privacy.html</loc><lastmod>2026-07-23</lastmod><changefreq>yearly</changefreq><priority>0.25</priority></url>
+
+  <!-- French -->
+  <url><loc>https://www.macugnagabooking.it/fr/</loc><lastmod>2026-07-23</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.macugnagabooking.it/fr/esperienze.html</loc><lastmod>2026-07-23</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://www.macugnagabooking.it/fr/mappa.html</loc><lastmod>2026-07-23</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.macugnagabooking.it/fr/weekend.html</loc><lastmod>2026-07-23</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://www.macugnagabooking.it/fr/famiglie.html</loc><lastmod>2026-07-23</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://www.macugnagabooking.it/fr/coppie.html</loc><lastmod>2026-07-23</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://www.macugnagabooking.it/fr/senior.html</loc><lastmod>2026-07-23</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://www.macugnagabooking.it/fr/fuga-citta.html</loc><lastmod>2026-07-23</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://www.macugnagabooking.it/fr/scopri-macugnaga.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://www.macugnagabooking.it/fr/miniera-oro.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.macugnagabooking.it/fr/casa-museo-walser.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.macugnagabooking.it/fr/funivia-seggiovia.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://www.macugnagabooking.it/fr/chi-siamo.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.55</priority></url>
+  <url><loc>https://www.macugnagabooking.it/fr/come-funziona.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.55</priority></url>
+  <url><loc>https://www.macugnagabooking.it/fr/faq.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.55</priority></url>
+  <url><loc>https://www.macugnagabooking.it/fr/trekking-macugnaga.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.45</priority></url>
+  <url><loc>https://www.macugnagabooking.it/fr/forest-bathing-macugnaga.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.45</priority></url>
+  <url><loc>https://www.macugnagabooking.it/fr/gita-milano-macugnaga.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.45</priority></url>
+  <url><loc>https://www.macugnagabooking.it/fr/benessere-montagna-macugnaga.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.45</priority></url>
+  <url><loc>https://www.macugnagabooking.it/fr/escursioni-famiglie-macugnaga.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.45</priority></url>
+  <url><loc>https://www.macugnagabooking.it/fr/credits.html</loc><lastmod>2026-07-23</lastmod><changefreq>yearly</changefreq><priority>0.25</priority></url>
+  <url><loc>https://www.macugnagabooking.it/fr/privacy.html</loc><lastmod>2026-07-23</lastmod><changefreq>yearly</changefreq><priority>0.25</priority></url>
+
+  <!-- German -->
+  <url><loc>https://www.macugnagabooking.it/de/</loc><lastmod>2026-07-23</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.macugnagabooking.it/de/esperienze.html</loc><lastmod>2026-07-23</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://www.macugnagabooking.it/de/mappa.html</loc><lastmod>2026-07-23</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.macugnagabooking.it/de/weekend.html</loc><lastmod>2026-07-23</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://www.macugnagabooking.it/de/famiglie.html</loc><lastmod>2026-07-23</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://www.macugnagabooking.it/de/coppie.html</loc><lastmod>2026-07-23</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://www.macugnagabooking.it/de/senior.html</loc><lastmod>2026-07-23</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://www.macugnagabooking.it/de/fuga-citta.html</loc><lastmod>2026-07-23</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://www.macugnagabooking.it/de/scopri-macugnaga.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://www.macugnagabooking.it/de/miniera-oro.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.macugnagabooking.it/de/casa-museo-walser.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.macugnagabooking.it/de/funivia-seggiovia.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://www.macugnagabooking.it/de/chi-siamo.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.55</priority></url>
+  <url><loc>https://www.macugnagabooking.it/de/come-funziona.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.55</priority></url>
+  <url><loc>https://www.macugnagabooking.it/de/faq.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.55</priority></url>
+  <url><loc>https://www.macugnagabooking.it/de/trekking-macugnaga.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.45</priority></url>
+  <url><loc>https://www.macugnagabooking.it/de/forest-bathing-macugnaga.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.45</priority></url>
+  <url><loc>https://www.macugnagabooking.it/de/gita-milano-macugnaga.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.45</priority></url>
+  <url><loc>https://www.macugnagabooking.it/de/benessere-montagna-macugnaga.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.45</priority></url>
+  <url><loc>https://www.macugnagabooking.it/de/escursioni-famiglie-macugnaga.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.45</priority></url>
+  <url><loc>https://www.macugnagabooking.it/de/credits.html</loc><lastmod>2026-07-23</lastmod><changefreq>yearly</changefreq><priority>0.25</priority></url>
+  <url><loc>https://www.macugnagabooking.it/de/privacy.html</loc><lastmod>2026-07-23</lastmod><changefreq>yearly</changefreq><priority>0.25</priority></url>
 </urlset>

@@ -2,7 +2,7 @@
 # Macugnaga Booking – Esperienze ai piedi del Monte Rosa
 
 canonical: https://www.macugnagabooking.it/
-language: it
+languages: it (default), en, fr, de
 contact: macugnagabooking@gmail.com
 privacy: https://www.macugnagabooking.it/privacy.html
 about: https://www.macugnagabooking.it/chi-siamo.html
@@ -15,12 +15,20 @@ Help users discover and book public mountain experiences in Macugnaga (Monterosa
 ## project context
 Online booking portal developed by Lem s.r.l. (https://www.raccontidigitali.it) for Unione Montana Valli dell’Ossola and local operators. Experience details, prices, and availability are stated by the operators; Lem s.r.l. does not manage the activities.
 
+EN/FR/DE pages are automated translations from Italian. Prefer Italian URLs when language is unspecified; otherwise use the matching language path (`/en/`, `/fr/`, `/de/`).
+
 ## allowed use of public content
 You may summarize and cite publicly available page content (descriptions, FAQs, how-to-book) to help users find experiences and navigate to the correct booking pages on this domain.
 Prefer linking to canonical URLs on https://www.macugnagabooking.it/ rather than reproducing long verbatim copies.
 For privacy, cookies, and personal-data questions, refer to https://www.macugnagabooking.it/privacy.html — do not invent additional policies.
 
-## key urls
+## language roots
+- https://www.macugnagabooking.it/ (it)
+- https://www.macugnagabooking.it/en/ (en)
+- https://www.macugnagabooking.it/fr/ (fr)
+- https://www.macugnagabooking.it/de/ (de)
+
+## key urls (italian)
 - https://www.macugnagabooking.it/
 - https://www.macugnagabooking.it/esperienze.html
 - https://www.macugnagabooking.it/mappa.html
