@@ -1,6 +1,6 @@
-# Mountain Experience Monterosa Macugnaga — llm.txt
+# Macugnaga Booking — llm.txt
 
-Site: Mountain Experience Portale di prenotazione Monterosa Macugnaga
+Site: Macugnaga Booking – Esperienze ai piedi del Monte Rosa
 Canonical URL: https://www.macugnagabooking.it/
 Language: Italian (it)
 
@@ -12,6 +12,7 @@ The online booking system is developed by Lem s.r.l. (https://www.raccontidigita
 ## Contact
 Email: macugnagabooking@gmail.com
 Privacy: https://www.macugnagabooking.it/privacy.html
+About: https://www.macugnagabooking.it/chi-siamo.html
 
 ## Key pages
 - Home: https://www.macugnagabooking.it/
@@ -26,8 +27,14 @@ Privacy: https://www.macugnagabooking.it/privacy.html
 - Gold mine: https://www.macugnagabooking.it/miniera-oro.html
 - Casa Museo Walser: https://www.macugnagabooking.it/casa-museo-walser.html
 - Cableways / chairlifts (context, not ticket sales): https://www.macugnagabooking.it/funivia-seggiovia.html
+- About / project: https://www.macugnagabooking.it/chi-siamo.html
 - How it works: https://www.macugnagabooking.it/come-funziona.html
 - FAQ: https://www.macugnagabooking.it/faq.html
+- Trekking (stub): https://www.macugnagabooking.it/trekking-macugnaga.html
+- Forest bathing (stub): https://www.macugnagabooking.it/forest-bathing-macugnaga.html
+- Day trip from Milan (stub): https://www.macugnagabooking.it/gita-milano-macugnaga.html
+- Mountain wellness (stub): https://www.macugnagabooking.it/benessere-montagna-macugnaga.html
+- Family hikes (stub): https://www.macugnagabooking.it/escursioni-famiglie-macugnaga.html
 - Credits: https://www.macugnagabooking.it/credits.html
 - Privacy & cookies: https://www.macugnagabooking.it/privacy.html
 

@@ -12,6 +12,12 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.macugnagabooking.it/casa-museo-walser.html">
   <meta property="og:locale" content="it_IT">
+  <meta property="og:site_name" content="Macugnaga Booking – Esperienze ai piedi del Monte Rosa">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Casa Museo Walser Macugnaga | Storia walser e visita online">
+  <meta name="twitter:description" content="Scopri la vita del popolo walser in una casa del Seicento a Borca. Prenota online l'ingresso e vivi un'ora di storia autentica ai piedi del Monte Rosa.">
+  <meta name="twitter:image" content="https://www.macugnagabooking.it/assets/web/casa-museo-hero.jpg">
+  <meta name="twitter:url" content="https://www.macugnagabooking.it/casa-museo-walser.html">
   <meta property="og:image" content="https://www.macugnagabooking.it/assets/web/casa-museo-hero.jpg">
   <meta name="geo.region" content="IT-VB">
   <meta name="geo.placename" content="Macugnaga, Borca">
@@ -20,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=5">
+  <link rel="stylesheet" href="css/style.css?v=6">
   <link rel="stylesheet" href="https://www.planyo.com/li.css">
   <script type="application/ld+json">
   {
@@ -60,6 +66,60 @@
           "addressLocality": "Macugnaga",
           "addressRegion": "Piemonte",
           "addressCountry": "IT"
+        }
+      },
+      {
+        "@type": ["Product", "Service"],
+        "name": "Visita Casa Museo Walser di Borca",
+        "description": "Visita guidata di circa un’ora nella casa parrocchiale del XVII secolo a Borca di Macugnaga: stube, mestieri, pane e memoria walser.",
+        "image": "https://www.macugnagabooking.it/assets/web/casa-museo-hero.jpg",
+        "brand": {
+          "@type": "Brand",
+          "name": "Macugnaga Booking – Esperienze ai piedi del Monte Rosa"
+        },
+        "category": "Museum",
+        "areaServed": {
+          "@type": "Place",
+          "name": "Macugnaga, Valle Anzasca"
+        },
+        "offers": {
+          "@type": "Offer",
+          "url": "https://www.macugnagabooking.it/casa-museo-walser.html",
+          "availability": "https://schema.org/InStock",
+          "priceCurrency": "EUR",
+          "category": "Prenotazione online ingresso museo"
+        }
+      },
+      {
+        "@type": "Event",
+        "name": "Visita Casa Museo Walser di Borca",
+        "description": "Esperienza prenotabile online: visita guidata di circa un’ora alla Casa Museo Walser di Borca a Macugnaga.",
+        "image": "https://www.macugnagabooking.it/assets/web/casa-museo-hero.jpg",
+        "url": "https://www.macugnagabooking.it/casa-museo-walser.html",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "location": {
+          "@type": "Place",
+          "name": "Casa Museo Walser di Borca",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Via Monterosa / Frazione Borca",
+            "addressLocality": "Macugnaga",
+            "addressRegion": "VB",
+            "postalCode": "28876",
+            "addressCountry": "IT"
+          }
+        },
+        "organizer": {
+          "@type": "Organization",
+          "name": "Macugnaga Booking – Esperienze ai piedi del Monte Rosa",
+          "url": "https://www.macugnagabooking.it/"
+        },
+        "offers": {
+          "@type": "Offer",
+          "url": "https://www.macugnagabooking.it/casa-museo-walser.html",
+          "availability": "https://schema.org/InStock",
+          "priceCurrency": "EUR"
         }
       },
       {
@@ -152,13 +212,32 @@
   </script>
 </head>
 <body>
-  <div id="site-header"></div>
+  <a class="skip-link" href="#main">Vai al contenuto</a>
+  <div id="site-header">
+  <nav class="seo-nav-fallback" aria-label="Navigazione principale">
+        <a href="index.html">Home</a>
+        <a href="esperienze.html">Esperienze</a>
+        <a href="casa-museo-walser.html">Casa Walser</a>
+        <a href="miniera-oro.html">Miniera d’oro</a>
+        <a href="funivia-seggiovia.html">Impianti</a>
+        <a href="mappa.html">Mappa</a>
+        <a href="weekend.html">Weekend</a>
+        <a href="scopri-macugnaga.html">Scopri Macugnaga</a>
+        <a href="chi-siamo.html">Chi siamo</a>
+        <a href="come-funziona.html">Come funziona</a>
+        <a href="faq.html">FAQ</a>
+        <a class="nav-cta" href="esperienze.html">Prenota online</a>
+  </nav>
+</div>
   <div id="site-search"></div>
 
-  <main>
+  <main id="main">
     <header class="page-hero">
       <div class="page-hero__media">
-        <img src="assets/web/casa-museo-hero.jpg" alt="Esterno della Casa Museo Walser di Borca a Macugnaga, tipica architettura alpina" width="1600" height="900" fetchpriority="high">
+        <picture>
+          <source type="image/webp" srcset="assets/web/casa-museo-hero-800.webp 800w, assets/web/casa-museo-hero-1200.webp 1200w, assets/web/casa-museo-hero.webp 1600w" sizes="100vw">
+          <img src="assets/web/casa-museo-hero.jpg" srcset="assets/web/casa-museo-hero-800.jpg 800w, assets/web/casa-museo-hero-1200.jpg 1200w, assets/web/casa-museo-hero.jpg 1600w" sizes="100vw" alt="Esterno della Casa Museo Walser di Borca a Macugnaga, tipica architettura alpina" width="1600" height="900" fetchpriority="high" decoding="async">
+        </picture>
       </div>
       <div class="page-hero__scrim" aria-hidden="true"></div>
       <div class="page-hero__content">
@@ -238,7 +317,10 @@
     <section class="section section--white">
       <div class="container split split--rev">
         <div class="split__media reveal">
-          <img src="assets/web/casa-museo-hero.jpg" alt="Casa Museo Walser di Borca: architettura in legno e pietra ai piedi del Monte Rosa" width="800" height="600" loading="lazy">
+          <picture>
+          <source type="image/webp" srcset="assets/web/casa-museo-hero-800.webp 800w, assets/web/casa-museo-hero-1200.webp 1200w, assets/web/casa-museo-hero.webp 1600w" sizes="100vw">
+          <img src="assets/web/casa-museo-hero.jpg" srcset="assets/web/casa-museo-hero-800.jpg 800w, assets/web/casa-museo-hero-1200.jpg 1200w, assets/web/casa-museo-hero.jpg 1600w" sizes="100vw" alt="Casa Museo Walser di Borca: architettura in legno e pietra ai piedi del Monte Rosa" width="800" height="600" loading="lazy" decoding="async">
+        </picture>
         </div>
         <div class="reveal prose">
           <p class="section__eyebrow">Chi erano i Walser</p>
@@ -254,6 +336,14 @@
       <div class="container">
         <p class="section__eyebrow reveal">Info pratiche</p>
         <h2 class="reveal">Dove, quando, come arrivare</h2>
+        <dl class="exp-facts reveal">
+          <div><dt>Durata</dt><dd>Visita guidata di circa 1 ora</dd></div>
+          <div><dt>Dove</dt><dd>Frazione Borca, Macugnaga (VB) — Valle Anzasca, Monte Rosa</dd></div>
+          <div><dt>Contesto</dt><dd>Casa parrocchiale del XVII secolo (Alts Walserhüüs Van Zer Burfuggu)</dd></div>
+          <div><dt>Per chi</dt><dd>Famiglie, scuole, appassionati di storia alpina</dd></div>
+          <div><dt>Contatti museo</dt><dd>Tel. <a href="tel:+393479842329">+39 347 9842329</a> · <a href="mailto:museowalser@libero.it">museowalser@libero.it</a></dd></div>
+          <div><dt>Prenotazione</dt><dd>Online su questo portale, anche fuori dagli orari su appuntamento</dd></div>
+        </dl>
         <div class="trust reveal" style="grid-template-columns:repeat(3,1fr);margin-top:1.25rem">
           <div class="trust__item">
             <strong>Dove</strong>
@@ -308,7 +398,7 @@
           </details>
           <details class="faq-item reveal">
             <summary>Chi gestisce le prenotazioni del portale di prenotazione?</summary>
-            <p class="faq-a">La prenotazione online è del portale di prenotazione Mountain Experience Monterosa Macugnaga (<a href="https://www.raccontidigitali.it" target="_blank" rel="noopener">Lem s.r.l.</a> per Unione Montana e operatori locali). Pagamento sicuro con carta o PayPal.</p>
+            <p class="faq-a">La prenotazione online è del portale di prenotazione Macugnaga Booking – Esperienze ai piedi del Monte Rosa (<a href="https://www.raccontidigitali.it" target="_blank" rel="noopener">Lem s.r.l.</a> per Unione Montana e operatori locali). Pagamento sicuro con carta o PayPal.</p>
           </details>
         </div>
         <div class="btn-row reveal" style="margin-top:1.75rem">
@@ -329,7 +419,7 @@
   </div>
 
   <script type="text/javascript" src="https://www.planyo.com/li.js?v=3"></script>
-  <script src="js/partials.js?v=5"></script>
+  <script src="js/partials.js?v=6"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

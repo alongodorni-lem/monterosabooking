@@ -11,6 +11,12 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.macugnagabooking.it/fuga-citta.html">
   <meta property="og:locale" content="it_IT">
+  <meta property="og:site_name" content="Macugnaga Booking – Esperienze ai piedi del Monte Rosa">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Macugnaga, la montagna vera vicino a Milano | Fuga dalla città">
+  <meta name="twitter:description" content="Idee weekend in montagna e gite fuori città: Macugnaga è a portata di strada da Milano, Varese, Novara e dalla Svizzera.">
+  <meta name="twitter:image" content="https://www.macugnagabooking.it/assets/web/hero-dorf.jpg">
+  <meta name="twitter:url" content="https://www.macugnagabooking.it/fuga-citta.html">
   <meta property="og:image" content="https://www.macugnagabooking.it/assets/web/hero-dorf.jpg">
   <meta name="geo.region" content="IT-VB">
   <meta name="geo.placename" content="Macugnaga">
@@ -19,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=5">
+  <link rel="stylesheet" href="css/style.css?v=6">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item": "https://www.macugnagabooking.it/"},{"@type":"ListItem","position":2,"name":"Fuga dalla città","item": "https://www.macugnagabooking.it/fuga-citta.html"}]}
   </script>
@@ -57,12 +63,31 @@
   </script>
 </head>
 <body>
-  <div id="site-header"></div>
+  <a class="skip-link" href="#main">Vai al contenuto</a>
+  <div id="site-header">
+  <nav class="seo-nav-fallback" aria-label="Navigazione principale">
+        <a href="index.html">Home</a>
+        <a href="esperienze.html">Esperienze</a>
+        <a href="casa-museo-walser.html">Casa Walser</a>
+        <a href="miniera-oro.html">Miniera d’oro</a>
+        <a href="funivia-seggiovia.html">Impianti</a>
+        <a href="mappa.html">Mappa</a>
+        <a href="weekend.html">Weekend</a>
+        <a href="scopri-macugnaga.html">Scopri Macugnaga</a>
+        <a href="chi-siamo.html">Chi siamo</a>
+        <a href="come-funziona.html">Come funziona</a>
+        <a href="faq.html">FAQ</a>
+        <a class="nav-cta" href="esperienze.html">Prenota online</a>
+  </nav>
+</div>
   <div id="site-search"></div>
-  <main>
+  <main id="main">
     <header class="page-hero">
       <div class="page-hero__media">
-        <img src="assets/web/hero-dorf.jpg" alt="Macugnaga, rifugio alpino dalla città" width="1600" height="900" fetchpriority="high">
+        <picture>
+          <source type="image/webp" srcset="assets/web/hero-dorf-800.webp 800w, assets/web/hero-dorf-1200.webp 1200w, assets/web/hero-dorf.webp 1920w" sizes="100vw">
+          <img src="assets/web/hero-dorf.jpg" srcset="assets/web/hero-dorf-800.jpg 800w, assets/web/hero-dorf-1200.jpg 1200w, assets/web/hero-dorf.jpg 1920w" sizes="100vw" alt="Macugnaga, rifugio alpino dalla città" width="1600" height="900" fetchpriority="high" decoding="async">
+        </picture>
       </div>
       <div class="page-hero__scrim" aria-hidden="true"></div>
       <div class="page-hero__content">
@@ -108,7 +133,10 @@
     <section class="section section--cream">
       <div class="container split">
         <div class="split__media reveal">
-          <img src="assets/web/forest-bathing.jpg" alt="Esperienze a contatto con la natura nei boschi di Macugnaga" width="800" height="600" loading="lazy">
+          <picture>
+          <source type="image/webp" srcset="assets/web/forest-bathing-800.webp 800w, assets/web/forest-bathing-1200.webp 1200w, assets/web/forest-bathing.webp 800w" sizes="100vw">
+          <img src="assets/web/forest-bathing.jpg" srcset="assets/web/forest-bathing-800.jpg 800w, assets/web/forest-bathing-1200.jpg 1200w, assets/web/forest-bathing.jpg 800w" sizes="100vw" alt="Esperienze a contatto con la natura nei boschi di Macugnaga" width="800" height="600" loading="lazy" decoding="async">
+        </picture>
         </div>
         <div class="reveal prose">
           <p class="section__eyebrow">Come restare</p>
@@ -155,7 +183,7 @@
       <button type="button" class="btn btn--outline" data-cookie-essential>Solo essenziali</button>
     </div>
   </div>
-  <script src="js/partials.js?v=5"></script>
+  <script src="js/partials.js?v=6"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

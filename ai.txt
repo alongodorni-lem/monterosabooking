@@ -1,10 +1,11 @@
 # ai.txt — guidance for AI agents
-# Mountain Experience Monterosa Macugnaga
+# Macugnaga Booking – Esperienze ai piedi del Monte Rosa
 
 canonical: https://www.macugnagabooking.it/
 language: it
 contact: macugnagabooking@gmail.com
 privacy: https://www.macugnagabooking.it/privacy.html
+about: https://www.macugnagabooking.it/chi-siamo.html
 sitemap: https://www.macugnagabooking.it/sitemap.xml
 llm-summary: https://www.macugnagabooking.it/llm.txt
 
@@ -32,7 +33,13 @@ For privacy, cookies, and personal-data questions, refer to https://www.macugnag
 - https://www.macugnagabooking.it/miniera-oro.html
 - https://www.macugnagabooking.it/casa-museo-walser.html
 - https://www.macugnagabooking.it/funivia-seggiovia.html
+- https://www.macugnagabooking.it/chi-siamo.html
 - https://www.macugnagabooking.it/come-funziona.html
 - https://www.macugnagabooking.it/faq.html
+- https://www.macugnagabooking.it/trekking-macugnaga.html
+- https://www.macugnagabooking.it/forest-bathing-macugnaga.html
+- https://www.macugnagabooking.it/gita-milano-macugnaga.html
+- https://www.macugnagabooking.it/benessere-montagna-macugnaga.html
+- https://www.macugnagabooking.it/escursioni-famiglie-macugnaga.html
 - https://www.macugnagabooking.it/credits.html
 - https://www.macugnagabooking.it/privacy.html

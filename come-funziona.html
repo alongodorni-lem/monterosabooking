@@ -11,6 +11,12 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.macugnagabooking.it/come-funziona.html">
   <meta property="og:locale" content="it_IT">
+  <meta property="og:site_name" content="Macugnaga Booking – Esperienze ai piedi del Monte Rosa">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Come funziona la prenotazione online | Macugnaga Monte Rosa">
+  <meta name="twitter:description" content="Tre passi: scegli l'esperienza, paga in sicurezza, ricevi conferma e contatti guida.">
+  <meta name="twitter:image" content="https://www.macugnagabooking.it/assets/web/proposte-montagna.jpg">
+  <meta name="twitter:url" content="https://www.macugnagabooking.it/come-funziona.html">
   <meta property="og:image" content="https://www.macugnagabooking.it/assets/web/proposte-montagna.jpg">
   <meta name="geo.region" content="IT-VB">
   <meta name="geo.placename" content="Macugnaga">
@@ -19,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=5">
+  <link rel="stylesheet" href="css/style.css?v=6">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item": "https://www.macugnagabooking.it/"},{"@type":"ListItem","position":2,"name":"Come funziona","item": "https://www.macugnagabooking.it/come-funziona.html"}]}
   </script>
@@ -38,12 +44,31 @@
   </script>
 </head>
 <body>
-  <div id="site-header"></div>
+  <a class="skip-link" href="#main">Vai al contenuto</a>
+  <div id="site-header">
+  <nav class="seo-nav-fallback" aria-label="Navigazione principale">
+        <a href="index.html">Home</a>
+        <a href="esperienze.html">Esperienze</a>
+        <a href="casa-museo-walser.html">Casa Walser</a>
+        <a href="miniera-oro.html">Miniera d’oro</a>
+        <a href="funivia-seggiovia.html">Impianti</a>
+        <a href="mappa.html">Mappa</a>
+        <a href="weekend.html">Weekend</a>
+        <a href="scopri-macugnaga.html">Scopri Macugnaga</a>
+        <a href="chi-siamo.html">Chi siamo</a>
+        <a href="come-funziona.html">Come funziona</a>
+        <a href="faq.html">FAQ</a>
+        <a class="nav-cta" href="esperienze.html">Prenota online</a>
+  </nav>
+</div>
   <div id="site-search"></div>
-  <main>
+  <main id="main">
     <header class="page-hero">
       <div class="page-hero__media">
-        <img src="assets/web/proposte-montagna.jpg" alt="Prenotazione esperienze in montagna" width="1600" height="900" fetchpriority="high">
+        <picture>
+          <source type="image/webp" srcset="assets/web/proposte-montagna-800.webp 800w, assets/web/proposte-montagna-1200.webp 1200w, assets/web/proposte-montagna.webp 1600w" sizes="100vw">
+          <img src="assets/web/proposte-montagna.jpg" srcset="assets/web/proposte-montagna-800.jpg 800w, assets/web/proposte-montagna-1200.jpg 1200w, assets/web/proposte-montagna.jpg 1600w" sizes="100vw" alt="Prenotazione esperienze in montagna" width="1600" height="900" fetchpriority="high" decoding="async">
+        </picture>
       </div>
       <div class="page-hero__scrim" aria-hidden="true"></div>
       <div class="page-hero__content">
@@ -110,7 +135,7 @@
       <button type="button" class="btn btn--outline" data-cookie-essential>Solo essenziali</button>
     </div>
   </div>
-  <script src="js/partials.js?v=5"></script>
+  <script src="js/partials.js?v=6"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

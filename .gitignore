@@ -25,3 +25,5 @@ assets/*.JPG
 !assets/CAPOLAV-ORO1.mp4
 # Keep optimized web set
 !assets/web/
+node_modules/
+

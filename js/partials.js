@@ -34,6 +34,7 @@
       navLink("mappa.html", "Mappa", page) +
       navLink("weekend.html", "Weekend", page) +
       navLink("scopri-macugnaga.html", "Scopri Macugnaga", page) +
+      navLink("chi-siamo.html", "Chi siamo", page) +
       navLink("come-funziona.html", "Come funziona", page) +
       navLink("faq.html", "FAQ", page) +
       '<a class="nav-cta" href="esperienze.html">Prenota online</a>' +
@@ -93,6 +94,7 @@
       '<li><a href="miniera-oro.html">Miniera d’oro</a></li>' +
       '<li><a href="funivia-seggiovia.html">Impianti</a></li>' +
       '<li><a href="mappa.html">Mappa esperienze</a></li>' +
+      '<li><a href="chi-siamo.html">Chi siamo / Il progetto</a></li>' +
       '<li><a href="come-funziona.html">Come funziona</a></li>' +
       "</ul></div>" +
       "<div><h3>Portali di informazione</h3><ul>" +
@@ -106,7 +108,7 @@
       '<a href="credits.html">Credits</a> · <a href="privacy.html">Privacy</a></p>' +
       "</div>" +
       '<div class="container footer-bottom">' +
-      "<span>© Mountain Experience Monterosa Macugnaga</span>" +
+      "<span>© Macugnaga Booking – Esperienze ai piedi del Monte Rosa</span>" +
       '<span><a href="privacy.html">Privacy</a> · <a href="credits.html">Credits</a></span>' +
       "</div></footer>";
   }
