@@ -5,7 +5,7 @@
   var SITE_ID = 70864;
   /* Hard TTL in localStorage. Force refresh after Planyo admin changes: bump
      CACHE_KEY (e.g. v8), or clear localStorage key mem_esperienze_list_*. */
-  var CACHE_KEY_BASE = "mem_esperienze_list_v9";
+  var CACHE_KEY_BASE = "mem_esperienze_list_v10";
   var CACHE_MS = 12 * 60 * 60 * 1000;
   var EVENT_TIMES_CONCURRENCY = 6;
   var MAX_DATE_LABELS = 5;
@@ -14,6 +14,10 @@
   var SPECIAL_RESOURCE_IDS = {
     "253398": true /* Casa Museo Walser */,
     "252705": true /* Miniera d'Oro della Guia */,
+  };
+  /* Booking deadline notice under available dates */
+  var DEADLINE_RESOURCE_IDS = {
+    "253421": true /* La via del pane */,
   };
   /* Reliable local images when Planyo photo is missing/broken (e.g. huge S3 PNGs). */
   var PHOTO_FALLBACKS = {
@@ -133,6 +137,22 @@
       return true;
     }
     return false;
+  }
+
+  function hasBookingDeadline(resourceId, name) {
+    if (DEADLINE_RESOURCE_IDS[String(resourceId)]) return true;
+    var n = String(name || "").toLowerCase();
+    return n.indexOf("via del pane") >= 0;
+  }
+
+  function deadlineNoticeHtml(item) {
+    if (!item || !hasBookingDeadline(item.resourceId, item.name)) return "";
+    var L = ui();
+    return (
+      '<p class="esperienze-card__deadline">' +
+      escapeHtml(L.viaDelPaneDeadline || "Prenotazioni entro il 17 agosto") +
+      "</p>"
+    );
   }
 
   function escapeHtml(str) {
@@ -671,6 +691,17 @@
       (L.nextDates || "Prossime date:") +
       "</span> " +
       escapeHtml(item.dateLabels.join(" · "));
+    var existingDeadline = card.querySelector(".esperienze-card__deadline");
+    var notice = deadlineNoticeHtml(item);
+    if (notice) {
+      if (existingDeadline) {
+        existingDeadline.outerHTML = notice;
+      } else {
+        datesEl.insertAdjacentHTML("afterend", notice);
+      }
+    } else if (existingDeadline) {
+      existingDeadline.remove();
+    }
     if (item.upcoming) {
       card.classList.remove("esperienze-card--soon");
     } else {
@@ -767,7 +798,8 @@
       (L.nextDates || "Prossime date:") +
       "</span> " +
       escapeHtml(item.dateLabels.join(" · ")) +
-      "</p>";
+      "</p>" +
+      deadlineNoticeHtml(item);
 
     var detailBtn =
       '<a role="button" class="btn btn--outline" href="' +

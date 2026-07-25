@@ -1495,6 +1495,14 @@ h1.hero__claim {
   font-style: italic;
 }
 
+.esperienze-card__deadline {
+  margin: -0.45rem 0 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #c62828;
+}
+
 .esperienze-card__actions {
   margin-top: auto;
 }
