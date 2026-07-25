@@ -240,6 +240,9 @@
       '<li><a href="come-funziona.html">' +
       (L.howItWorks || "") +
       "</a></li>" +
+      '<li><a href="embed-widget.html">' +
+      (L.embedWidget || "Incorpora nel tuo sito") +
+      "</a></li>" +
       "</ul></div>" +
       "<div><h3>" +
       (L.infoPortals || "") +

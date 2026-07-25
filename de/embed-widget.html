@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <script src="../js/lang-pref.js?v=1"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Buchungs-Widget einbinden | Macugnaga Booking</title>
+  <meta name="description" content="HTML-Code erzeugen, um buchbare Erlebnisse in Macugnaga Monte Rosa auf Ihrer Website einzubinden. Planyo-Widget mit personalisiertem Refer-Code für Anbieter und Unterkünfte.">
+  <link rel="canonical" href="https://www.macugnagabooking.it/de/embed-widget.html">
+  <link rel="alternate" hreflang="it" href="https://www.macugnagabooking.it/embed-widget.html">
+  <link rel="alternate" hreflang="en" href="https://www.macugnagabooking.it/en/embed-widget.html">
+  <link rel="alternate" hreflang="fr" href="https://www.macugnagabooking.it/fr/embed-widget.html">
+  <link rel="alternate" hreflang="de" href="https://www.macugnagabooking.it/de/embed-widget.html">
+  <link rel="alternate" hreflang="x-default" href="https://www.macugnagabooking.it/embed-widget.html">
+  <meta property="og:title" content="Buchungs-Widget einbinden">
+  <meta property="og:description" content="HTML-Code erzeugen, damit Besucher Macugnaga-Erlebnisse direkt auf Ihrer Website entdecken und buchen können.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.macugnagabooking.it/de/embed-widget.html">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:site_name" content="Macugnaga Booking – Erlebnisse am Fuße des Monte Rosa">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Buchungs-Widget einbinden | Macugnaga Booking">
+  <meta name="twitter:description" content="HTML-Code erzeugen, damit Besucher Macugnaga-Erlebnisse direkt auf Ihrer Website entdecken und buchen können.">
+  <meta name="twitter:image" content="https://www.macugnagabooking.it/assets/web/proposte-montagna.jpg">
+  <meta name="twitter:url" content="https://www.macugnagabooking.it/de/embed-widget.html">
+  <meta property="og:image" content="https://www.macugnagabooking.it/assets/web/proposte-montagna.jpg">
+  <meta name="robots" content="index,follow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css?v=12">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://www.macugnagabooking.it/de/"},{"@type":"ListItem","position":2,"name":"Auf Ihrer Website einbinden","item":"https://www.macugnagabooking.it/de/embed-widget.html"}]}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+  <div id="site-header">
+    <nav class="seo-nav-fallback" aria-label="Hauptnavigation">
+        <a href="index.html">Start</a>
+        <a href="esperienze.html">Erlebnisse</a>
+        <a href="casa-museo-walser.html">Walser-Haus</a>
+        <a href="miniera-oro.html">Goldmine</a>
+        <a href="funivia-seggiovia.html">Bahnen</a>
+        <a href="mappa.html">Karte</a>
+        <a href="weekend.html">Wochenende</a>
+        <a href="scopri-macugnaga.html">Macugnaga</a>
+        <a href="come-funziona.html">So funktioniert’s</a>
+        <a href="faq.html">FAQ</a>
+        <a class="nav-cta" href="esperienze.html">Online buchen</a>
+  </nav>
+</div>
+  <div id="site-search"></div>
+  <main id="main">
+    <section class="section section--white">
+      <div class="container prose">
+        <p class="breadcrumb"><a href="index.html">Start</a> · Auf Ihrer Website einbinden</p>
+        <h1>Buchungs-Widget für Ihre Website</h1>
+        <p class="lead">Geben Sie den Namen Ihrer Website oder Unterkunft ein (max. 15 Zeichen). Wir erzeugen HTML-Code mit einem personalisierten Planyo-Refer-Code zur Nachverfolgung von Buchungen von Ihrer Website.</p>
+
+        <form id="embed-widget-form" class="embed-widget-form" novalidate>
+          <label for="embed-site-name">Name der Website oder Unterkunft</label>
+          <div class="embed-widget-form__row">
+            <input
+              type="text"
+              id="embed-site-name"
+              name="site_name"
+              maxlength="15"
+              autocomplete="organization"
+              required
+              placeholder="es. HotelRosa"
+            >
+            <button type="submit" class="btn btn--primary">Code erzeugen</button>
+          </div>
+          <p id="embed-widget-error" class="embed-widget-form__error" role="alert" hidden></p>
+        </form>
+
+        <div id="embed-widget-result" class="embed-widget-result" hidden>
+          <p class="embed-widget-result__ref">Refer-Code: <code id="embed-refcode"></code></p>
+          <label for="embed-widget-code">Zu kopierender HTML-Code</label>
+          <textarea id="embed-widget-code" class="embed-widget-result__code" rows="18" readonly spellcheck="false"></textarea>
+          <div class="btn-row">
+            <button type="button" id="embed-copy-btn" class="btn btn--primary">Code kopieren</button>
+          </div>
+          <p id="embed-copy-feedback" class="embed-widget-result__feedback" role="status" aria-live="polite" hidden></p>
+          <p class="note">Kopieren Sie den HTML-Code und fügen Sie ihn direkt in Ihre Website-Seite ein, damit Besucher alle Aktivitäten entdecken und buchen können.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <noscript>
+    <div class="container">
+      <p><a href="embed-widget.html">Auf Ihrer Website einbinden</a> — Macugnaga Booking Buchungsportal.</p>
+    </div>
+  </noscript>
+  <p class="footer-translation-note container" hidden>Traduzione automatica dalla versione ufficiale in lingua italiana</p>
+  <div id="site-footer"></div>
+  <div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Cookie-Hinweis">
+    <p>Diese Website verwendet technisch notwendige Cookies und Drittanbieterdienste für Online-Buchung und Schriftarten. <a href="privacy.html">Datenschutz und Cookies</a></p>
+    <div class="cookie-banner__actions">
+      <button type="button" class="btn btn--primary" data-cookie-accept>Akzeptieren</button>
+      <button type="button" class="btn btn--outline" data-cookie-essential>Nur notwendige</button>
+    </div>
+  </div>
+  <script src="../js/i18n.js?v=4"></script>
+  <script src="../js/partials.js?v=11"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/embed-widget.js?v=1"></script>
+</body>
+</html>

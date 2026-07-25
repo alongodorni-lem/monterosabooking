@@ -124,6 +124,32 @@ export const PAGE_META = {
         "Drei Schritte: Erlebnis wählen, sicher zahlen, Bestätigung und Guide-Kontakte erhalten.",
     },
   },
+  "embed-widget.html": {
+    en: {
+      title: "Embed the booking widget | Macugnaga Booking",
+      description:
+        "Generate HTML code to embed bookable Macugnaga Monte Rosa experiences on your website. Planyo widget with a personalised refer code for operators and properties.",
+      ogTitle: "Embed the booking widget",
+      ogDescription:
+        "Generate HTML code so visitors can discover and book Macugnaga experiences directly on your site.",
+    },
+    fr: {
+      title: "Intégrer le widget de réservation | Macugnaga Booking",
+      description:
+        "Générez le code HTML pour intégrer sur votre site les expériences réservables à Macugnaga Monte Rosa. Widget Planyo avec code référent personnalisé pour opérateurs et structures.",
+      ogTitle: "Intégrer le widget de réservation",
+      ogDescription:
+        "Générez le code HTML pour faire découvrir et réserver les expériences de Macugnaga directement sur votre site.",
+    },
+    de: {
+      title: "Buchungs-Widget einbinden | Macugnaga Booking",
+      description:
+        "HTML-Code erzeugen, um buchbare Erlebnisse in Macugnaga Monte Rosa auf Ihrer Website einzubinden. Planyo-Widget mit personalisiertem Refer-Code für Anbieter und Unterkünfte.",
+      ogTitle: "Buchungs-Widget einbinden",
+      ogDescription:
+        "HTML-Code erzeugen, damit Besucher Macugnaga-Erlebnisse direkt auf Ihrer Website entdecken und buchen können.",
+    },
+  },
   "faq.html": {
     en: {
       title: "FAQ | Macugnaga Booking – Experiences at Monte Rosa",
@@ -1262,5 +1288,60 @@ export const PHRASES = {
     en: "FAQ",
     fr: "FAQ",
     de: "FAQ",
+  },
+  "Incorpora nel tuo sito": {
+    en: "Embed on your site",
+    fr: "Intégrer sur votre site",
+    de: "Auf Ihrer Website einbinden",
+  },
+  "Widget di prenotazione per il tuo sito": {
+    en: "Booking widget for your website",
+    fr: "Widget de réservation pour votre site",
+    de: "Buchungs-Widget für Ihre Website",
+  },
+  "Inserisci il nome del tuo sito o della struttura (max 15 caratteri). Genereremo il codice HTML con un refer code Planyo personalizzato per tracciare le prenotazioni provenienti dal tuo sito.": {
+    en: "Enter your site or property name (max 15 characters). We will generate HTML code with a personalised Planyo refer code to track bookings from your site.",
+    fr: "Saisissez le nom de votre site ou de votre structure (max 15 caractères). Nous générerons le code HTML avec un code référent Planyo personnalisé pour suivre les réservations provenant de votre site.",
+    de: "Geben Sie den Namen Ihrer Website oder Unterkunft ein (max. 15 Zeichen). Wir erzeugen HTML-Code mit einem personalisierten Planyo-Refer-Code zur Nachverfolgung von Buchungen von Ihrer Website.",
+  },
+  "Nome del sito o della struttura": {
+    en: "Site or property name",
+    fr: "Nom du site ou de la structure",
+    de: "Name der Website oder Unterkunft",
+  },
+  "Genera codice": {
+    en: "Generate code",
+    fr: "Générer le code",
+    de: "Code erzeugen",
+  },
+  "Refer code:": {
+    en: "Refer code:",
+    fr: "Code référent :",
+    de: "Refer-Code:",
+  },
+  "Codice HTML da copiare": {
+    en: "HTML code to copy",
+    fr: "Code HTML à copier",
+    de: "Zu kopierender HTML-Code",
+  },
+  "Copia codice": {
+    en: "Copy code",
+    fr: "Copier le code",
+    de: "Code kopieren",
+  },
+  "Copia il codice html e incollalo direttamente nella pagina del tuo sito per inserire la possibilità di conoscere e prenotare direttamente tutte le attività.": {
+    en: "Copy the HTML code and paste it directly into your website page to let visitors discover and book all activities.",
+    fr: "Copiez le code HTML et collez-le directement dans la page de votre site pour permettre de découvrir et réserver toutes les activités.",
+    de: "Kopieren Sie den HTML-Code und fügen Sie ihn direkt in Ihre Website-Seite ein, damit Besucher alle Aktivitäten entdecken und buchen können.",
+  },
+  "Incorpora il widget di prenotazione": {
+    en: "Embed the booking widget",
+    fr: "Intégrer le widget de réservation",
+    de: "Buchungs-Widget einbinden",
+  },
+  "Portale di prenotazione Macugnaga Booking.": {
+    en: "Macugnaga Booking portal.",
+    fr: "Portail de réservation Macugnaga Booking.",
+    de: "Macugnaga Booking Buchungsportal.",
   },
 };

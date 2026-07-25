@@ -1821,3 +1821,85 @@ a.btn.btn-primary:hover {
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+
+/* ——— Embed widget (operators) ——— */
+.embed-widget-form {
+  margin: 2rem 0 1.5rem;
+  max-width: 36rem;
+}
+
+.embed-widget-form label,
+.embed-widget-result label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.embed-widget-form__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.embed-widget-form input[type="text"] {
+  flex: 1 1 12rem;
+  min-width: 0;
+  max-width: 16rem;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid rgba(30, 50, 40, 0.22);
+  border-radius: 4px;
+  font: inherit;
+  background: var(--white);
+  color: var(--ink);
+}
+
+.embed-widget-form input[type="text"]:focus {
+  outline: 2px solid var(--green-mid);
+  outline-offset: 1px;
+}
+
+.embed-widget-form__error {
+  margin-top: 0.75rem;
+  color: #8b2e2e;
+  font-size: 0.95rem;
+}
+
+.embed-widget-result {
+  margin-top: 2rem;
+}
+
+.embed-widget-result__ref {
+  margin-bottom: 1rem;
+}
+
+.embed-widget-result__ref code {
+  font-size: 1.05em;
+  padding: 0.15rem 0.4rem;
+  background: rgba(30, 50, 40, 0.06);
+  border-radius: 3px;
+}
+
+.embed-widget-result__code {
+  display: block;
+  width: 100%;
+  max-width: 48rem;
+  margin: 0.5rem 0 0;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(30, 50, 40, 0.22);
+  border-radius: 4px;
+  font-family: ui-monospace, "Cascadia Code", "Segoe UI Mono", Consolas, monospace;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  background: #f7f8f6;
+  color: var(--ink);
+  resize: vertical;
+  white-space: pre;
+}
+
+.embed-widget-result__feedback {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  color: var(--green-dark);
+  font-weight: 600;
+}

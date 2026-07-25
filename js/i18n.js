@@ -36,6 +36,7 @@
       proloco: "Associazione Turistica Pro Loco Macugnaga (info, eventi e ricettività)",
       skiLiftsExt: "Impianti di risalita",
       comune: "Comune di Macugnaga",
+      embedWidget: "Incorpora nel tuo sito",
       footerDisclaimer:
         "Informazioni, prezzi e disponibilità riportati dal portale di prenotazione sono indicati dai gestori delle esperienze. Con la prenotazione online riceverai i contatti diretti degli organizzatori, da contattare per ogni ulteriore informazione. ",
       lemNotResponsible: " non è in alcun modo responsabile della gestione delle attività. ",
@@ -168,6 +169,7 @@
       proloco: "Pro Loco Macugnaga Tourist Association (info, events and lodging)",
       skiLiftsExt: "Ski lifts",
       comune: "Municipality of Macugnaga",
+      embedWidget: "Embed on your site",
       footerDisclaimer:
         "Information, prices and availability on the booking portal are provided by the experience operators. After booking online you will receive the organisers’ direct contacts for any further information. ",
       lemNotResponsible: " is in no way responsible for the management of the activities. ",
@@ -299,6 +301,7 @@
         "Association touristique Pro Loco Macugnaga (infos, événements et hébergement)",
       skiLiftsExt: "Remontées mécaniques",
       comune: "Commune de Macugnaga",
+      embedWidget: "Intégrer sur votre site",
       footerDisclaimer:
         "Les informations, prix et disponibilités du portail de réservation sont indiqués par les organisateurs des expériences. Après une réservation en ligne, vous recevrez leurs contacts directs pour toute information complémentaire. ",
       lemNotResponsible:
@@ -433,6 +436,7 @@
         "Tourismusverein Pro Loco Macugnaga (Infos, Veranstaltungen und Unterkunft)",
       skiLiftsExt: "Bergbahnen",
       comune: "Gemeinde Macugnaga",
+      embedWidget: "Auf Ihrer Website einbinden",
       footerDisclaimer:
         "Informationen, Preise und Verfügbarkeiten im Buchungsportal werden von den Anbietern der Erlebnisse angegeben. Nach der Online-Buchung erhalten Sie die direkten Kontakte der Organisatoren für weitere Auskünfte. ",
       lemNotResponsible:

@@ -157,6 +157,17 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://www.macugnagabooking.it/embed-widget.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.macugnagabooking.it/embed-widget.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.macugnagabooking.it/en/embed-widget.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.macugnagabooking.it/fr/embed-widget.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.macugnagabooking.it/de/embed-widget.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.macugnagabooking.it/embed-widget.html"/>
+    <lastmod>2026-07-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://www.macugnagabooking.it/faq.html</loc>
     <xhtml:link rel="alternate" hreflang="it" href="https://www.macugnagabooking.it/faq.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.macugnagabooking.it/en/faq.html"/>
@@ -260,6 +271,7 @@
   <url><loc>https://www.macugnagabooking.it/en/funivia-seggiovia.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
   <url><loc>https://www.macugnagabooking.it/en/chi-siamo.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.55</priority></url>
   <url><loc>https://www.macugnagabooking.it/en/come-funziona.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.55</priority></url>
+  <url><loc>https://www.macugnagabooking.it/en/embed-widget.html</loc><lastmod>2026-07-25</lastmod><changefreq>monthly</changefreq><priority>0.45</priority></url>
   <url><loc>https://www.macugnagabooking.it/en/faq.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.55</priority></url>
   <url><loc>https://www.macugnagabooking.it/en/trekking-macugnaga.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.45</priority></url>
   <url><loc>https://www.macugnagabooking.it/en/forest-bathing-macugnaga.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.45</priority></url>
@@ -284,6 +296,7 @@
   <url><loc>https://www.macugnagabooking.it/fr/funivia-seggiovia.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
   <url><loc>https://www.macugnagabooking.it/fr/chi-siamo.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.55</priority></url>
   <url><loc>https://www.macugnagabooking.it/fr/come-funziona.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.55</priority></url>
+  <url><loc>https://www.macugnagabooking.it/fr/embed-widget.html</loc><lastmod>2026-07-25</lastmod><changefreq>monthly</changefreq><priority>0.45</priority></url>
   <url><loc>https://www.macugnagabooking.it/fr/faq.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.55</priority></url>
   <url><loc>https://www.macugnagabooking.it/fr/trekking-macugnaga.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.45</priority></url>
   <url><loc>https://www.macugnagabooking.it/fr/forest-bathing-macugnaga.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.45</priority></url>
@@ -308,6 +321,7 @@
   <url><loc>https://www.macugnagabooking.it/de/funivia-seggiovia.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.65</priority></url>
   <url><loc>https://www.macugnagabooking.it/de/chi-siamo.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.55</priority></url>
   <url><loc>https://www.macugnagabooking.it/de/come-funziona.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.55</priority></url>
+  <url><loc>https://www.macugnagabooking.it/de/embed-widget.html</loc><lastmod>2026-07-25</lastmod><changefreq>monthly</changefreq><priority>0.45</priority></url>
   <url><loc>https://www.macugnagabooking.it/de/faq.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.55</priority></url>
   <url><loc>https://www.macugnagabooking.it/de/trekking-macugnaga.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.45</priority></url>
   <url><loc>https://www.macugnagabooking.it/de/forest-bathing-macugnaga.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.45</priority></url>
