@@ -105,7 +105,7 @@ function injectScripts(html, lang) {
   );
   out = out.replace(
     /(\.\.\/)?js\/embed-widget\.js\?v=\d+/g,
-    `${prefix}js/embed-widget.js?v=1`
+    `${prefix}js/embed-widget.js?v=2`
   );
   out = out.replace(/(\.\.\/)?js\/main\.js/g, `${prefix}js/main.js`);
   out = out.replace(/(\.\.\/)?css\/style\.css\?v=\d+/g, `${prefix}css/style.css?v=12`);
@@ -267,7 +267,7 @@ function patchItalian(srcHtml, file) {
     html = html.replace(/js\/partials\.js\?v=\d+/g, "js/partials.js?v=11");
   }
   html = html.replace(/js\/esperienze-list\.js\?v=\d+/g, "js/esperienze-list.js?v=9");
-  html = html.replace(/js\/embed-widget\.js\?v=\d+/g, "js/embed-widget.js?v=1");
+  html = html.replace(/js\/embed-widget\.js\?v=\d+/g, "js/embed-widget.js?v=2");
   html = html.replace(/css\/style\.css\?v=\d+/g, "css/style.css?v=12");
   /* Shorter nav label in static seo fallback */
   html = html.replace(

@@ -17,6 +17,8 @@ Thumbs.db
 assets/FOTO MINIERA/
 assets/widget *.txt
 assets/widget*.txt
+# Operator embed generator needs this Planyo template on the live site
+!assets/widget_per_altri_siti.txt
 assets/*.png
 assets/*.jpg
 assets/*.jpeg

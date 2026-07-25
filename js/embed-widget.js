@@ -44,6 +44,36 @@
     },
   };
 
+  /* Fallback if assets/widget_per_altri_siti.txt is unavailable (404 / offline). */
+  var FALLBACK_TEMPLATE =
+    "<script type=\"text/javascript\">\n" +
+    "/* change the following values to match your settings */\n" +
+    "var planyo_site_id='70864'; /* ID of your planyo site */\n" +
+    "var planyo_default_mode='resource_list'; /* one of: 'resource_list' (displays list of resources with photos, descriptions etc.), 'search' (displays the search box), 'empty' (will not display anything by default but will require you to either pass the resource ID as parameter in the URL (resource_id) or add an external search box or calendar preview), 'upcoming_availability' (displays a quick list of all upcoming availability) */\n" +
+    "var extra_search_fields=''; /* comma-separated extra fields in the search box, e.g. 'Number of persons'. You first need to define them in settings/custom resource properties */\n" +
+    "var sort_fields=''; /* comma-separated sort fields for the search box -- a single field will hide the sort dropdown box */\n" +
+    "var planyo_resource_ordering='name'; /* optional sort criterium for resource list */\n" +
+    "var planyo_include_js_library=true; /* set this to true if jQuery (required) should be included by this plugin, or false if your website already includes jQuery */\n" +
+    "var planyo_attribs=''; /* optionally you can insert the attribute string here */\n" +
+    "var planyo_resource_id=''; /* optional: ID of the resource being reserved */\n" +
+    "var planyo_language='IT'; /* you can optionally change the language here, e.g. 'FR' or 'ES' or pass the languge in the 'lang' parameter. 'AUTO' means the language is detected automatically */\n" +
+    "var ulap_script=\"jsonp\"; /* leave this as \"jsonp\" for a plain-javascript implementation --OR-- if using a php/asp.net/java implementation, one of the ULAP scripts: \"ulap.php\", \"ulap.aspx\", \"ulap.jsp\", in such case you must download the advanced integration Planyo files from http://www.planyo.com/Plugins/PlanyoFiles/planyo-files.zip */\n" +
+    "var planyo_use_https=true;\n" +
+    "var planyo_files_location='https://www.planyo.com/Plugins/PlanyoFiles'; /* relative or absolute directory where the planyo files are kept (leave unchanged for plain-javascript implementation, otherwise e.g. '/planyo-files' when using the ULAP scripts) */\n" +
+    "var empty_mode=false; /* should be always set to false */\n" +
+    "</script>\n" +
+    "\n" +
+    "<script type=\"text/javascript\">\n" +
+    "function get_param (name) {name = name.replace(/[\\[]/,\"\\\\\\[\").replace(/[\\]]/,\"\\\\\\]\");var regexS = \"[\\\\?&]\"+name+\"=([^&#]*)\";var regex = new RegExp (regexS);var results = regex.exec (window.location.href);if (results == null) return null;else  return results[1];}\n" +
+    "if (get_param('mode'))planyo_embed_mode = get_param('mode');\n" +
+    "function get_full_planyo_file_path(name) {if(planyo_files_location.length==0||planyo_files_location.lastIndexOf('/')==planyo_files_location.length-1)return planyo_files_location+name; else return planyo_files_location+'/'+name;}\n" +
+    "</script>\n" +
+    "<link rel='stylesheet' href='https://www.planyo.com/schemes/?calendar=70864&detect_mobile=auto&sel=scheme_css' type='text/css' />\n" +
+    "<div id='planyo_content' class='planyo'><img src='https://www.planyo.com/images/hourglass.gif' align='middle' /></div>\n" +
+    "<script type='text/javascript' src='https://www.planyo.com/Plugins/PlanyoFiles/jquery-3.6.4.min.js'></script>\n" +
+    "<script src='https://www.planyo.com/Plugins/PlanyoFiles/booking-utils.js' type='text/javascript'></script>\n" +
+    "<noscript><a href='https://www.planyo.com/about-calendar.php?calendar=70864'>Make a reservation</a><br/><br/><a href='https://www.planyo.com/'>Reservation system powered by Planyo</a></noscript>\n";
+
   var templateCache = null;
   var templatePromise = null;
 
@@ -58,6 +88,8 @@
 
   function assetPrefix() {
     if (window.MB_I18N) return window.MB_I18N.assetPrefix(lang());
+    var path = window.location.pathname || "";
+    if (/\/(en|fr|de)(\/|$)/.test(path)) return "../";
     return "";
   }
 
@@ -104,12 +136,16 @@
         return res.text();
       })
       .then(function (text) {
+        if (!text || text.indexOf("planyo_site_id") === -1) {
+          throw new Error("Invalid template");
+        }
         templateCache = text;
         return text;
       })
-      .catch(function (err) {
+      .catch(function () {
+        templateCache = FALLBACK_TEMPLATE;
         templatePromise = null;
-        throw err;
+        return templateCache;
       });
     return templatePromise;
   }
