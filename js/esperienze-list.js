@@ -5,7 +5,7 @@
   var SITE_ID = 70864;
   /* Hard TTL in localStorage. Force refresh after Planyo admin changes: bump
      CACHE_KEY (e.g. v8), or clear localStorage key mem_esperienze_list_*. */
-  var CACHE_KEY_BASE = "mem_esperienze_list_v10";
+  var CACHE_KEY_BASE = "mem_esperienze_list_v11";
   var CACHE_MS = 12 * 60 * 60 * 1000;
   var EVENT_TIMES_CONCURRENCY = 6;
   var MAX_DATE_LABELS = 5;
@@ -15,7 +15,7 @@
     "253398": true /* Casa Museo Walser */,
     "252705": true /* Miniera d'Oro della Guia */,
   };
-  /* Booking deadline notice under available dates */
+  /* Booking deadline notice under available dates (id + name match). */
   var DEADLINE_RESOURCE_IDS = {
     "253421": true /* La via del pane */,
   };
@@ -141,7 +141,9 @@
 
   function hasBookingDeadline(resourceId, name) {
     if (DEADLINE_RESOURCE_IDS[String(resourceId)]) return true;
-    var n = String(name || "").toLowerCase();
+    var n = String(name || "")
+      .toLowerCase()
+      .replace(/\s+/g, " ");
     return n.indexOf("via del pane") >= 0;
   }
 
@@ -153,6 +155,23 @@
       escapeHtml(L.viaDelPaneDeadline || "Prenotazioni entro il 17 agosto") +
       "</p>"
     );
+  }
+
+  /* Keep deadline after date patches / full re-renders (progressive load). */
+  function syncDeadlineNotice(card, item) {
+    if (!card) return;
+    var datesEl = card.querySelector(".esperienze-card__dates");
+    var existingDeadline = card.querySelector(".esperienze-card__deadline");
+    var notice = deadlineNoticeHtml(item);
+    if (notice) {
+      if (existingDeadline) {
+        existingDeadline.outerHTML = notice;
+      } else if (datesEl) {
+        datesEl.insertAdjacentHTML("afterend", notice);
+      }
+    } else if (existingDeadline) {
+      existingDeadline.remove();
+    }
   }
 
   function escapeHtml(str) {
@@ -691,17 +710,7 @@
       (L.nextDates || "Prossime date:") +
       "</span> " +
       escapeHtml(item.dateLabels.join(" · "));
-    var existingDeadline = card.querySelector(".esperienze-card__deadline");
-    var notice = deadlineNoticeHtml(item);
-    if (notice) {
-      if (existingDeadline) {
-        existingDeadline.outerHTML = notice;
-      } else {
-        datesEl.insertAdjacentHTML("afterend", notice);
-      }
-    } else if (existingDeadline) {
-      existingDeadline.remove();
-    }
+    syncDeadlineNotice(card, item);
     if (item.upcoming) {
       card.classList.remove("esperienze-card--soon");
     } else {
@@ -895,6 +904,14 @@
         })
         .join("") +
       "</div>";
+
+    items.forEach(function (item) {
+      if (!item) return;
+      var card = el.querySelector(
+        '.esperienze-card[data-resource-id="' + item.resourceId + '"]'
+      );
+      syncDeadlineNotice(card, item);
+    });
 
     bindListInteractions(el);
   }

@@ -1496,6 +1496,7 @@ h1.hero__claim {
 }
 
 .esperienze-card__deadline {
+  display: block;
   margin: -0.45rem 0 0.85rem;
   font-size: 0.85rem;
   font-weight: 600;
