@@ -126,28 +126,28 @@ export const PAGE_META = {
   },
   "embed-widget.html": {
     en: {
-      title: "Embed the booking widget | Macugnaga Booking",
+      title: "Embed booking on your site | Macugnaga Booking",
       description:
-        "Generate HTML code to embed bookable Macugnaga Monte Rosa experiences on your website. Planyo widget with a personalised refer code for operators and properties.",
-      ogTitle: "Embed the booking widget",
+        "Offer clients booking of Macugnaga Monte Rosa experiences from your site: direct link or HTML code to embed. For operators, blogs and accommodations.",
+      ogTitle: "Embed booking on your site",
       ogDescription:
-        "Generate HTML code so visitors can discover and book Macugnaga experiences directly on your site.",
+        "Two ways to let visitors book Macugnaga experiences from your site: a direct link or HTML code to embed.",
     },
     fr: {
-      title: "Intégrer le widget de réservation | Macugnaga Booking",
+      title: "Intégrer la réservation sur votre site | Macugnaga Booking",
       description:
-        "Générez le code HTML pour intégrer sur votre site les expériences réservables à Macugnaga Monte Rosa. Widget Planyo avec code référent personnalisé pour opérateurs et structures.",
-      ogTitle: "Intégrer le widget de réservation",
+        "Proposez à vos clients de réserver les expériences de Macugnaga Monte Rosa depuis votre site : lien direct ou code HTML à intégrer. Pour opérateurs, blogs et hébergements.",
+      ogTitle: "Intégrer la réservation sur votre site",
       ogDescription:
-        "Générez le code HTML pour faire découvrir et réserver les expériences de Macugnaga directement sur votre site.",
+        "Deux façons de faire réserver les expériences de Macugnaga depuis votre site : lien direct ou code HTML à intégrer.",
     },
     de: {
-      title: "Buchungs-Widget einbinden | Macugnaga Booking",
+      title: "Buchung auf Ihrer Website einbinden | Macugnaga Booking",
       description:
-        "HTML-Code erzeugen, um buchbare Erlebnisse in Macugnaga Monte Rosa auf Ihrer Website einzubinden. Planyo-Widget mit personalisiertem Refer-Code für Anbieter und Unterkünfte.",
-      ogTitle: "Buchungs-Widget einbinden",
+        "Bieten Sie Kunden die Buchung von Erlebnissen in Macugnaga Monte Rosa von Ihrer Website aus: Direktlink oder HTML-Code zum Einbinden. Für Anbieter, Blogs und Unterkünfte.",
+      ogTitle: "Buchung auf Ihrer Website einbinden",
       ogDescription:
-        "HTML-Code erzeugen, damit Besucher Macugnaga-Erlebnisse direkt auf Ihrer Website entdecken und buchen können.",
+        "Zwei Wege, Macugnaga-Erlebnisse von Ihrer Website aus buchbar zu machen: Direktlink oder HTML-Code zum Einbinden.",
     },
   },
   "faq.html": {
@@ -1294,30 +1294,90 @@ export const PHRASES = {
     fr: "Intégrer sur votre site",
     de: "Auf Ihrer Website einbinden",
   },
-  "Widget di prenotazione per il tuo sito": {
-    en: "Booking widget for your website",
-    fr: "Widget de réservation pour votre site",
-    de: "Buchungs-Widget für Ihre Website",
+  "Prenotazioni sul tuo sito": {
+    en: "Bookings on your site",
+    fr: "Réservations sur votre site",
+    de: "Buchungen auf Ihrer Website",
   },
-  "Inserisci il nome del tuo sito o della struttura (max 15 caratteri). Genereremo il codice HTML con un refer code Planyo personalizzato per tracciare le prenotazioni provenienti dal tuo sito.": {
-    en: "Enter your site or property name (max 15 characters). We will generate HTML code with a personalised Planyo refer code to track bookings from your site.",
-    fr: "Saisissez le nom de votre site ou de votre structure (max 15 caractères). Nous générerons le code HTML avec un code référent Planyo personnalisé pour suivre les réservations provenant de votre site.",
-    de: "Geben Sie den Namen Ihrer Website oder Unterkunft ein (max. 15 Zeichen). Wir erzeugen HTML-Code mit einem personalisierten Planyo-Refer-Code zur Nachverfolgung von Buchungen von Ihrer Website.",
+  "Se gestisci un blog, un sito di alloggi, un portale o simili, puoi offrire ai tuoi clienti la possibilità di prenotare le esperienze direttamente dal tuo sito. Due modalità:": {
+    en: "If you manage a blog, an accommodation website, a portal or similar, you can offer your clients the ability to book experiences directly from your site. Two modes:",
+    fr: "Si vous gérez un blog, un site d’hébergement, un portail ou similaire, vous pouvez offrir à vos clients la possibilité de réserver des expériences directement depuis votre site. Deux modes :",
+    de: "Wenn Sie einen Blog, eine Unterkunfts-Website, ein Portal oder Ähnliches betreiben, können Sie Ihren Kunden die Buchung von Erlebnissen direkt über Ihre Website anbieten. Zwei Möglichkeiten:",
   },
-  "Nome del sito o della struttura": {
-    en: "Site or property name",
-    fr: "Nom du site ou de la structure",
-    de: "Name der Website oder Unterkunft",
+  "un link diretto da usare subito;": {
+    en: "a direct link you can use immediately;",
+    fr: "un lien direct à utiliser immédiatement ;",
+    de: "ein Direktlink, den Sie sofort nutzen können;",
+  },
+  "integrare le esperienze sul tuo sito tramite codice HTML da incollare (in questo caso, dopo aver generato il codice in questa pagina, è necessario scrivere a": {
+    en: "integrate experiences on your site via HTML code to paste (in this case, after generating the code on this page, you must email",
+    fr: "intégrer les expériences sur votre site via un code HTML à coller (dans ce cas, après avoir généré le code sur cette page, vous devez écrire à",
+    de: "Erlebnisse über einzufügenden HTML-Code auf Ihrer Website einbinden (in diesem Fall müssen Sie nach der Code-Erzeugung auf dieser Seite eine E-Mail an",
+  },
+  "per autorizzare la pubblicazione sul tuo sito web).": {
+    en: "to authorize publication on your website).",
+    fr: "pour autoriser la publication sur votre site web).",
+    de: "schreiben, um die Veröffentlichung auf Ihrer Website freizugeben).",
+  },
+  "Metodo 1 — Link diretto": {
+    en: "Method 1 — Direct link",
+    fr: "Méthode 1 — Lien direct",
+    de: "Methode 1 — Direktlink",
+  },
+  "Inserisci il tuo sito internet e genera un link personalizzato da condividere o inserire sul tuo sito.": {
+    en: "Enter your website and generate a personalised link to share or place on your site.",
+    fr: "Saisissez votre site internet et générez un lien personnalisé à partager ou à placer sur votre site.",
+    de: "Geben Sie Ihre Website ein und erzeugen Sie einen personalisierten Link zum Teilen oder Einbinden.",
+  },
+  "tuo sito internet (ex. www.miosito.it)": {
+    en: "your website (e.g. www.mysite.com)",
+    fr: "votre site internet (ex. www.monsite.fr)",
+    de: "Ihre Website (z. B. www.meinerseite.de)",
+  },
+  "Genera link": {
+    en: "Generate link",
+    fr: "Générer le lien",
+    de: "Link erzeugen",
+  },
+  "Link da copiare": {
+    en: "Link to copy",
+    fr: "Lien à copier",
+    de: "Zu kopierender Link",
+  },
+  "Copia link": {
+    en: "Copy link",
+    fr: "Copier le lien",
+    de: "Link kopieren",
+  },
+  "Metodo 2 — Codice HTML": {
+    en: "Method 2 — HTML code",
+    fr: "Méthode 2 — Code HTML",
+    de: "Methode 2 — HTML-Code",
+  },
+  "Genera il codice HTML da incollare nella pagina del tuo sito. Dopo la generazione, scrivi a": {
+    en: "Generate the HTML code to paste into your website page. After generating it, email",
+    fr: "Générez le code HTML à coller dans la page de votre site. Après la génération, écrivez à",
+    de: "Erzeugen Sie den HTML-Code zum Einfügen in Ihre Website-Seite. Nach der Erzeugung schreiben Sie an",
+  },
+  "per autorizzare la pubblicazione sul tuo sito web.": {
+    en: "to authorize publication on your website.",
+    fr: "pour autoriser la publication sur votre site web.",
+    de: "zur Freigabe der Veröffentlichung auf Ihrer Website.",
+  },
+  "sito internet (ex. www.miosito.it)": {
+    en: "website (e.g. www.mysite.com)",
+    fr: "site internet (ex. www.monsite.fr)",
+    de: "Website (z. B. www.meinerseite.de)",
   },
   "Genera codice": {
     en: "Generate code",
     fr: "Générer le code",
     de: "Code erzeugen",
   },
-  "Refer code:": {
-    en: "Refer code:",
-    fr: "Code référent :",
-    de: "Refer-Code:",
+  "Codice di riferimento:": {
+    en: "Reference code:",
+    fr: "Code de référence :",
+    de: "Referenzcode:",
   },
   "Codice HTML da copiare": {
     en: "HTML code to copy",
@@ -1329,15 +1389,25 @@ export const PHRASES = {
     fr: "Copier le code",
     de: "Code kopieren",
   },
-  "Copia il codice html e incollalo direttamente nella pagina del tuo sito per inserire la possibilità di conoscere e prenotare direttamente tutte le attività.": {
-    en: "Copy the HTML code and paste it directly into your website page to let visitors discover and book all activities.",
-    fr: "Copiez le code HTML et collez-le directement dans la page de votre site pour permettre de découvrir et réserver toutes les activités.",
-    de: "Kopieren Sie den HTML-Code und fügen Sie ihn direkt in Ihre Website-Seite ein, damit Besucher alle Aktivitäten entdecken und buchen können.",
+  "Copia il codice HTML e incollalo nella pagina del tuo sito. Ricorda di scrivere a": {
+    en: "Copy the HTML code and paste it into your website page. Remember to email",
+    fr: "Copiez le code HTML et collez-le dans la page de votre site. N’oubliez pas d’écrire à",
+    de: "Kopieren Sie den HTML-Code und fügen Sie ihn in Ihre Website-Seite ein. Denken Sie daran, an",
+  },
+  "per autorizzare la pubblicazione.": {
+    en: "to authorize publication.",
+    fr: "pour autoriser la publication.",
+    de: "zu schreiben, um die Veröffentlichung freizugeben.",
+  },
+  "Il servizio è sicuro e gratuito; la provenienza delle prenotazioni (es. da www.tuosito.it) viene registrata a fini statistici e per eventuali collaborazioni future che potrete avviare con noi.": {
+    en: "The service is safe and free; booking provenance (e.g. from www.yoursite.com) is recorded for statistics and for possible future collaborations you may start with us.",
+    fr: "Le service est sûr et gratuit ; la provenance des réservations (ex. depuis www.votresite.fr) est enregistrée à des fins statistiques et pour d’éventuelles collaborations futures que vous pourriez engager avec nous.",
+    de: "Der Service ist sicher und kostenlos; die Herkunft der Buchungen (z. B. von www.ihrerseite.de) wird für Statistiken und mögliche künftige Zusammenarbeit mit uns erfasst.",
   },
   "Incorpora il widget di prenotazione": {
-    en: "Embed the booking widget",
-    fr: "Intégrer le widget de réservation",
-    de: "Buchungs-Widget einbinden",
+    en: "Embed booking on your site",
+    fr: "Intégrer la réservation sur votre site",
+    de: "Buchung auf Ihrer Website einbinden",
   },
   "Portale di prenotazione Macugnaga Booking.": {
     en: "Macugnaga Booking portal.",

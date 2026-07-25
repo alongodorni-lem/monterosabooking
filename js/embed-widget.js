@@ -1,46 +1,43 @@
-/* Operator embed widget generator — client-side only */
+/* Operator embed tools: direct link + HTML widget — client-side only */
 (function () {
   "use strict";
 
-  var form = document.getElementById("embed-widget-form");
-  if (!form) return;
-
-  var nameInput = document.getElementById("embed-site-name");
-  var errorEl = document.getElementById("embed-widget-error");
-  var resultEl = document.getElementById("embed-widget-result");
-  var refEl = document.getElementById("embed-refcode");
-  var codeEl = document.getElementById("embed-widget-code");
-  var copyBtn = document.getElementById("embed-copy-btn");
-  var feedbackEl = document.getElementById("embed-copy-feedback");
+  var REFCODE_MAX = 30;
+  var BOOKING_BASE =
+    "https://www.planyo.com/booking.php?calendar=70864&custom-language=LANG&attribute_string=%26mode%3Dresource_list%26lang%3DLANG%26sort%3Dname";
 
   var MSG = {
     it: {
-      empty: "Inserisci il nome del sito o della struttura (max 15 caratteri).",
-      invalid: "Usa solo lettere, numeri, trattino o underscore (senza spazi).",
+      empty: "Inserisci il tuo sito internet (es. www.miosito.it).",
+      invalid: "Usa lettere, numeri, punto, trattino o underscore (senza spazi).",
       loadError: "Impossibile caricare il template del widget. Riprova più tardi.",
-      copied: "Codice copiato negli appunti.",
-      copyFail: "Impossibile copiare automaticamente. Seleziona il codice e copialo manualmente.",
+      copiedCode: "Codice copiato negli appunti.",
+      copiedLink: "Link copiato negli appunti.",
+      copyFail: "Impossibile copiare automaticamente. Seleziona il testo e copialo manualmente.",
     },
     en: {
-      empty: "Enter the site or property name (max 15 characters).",
-      invalid: "Use only letters, numbers, hyphen or underscore (no spaces).",
+      empty: "Enter your website (e.g. www.mysite.com).",
+      invalid: "Use letters, numbers, dots, hyphen or underscore (no spaces).",
       loadError: "Could not load the widget template. Please try again later.",
-      copied: "Code copied to clipboard.",
-      copyFail: "Could not copy automatically. Select the code and copy it manually.",
+      copiedCode: "Code copied to clipboard.",
+      copiedLink: "Link copied to clipboard.",
+      copyFail: "Could not copy automatically. Select the text and copy it manually.",
     },
     fr: {
-      empty: "Saisissez le nom du site ou de la structure (max 15 caractères).",
-      invalid: "Utilisez uniquement lettres, chiffres, tiret ou underscore (sans espaces).",
+      empty: "Saisissez votre site internet (ex. www.monsite.fr).",
+      invalid: "Utilisez lettres, chiffres, point, tiret ou underscore (sans espaces).",
       loadError: "Impossible de charger le modèle du widget. Réessayez plus tard.",
-      copied: "Code copié dans le presse-papiers.",
-      copyFail: "Copie automatique impossible. Sélectionnez le code et copiez-le manuellement.",
+      copiedCode: "Code copié dans le presse-papiers.",
+      copiedLink: "Lien copié dans le presse-papiers.",
+      copyFail: "Copie automatique impossible. Sélectionnez le texte et copiez-le manuellement.",
     },
     de: {
-      empty: "Geben Sie den Namen der Website oder Unterkunft ein (max. 15 Zeichen).",
-      invalid: "Nur Buchstaben, Zahlen, Bindestrich oder Unterstrich (ohne Leerzeichen).",
+      empty: "Geben Sie Ihre Website ein (z. B. www.meinerseite.de).",
+      invalid: "Nur Buchstaben, Zahlen, Punkt, Bindestrich oder Unterstrich (ohne Leerzeichen).",
       loadError: "Widget-Vorlage konnte nicht geladen werden. Bitte später erneut versuchen.",
-      copied: "Code in die Zwischenablage kopiert.",
-      copyFail: "Automatisches Kopieren fehlgeschlagen. Code markieren und manuell kopieren.",
+      copiedCode: "Code in die Zwischenablage kopiert.",
+      copiedLink: "Link in die Zwischenablage kopiert.",
+      copyFail: "Automatisches Kopieren fehlgeschlagen. Text markieren und manuell kopieren.",
     },
   };
 
@@ -82,6 +79,12 @@
     return "it";
   }
 
+  function bookingLang() {
+    var l = lang();
+    if (l === "en" || l === "fr" || l === "de") return l.toUpperCase();
+    return "IT";
+  }
+
   function t() {
     return MSG[lang()] || MSG.it;
   }
@@ -93,22 +96,43 @@
     return "";
   }
 
-  function showError(msg) {
-    if (!errorEl) return;
-    errorEl.textContent = msg || "";
-    errorEl.hidden = !msg;
+  function setAlert(el, msg) {
+    if (!el) return;
+    el.textContent = msg || "";
+    el.hidden = !msg;
   }
 
-  function showFeedback(msg) {
-    if (!feedbackEl) return;
-    feedbackEl.textContent = msg || "";
-    feedbackEl.hidden = !msg;
-  }
-
-  /** Spaces removed, then keep safe URL/refcode chars only. */
+  /**
+   * Build a Planyo-safe refcode from a typed website name.
+   * Strips protocol/path/spaces; keeps letters, digits, dot, hyphen, underscore.
+   */
   function sanitizeRefcode(raw) {
-    var noSpaces = String(raw || "").replace(/\s+/g, "");
-    return noSpaces.replace(/[^a-zA-Z0-9_-]/g, "");
+    var s = String(raw || "").trim();
+    s = s.replace(/^https?:\/\//i, "");
+    s = s.replace(/^www\./i, "www.");
+    s = s.split(/[/?#]/)[0];
+    s = s.replace(/\s+/g, "");
+    s = s.replace(/[^a-zA-Z0-9._-]/g, "");
+    if (s.length > REFCODE_MAX) s = s.slice(0, REFCODE_MAX);
+    return s;
+  }
+
+  function parseSiteInput(inputEl) {
+    var raw = String((inputEl && inputEl.value) || "");
+    if (!raw.trim()) {
+      return { ok: false, error: t().empty };
+    }
+    var refcode = sanitizeRefcode(raw);
+    if (!refcode) {
+      return { ok: false, error: t().invalid };
+    }
+    return { ok: true, refcode: refcode };
+  }
+
+  function buildDirectLink(refcode) {
+    var L = bookingLang();
+    var url = BOOKING_BASE.replace(/LANG/g, L);
+    return url + "&ppp_refcode=" + encodeURIComponent(refcode);
   }
 
   function injectRefcode(template, refcode) {
@@ -150,13 +174,17 @@
     return templatePromise;
   }
 
-  function copyText(text) {
+  function copyText(text, selectEl) {
     if (navigator.clipboard && navigator.clipboard.writeText) {
       return navigator.clipboard.writeText(text);
     }
     return new Promise(function (resolve, reject) {
-      codeEl.focus();
-      codeEl.select();
+      if (!selectEl) {
+        reject(new Error("no select target"));
+        return;
+      }
+      selectEl.focus();
+      if (selectEl.select) selectEl.select();
       try {
         var ok = document.execCommand("copy");
         if (ok) resolve();
@@ -167,55 +195,115 @@
     });
   }
 
+  /* ——— Method 1: direct link ——— */
+  var linkForm = document.getElementById("embed-link-form");
+  if (linkForm) {
+    var linkInput = document.getElementById("embed-link-site");
+    var linkError = document.getElementById("embed-link-error");
+    var linkResult = document.getElementById("embed-link-result");
+    var linkUrlEl = document.getElementById("embed-link-url");
+    var linkCopyBtn = document.getElementById("embed-link-copy-btn");
+    var linkFeedback = document.getElementById("embed-link-feedback");
+
+    linkForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      setAlert(linkError, "");
+      setAlert(linkFeedback, "");
+
+      var parsed = parseSiteInput(linkInput);
+      if (!parsed.ok) {
+        setAlert(linkError, parsed.error);
+        if (linkResult) linkResult.hidden = true;
+        if (linkInput) linkInput.focus();
+        return;
+      }
+
+      var url = buildDirectLink(parsed.refcode);
+      if (linkUrlEl) {
+        linkUrlEl.value = url;
+      }
+      if (linkResult) linkResult.hidden = false;
+      if (linkUrlEl) {
+        linkUrlEl.focus();
+        linkUrlEl.select();
+      }
+    });
+
+    if (linkCopyBtn) {
+      linkCopyBtn.addEventListener("click", function () {
+        var text = (linkUrlEl && linkUrlEl.value) || "";
+        if (!text) return;
+        copyText(text, linkUrlEl)
+          .then(function () {
+            setAlert(linkFeedback, t().copiedLink);
+          })
+          .catch(function () {
+            setAlert(linkFeedback, t().copyFail);
+            if (linkUrlEl) {
+              linkUrlEl.focus();
+              linkUrlEl.select();
+            }
+          });
+      });
+    }
+  }
+
+  /* ——— Method 2: HTML embed ——— */
+  var form = document.getElementById("embed-widget-form");
+  if (!form) return;
+
+  var nameInput = document.getElementById("embed-site-name");
+  var errorEl = document.getElementById("embed-widget-error");
+  var resultEl = document.getElementById("embed-widget-result");
+  var refEl = document.getElementById("embed-refcode");
+  var codeEl = document.getElementById("embed-widget-code");
+  var copyBtn = document.getElementById("embed-copy-btn");
+  var feedbackEl = document.getElementById("embed-copy-feedback");
+
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    showError("");
-    showFeedback("");
+    setAlert(errorEl, "");
+    setAlert(feedbackEl, "");
 
-    var refcode = sanitizeRefcode(nameInput.value);
-    if (!String(nameInput.value || "").trim()) {
-      showError(t().empty);
-      resultEl.hidden = true;
-      nameInput.focus();
+    var parsed = parseSiteInput(nameInput);
+    if (!parsed.ok) {
+      setAlert(errorEl, parsed.error);
+      if (resultEl) resultEl.hidden = true;
+      if (nameInput) nameInput.focus();
       return;
-    }
-    if (!refcode) {
-      showError(t().invalid);
-      resultEl.hidden = true;
-      nameInput.focus();
-      return;
-    }
-    if (refcode.length > 15) {
-      refcode = refcode.slice(0, 15);
     }
 
     loadTemplate()
       .then(function (tpl) {
-        var html = injectRefcode(tpl, refcode);
-        refEl.textContent = refcode;
-        codeEl.value = html;
-        resultEl.hidden = false;
-        codeEl.focus();
-        codeEl.select();
+        var html = injectRefcode(tpl, parsed.refcode);
+        if (refEl) refEl.textContent = parsed.refcode;
+        if (codeEl) codeEl.value = html;
+        if (resultEl) resultEl.hidden = false;
+        if (codeEl) {
+          codeEl.focus();
+          codeEl.select();
+        }
       })
       .catch(function () {
-        showError(t().loadError);
-        resultEl.hidden = true;
+        setAlert(errorEl, t().loadError);
+        if (resultEl) resultEl.hidden = true;
       });
   });
 
   if (copyBtn) {
     copyBtn.addEventListener("click", function () {
-      var text = codeEl.value || "";
+      var text = (codeEl && codeEl.value) || "";
       if (!text) return;
-      copyText(text)
+      copyText(text, codeEl)
         .then(function () {
-          showFeedback(t().copied);
+          setAlert(feedbackEl, t().copiedCode);
         })
         .catch(function () {
-          showFeedback(t().copyFail);
-          codeEl.focus();
-          codeEl.select();
+          setAlert(feedbackEl, t().copyFail);
+          if (codeEl) {
+            codeEl.focus();
+            codeEl.select();
+          }
         });
     });
   }

@@ -4,23 +4,23 @@
   <meta charset="utf-8">
   <script src="../js/lang-pref.js?v=1"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Buchungs-Widget einbinden | Macugnaga Booking</title>
-  <meta name="description" content="HTML-Code erzeugen, um buchbare Erlebnisse in Macugnaga Monte Rosa auf Ihrer Website einzubinden. Planyo-Widget mit personalisiertem Refer-Code für Anbieter und Unterkünfte.">
+  <title>Buchung auf Ihrer Website einbinden | Macugnaga Booking</title>
+  <meta name="description" content="Bieten Sie Kunden die Buchung von Erlebnissen in Macugnaga Monte Rosa von Ihrer Website aus: Direktlink oder HTML-Code zum Einbinden. Für Anbieter, Blogs und Unterkünfte.">
   <link rel="canonical" href="https://www.macugnagabooking.it/de/embed-widget.html">
   <link rel="alternate" hreflang="it" href="https://www.macugnagabooking.it/embed-widget.html">
   <link rel="alternate" hreflang="en" href="https://www.macugnagabooking.it/en/embed-widget.html">
   <link rel="alternate" hreflang="fr" href="https://www.macugnagabooking.it/fr/embed-widget.html">
   <link rel="alternate" hreflang="de" href="https://www.macugnagabooking.it/de/embed-widget.html">
   <link rel="alternate" hreflang="x-default" href="https://www.macugnagabooking.it/embed-widget.html">
-  <meta property="og:title" content="Buchungs-Widget einbinden">
-  <meta property="og:description" content="HTML-Code erzeugen, damit Besucher Macugnaga-Erlebnisse direkt auf Ihrer Website entdecken und buchen können.">
+  <meta property="og:title" content="Buchung auf Ihrer Website einbinden">
+  <meta property="og:description" content="Zwei Wege, Macugnaga-Erlebnisse von Ihrer Website aus buchbar zu machen: Direktlink oder HTML-Code zum Einbinden.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.macugnagabooking.it/de/embed-widget.html">
   <meta property="og:locale" content="de_DE">
   <meta property="og:site_name" content="Macugnaga Booking – Erlebnisse am Fuße des Monte Rosa">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Buchungs-Widget einbinden | Macugnaga Booking">
-  <meta name="twitter:description" content="HTML-Code erzeugen, damit Besucher Macugnaga-Erlebnisse direkt auf Ihrer Website entdecken und buchen können.">
+  <meta name="twitter:title" content="Buchung auf Ihrer Website einbinden | Macugnaga Booking">
+  <meta name="twitter:description" content="Zwei Wege, Macugnaga-Erlebnisse von Ihrer Website aus buchbar zu machen: Direktlink oder HTML-Code zum Einbinden.">
   <meta name="twitter:image" content="https://www.macugnagabooking.it/assets/web/proposte-montagna.jpg">
   <meta name="twitter:url" content="https://www.macugnagabooking.it/de/embed-widget.html">
   <meta property="og:image" content="https://www.macugnagabooking.it/assets/web/proposte-montagna.jpg">
@@ -28,7 +28,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=12">
+  <link rel="stylesheet" href="../css/style.css?v=13">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://www.macugnagabooking.it/de/"},{"@type":"ListItem","position":2,"name":"Auf Ihrer Website einbinden","item":"https://www.macugnagabooking.it/de/embed-widget.html"}]}
   </script>
@@ -55,36 +55,75 @@
     <section class="section section--white">
       <div class="container prose">
         <p class="breadcrumb"><a href="index.html">Start</a> · Auf Ihrer Website einbinden</p>
-        <h1>Buchungs-Widget für Ihre Website</h1>
-        <p class="lead">Geben Sie den Namen Ihrer Website oder Unterkunft ein (max. 15 Zeichen). Wir erzeugen HTML-Code mit einem personalisierten Planyo-Refer-Code zur Nachverfolgung von Buchungen von Ihrer Website.</p>
+        <h1>Buchungen auf Ihrer Website</h1>
+        <p class="lead">Wenn Sie einen Blog, eine Unterkunfts-Website, ein Portal oder Ähnliches betreiben, können Sie Ihren Kunden die Buchung von Erlebnissen direkt über Ihre Website anbieten. Zwei Möglichkeiten:</p>
+        <ol class="embed-methods-list">
+          <li>ein Direktlink, den Sie sofort nutzen können;</li>
+          <li>Erlebnisse über einzufügenden HTML-Code auf Ihrer Website einbinden (in diesem Fall müssen Sie nach der Code-Erzeugung auf dieser Seite eine E-Mail an <a href="mailto:macugnagabooking@gmail.com">macugnagabooking@gmail.com</a> schreiben, um die Veröffentlichung auf Ihrer Website freizugeben).</li>
+        </ol>
 
-        <form id="embed-widget-form" class="embed-widget-form" novalidate>
-          <label for="embed-site-name">Name der Website oder Unterkunft</label>
-          <div class="embed-widget-form__row">
-            <input
-              type="text"
-              id="embed-site-name"
-              name="site_name"
-              maxlength="15"
-              autocomplete="organization"
-              required
-              placeholder="es. HotelRosa"
-            >
-            <button type="submit" class="btn btn--primary">Code erzeugen</button>
+        <div class="embed-method" id="metodo-link">
+          <h2>Methode 1 — Direktlink</h2>
+          <p>Geben Sie Ihre Website ein und erzeugen Sie einen personalisierten Link zum Teilen oder Einbinden.</p>
+          <form id="embed-link-form" class="embed-widget-form" novalidate>
+            <label for="embed-link-site">Ihre Website (z. B. www.meinerseite.de)</label>
+            <div class="embed-widget-form__row">
+              <input
+                type="text"
+                id="embed-link-site"
+                name="link_site"
+                maxlength="30"
+                autocomplete="url"
+                required
+                placeholder="Ihre Website (z. B. www.meinerseite.de)"
+              >
+              <button type="submit" class="btn btn--primary">Link erzeugen</button>
+            </div>
+            <p id="embed-link-error" class="embed-widget-form__error" role="alert" hidden></p>
+          </form>
+          <div id="embed-link-result" class="embed-widget-result" hidden>
+            <label for="embed-link-url">Zu kopierender Link</label>
+            <input type="text" id="embed-link-url" class="embed-widget-result__url" readonly spellcheck="false">
+            <div class="btn-row">
+              <button type="button" id="embed-link-copy-btn" class="btn btn--primary">Link kopieren</button>
+            </div>
+            <p id="embed-link-feedback" class="embed-widget-result__feedback" role="status" aria-live="polite" hidden></p>
           </div>
-          <p id="embed-widget-error" class="embed-widget-form__error" role="alert" hidden></p>
-        </form>
-
-        <div id="embed-widget-result" class="embed-widget-result" hidden>
-          <p class="embed-widget-result__ref">Refer-Code: <code id="embed-refcode"></code></p>
-          <label for="embed-widget-code">Zu kopierender HTML-Code</label>
-          <textarea id="embed-widget-code" class="embed-widget-result__code" rows="18" readonly spellcheck="false"></textarea>
-          <div class="btn-row">
-            <button type="button" id="embed-copy-btn" class="btn btn--primary">Code kopieren</button>
-          </div>
-          <p id="embed-copy-feedback" class="embed-widget-result__feedback" role="status" aria-live="polite" hidden></p>
-          <p class="note">Kopieren Sie den HTML-Code und fügen Sie ihn direkt in Ihre Website-Seite ein, damit Besucher alle Aktivitäten entdecken und buchen können.</p>
         </div>
+
+        <div class="embed-method" id="metodo-html">
+          <h2>Methode 2 — HTML-Code</h2>
+          <p>Erzeugen Sie den HTML-Code zum Einfügen in Ihre Website-Seite. Nach der Erzeugung schreiben Sie an <a href="mailto:macugnagabooking@gmail.com">macugnagabooking@gmail.com</a> zur Freigabe der Veröffentlichung auf Ihrer Website.</p>
+          <form id="embed-widget-form" class="embed-widget-form" novalidate>
+            <label for="embed-site-name">Website (z. B. www.meinerseite.de)</label>
+            <div class="embed-widget-form__row">
+              <input
+                type="text"
+                id="embed-site-name"
+                name="site_name"
+                maxlength="30"
+                autocomplete="url"
+                required
+                placeholder="Website (z. B. www.meinerseite.de)"
+              >
+              <button type="submit" class="btn btn--primary">Code erzeugen</button>
+            </div>
+            <p id="embed-widget-error" class="embed-widget-form__error" role="alert" hidden></p>
+          </form>
+
+          <div id="embed-widget-result" class="embed-widget-result" hidden>
+            <p class="embed-widget-result__ref">Referenzcode: <code id="embed-refcode"></code></p>
+            <label for="embed-widget-code">Zu kopierender HTML-Code</label>
+            <textarea id="embed-widget-code" class="embed-widget-result__code" rows="18" readonly spellcheck="false"></textarea>
+            <div class="btn-row">
+              <button type="button" id="embed-copy-btn" class="btn btn--primary">Code kopieren</button>
+            </div>
+            <p id="embed-copy-feedback" class="embed-widget-result__feedback" role="status" aria-live="polite" hidden></p>
+            <p class="note">Kopieren Sie den HTML-Code und fügen Sie ihn in Ihre Website-Seite ein. Denken Sie daran, an <a href="mailto:macugnagabooking@gmail.com">macugnagabooking@gmail.com</a> zu schreiben, um die Veröffentlichung freizugeben.</p>
+          </div>
+        </div>
+
+        <p class="note embed-footer-note">Der Service ist sicher und kostenlos; die Herkunft der Buchungen (z. B. von www.ihrerseite.de) wird für Statistiken und mögliche künftige Zusammenarbeit mit uns erfasst.</p>
       </div>
     </section>
   </main>
@@ -105,6 +144,6 @@
   <script src="../js/i18n.js?v=4"></script>
   <script src="../js/partials.js?v=11"></script>
   <script src="../js/main.js"></script>
-  <script src="../js/embed-widget.js?v=2"></script>
+  <script src="../js/embed-widget.js?v=3"></script>
 </body>
 </html>

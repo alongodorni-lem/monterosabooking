@@ -1824,9 +1824,28 @@ a.btn.btn-primary:hover {
 }
 
 /* ——— Embed widget (operators) ——— */
+.embed-methods-list {
+  margin: 0 0 1.75rem;
+}
+
+.embed-method {
+  margin: 2.25rem 0 2.5rem;
+  padding-top: 0.25rem;
+  border-top: 1px solid rgba(30, 50, 40, 0.12);
+}
+
+.embed-method:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.embed-method h2 {
+  margin-top: 1.5rem;
+}
+
 .embed-widget-form {
-  margin: 2rem 0 1.5rem;
-  max-width: 36rem;
+  margin: 1.25rem 0 1.5rem;
+  max-width: 40rem;
 }
 
 .embed-widget-form label,
@@ -1844,9 +1863,9 @@ a.btn.btn-primary:hover {
 }
 
 .embed-widget-form input[type="text"] {
-  flex: 1 1 12rem;
+  flex: 1 1 14rem;
   min-width: 0;
-  max-width: 16rem;
+  max-width: 22rem;
   padding: 0.7rem 0.85rem;
   border: 1px solid rgba(30, 50, 40, 0.22);
   border-radius: 4px;
@@ -1867,7 +1886,7 @@ a.btn.btn-primary:hover {
 }
 
 .embed-widget-result {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 }
 
 .embed-widget-result__ref {
@@ -1879,6 +1898,25 @@ a.btn.btn-primary:hover {
   padding: 0.15rem 0.4rem;
   background: rgba(30, 50, 40, 0.06);
   border-radius: 3px;
+}
+
+.embed-widget-result__url {
+  display: block;
+  width: 100%;
+  max-width: 48rem;
+  margin: 0.5rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid rgba(30, 50, 40, 0.22);
+  border-radius: 4px;
+  font-family: ui-monospace, "Cascadia Code", "Segoe UI Mono", Consolas, monospace;
+  font-size: 0.82rem;
+  background: #f7f8f6;
+  color: var(--ink);
+}
+
+.embed-widget-result__url:focus {
+  outline: 2px solid var(--green-mid);
+  outline-offset: 1px;
 }
 
 .embed-widget-result__code {
@@ -1903,4 +1941,8 @@ a.btn.btn-primary:hover {
   font-size: 0.95rem;
   color: var(--green-dark);
   font-weight: 600;
+}
+
+.embed-footer-note {
+  margin-top: 2.5rem;
 }
