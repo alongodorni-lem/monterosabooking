@@ -175,11 +175,13 @@ ${NAV}
     </section>
   </main>
   <div id="site-footer"></div>
-  <div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Informativa cookie">
-    <p>Questo sito utilizza cookie tecnici necessari al funzionamento e servizi di terze parti per la prenotazione online e i font. <a href="privacy.html">Privacy e cookie</a></p>
-    <div class="cookie-banner__actions">
-      <button type="button" class="btn btn--primary" data-cookie-accept>Accetta</button>
-      <button type="button" class="btn btn--outline" data-cookie-essential>Solo essenziali</button>
+  <div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Preferenze cookie e privacy" aria-modal="false">
+    <div class="cookie-banner-main">
+      <p>Usiamo cookie tecnici e sistema di prenotazione. <a href="privacy.html">Privacy</a></p>
+      <div class="cookie-banner__actions">
+        <button type="button" class="cookie-btn" data-cookie-essential>Solo indispensabili</button>
+        <button type="button" class="cookie-btn cookie-btn--primary" data-cookie-accept>Accetta tutti</button>
+      </div>
     </div>
   </div>
   <script src="js/partials.js?v=6"></script>

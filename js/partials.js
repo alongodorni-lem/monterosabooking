@@ -287,20 +287,22 @@
     if (!el) return;
     var L = ui();
     el.setAttribute("aria-label", L.cookieAria || "Cookie notice");
+    el.setAttribute("aria-modal", "false");
     el.innerHTML =
+      '<div class="cookie-banner-main">' +
       "<p>" +
       (L.cookieText || "") +
       '<a href="privacy.html">' +
       (L.cookiePrivacy || "Privacy") +
       "</a></p>" +
       '<div class="cookie-banner__actions">' +
-      '<button type="button" class="btn btn--primary" data-cookie-accept>' +
-      (L.cookieAccept || "Accept") +
-      "</button>" +
-      '<button type="button" class="btn btn--outline" data-cookie-essential>' +
+      '<button type="button" class="cookie-btn" data-cookie-essential>' +
       (L.cookieEssential || "Essential only") +
       "</button>" +
-      "</div>";
+      '<button type="button" class="cookie-btn cookie-btn--primary" data-cookie-accept>' +
+      (L.cookieAccept || "Accept") +
+      "</button>" +
+      "</div></div>";
   }
 
   function loadScript(src) {
