@@ -5,11 +5,14 @@
   var SITE_ID = 70864;
   /* Hard TTL in localStorage. Force refresh after Planyo admin changes: bump
      CACHE_KEY (e.g. v8), or clear localStorage key mem_esperienze_list_*. */
-  var CACHE_KEY_BASE = "mem_esperienze_list_v11";
+  var CACHE_KEY_BASE = "mem_esperienze_list_v12";
   var CACHE_MS = 12 * 60 * 60 * 1000;
   var EVENT_TIMES_CONCURRENCY = 6;
   var MAX_DATE_LABELS = 5;
   var DESC_MAX = 220;
+  var CARD_IMG_WIDTH = 640;
+  var CARD_IMG_HEIGHT = 400;
+  var EAGER_PHOTO_COUNT = 2;
   var REST_URL = "https://www.planyo.com/rest/";
   var SPECIAL_RESOURCE_IDS = {
     "253398": true /* Casa Museo Walser */,
@@ -19,10 +22,16 @@
   var DEADLINE_RESOURCE_IDS = {
     "253421": true /* La via del pane */,
   };
-  /* Reliable local images when Planyo photo is missing/broken (e.g. huge S3 PNGs). */
+  /* Local fallbacks only when Planyo HTTPS photo fails (onerror). Prefer API. */
   var PHOTO_FALLBACKS = {
     "252382": "assets/web/forest-bathing.jpg",
     "253390": "assets/web/forest-bathing.jpg",
+    "252705": "assets/web/miniera-hero.jpg",
+    "253398": "assets/web/casa-museo-hero.jpg",
+    "252697": "assets/web/folletti-museo.jpg",
+    "252699": "assets/web/trekking-salute.jpg",
+    "253399": "assets/web/ricerca-oro.jpg",
+    "253421": "assets/web/casa-museo-pane.jpg",
   };
 
   function siteLang() {
@@ -395,13 +404,31 @@
     );
   }
 
-  function firstPhotoUrl(resource, resourceId) {
-    var id = String(
-      resourceId || (resource && (resource.id || resource.resource_id)) || ""
+  function isRemotePlanyoPhoto(url) {
+    var u = String(url || "");
+    if (!/^https:\/\//i.test(u)) return false;
+    return (
+      /planyo-ch\.s3[\w.-]*\.amazonaws\.com/i.test(u) ||
+      /(?:^|\.)planyo\.com\//i.test(u)
     );
-    /* Known local overrides first (reliable card thumbnails). */
-    if (id && PHOTO_FALLBACKS[id]) return photoFallback(id);
+  }
 
+  /* Same-origin resize/compress proxy (serve.py /api/img) — avoids 3–4MB PNGs. */
+  function optimizePhotoUrl(url) {
+    var u = String(url || "").trim();
+    if (!u) return "";
+    if (u.indexOf("/api/img") === 0) return u;
+    if (!isRemotePlanyoPhoto(u)) return u;
+    return (
+      "/api/img?u=" +
+      encodeURIComponent(u) +
+      "&w=" +
+      CARD_IMG_WIDTH +
+      "&q=72&f=webp"
+    );
+  }
+
+  function firstPhotoUrl(resource, resourceId) {
     var photos = resource && resource.photos;
     var list = asList(photos);
     var i;
@@ -420,7 +447,11 @@
         ""
     );
     if (fromProps) return fromProps;
-    return "";
+    /* API empty/broken — local fallback as last resort before paint. */
+    var id = String(
+      resourceId || (resource && (resource.id || resource.resource_id)) || ""
+    );
+    return id ? photoFallback(id) : "";
   }
 
   function resourceDescUrl(resourceId) {
@@ -785,15 +816,28 @@
     }
   }
 
-  function renderItem(item) {
+  function renderItem(item, index) {
     var L = ui();
     var reserve = reserveUrl(item.resourceId);
     var detail = resourceDescUrl(item.resourceId);
-    var photoSrc = item.photo || photoFallback(item.resourceId) || "";
+    var rawPhoto = item.photo || photoFallback(item.resourceId) || "";
+    var photoSrc = optimizePhotoUrl(rawPhoto);
+    var eager = typeof index === "number" && index < EAGER_PHOTO_COUNT;
+    var loadingAttrs = eager
+      ? 'loading="eager" fetchpriority="high"'
+      : 'loading="lazy"';
     var img = photoSrc
       ? '<div class="esperienze-card__media"><img src="' +
         escapeHtml(photoSrc) +
-        '" alt="" width="640" height="400" loading="lazy" data-photo-fallback="1"></div>'
+        '" alt="" width="' +
+        CARD_IMG_WIDTH +
+        '" height="' +
+        CARD_IMG_HEIGHT +
+        '" ' +
+        loadingAttrs +
+        ' decoding="async" data-photo-fallback="1" data-photo-orig="' +
+        escapeHtml(rawPhoto) +
+        '"></div>'
       : '<div class="esperienze-card__media esperienze-card__media--empty" aria-hidden="true"></div>';
 
     var datesClass =
@@ -866,11 +910,25 @@
     });
 
     el.querySelectorAll("img[data-photo-fallback]").forEach(function (imgEl) {
-      imgEl.addEventListener("error", function () {
+      imgEl.addEventListener("error", function onPhotoError() {
+        var src = imgEl.getAttribute("src") || "";
+        var orig = imgEl.getAttribute("data-photo-orig") || "";
+        /* Proxy failed → try original HTTPS once. */
+        if (
+          src.indexOf("/api/img") === 0 &&
+          orig &&
+          orig !== src &&
+          imgEl.getAttribute("data-tried-orig") !== "1"
+        ) {
+          imgEl.setAttribute("data-tried-orig", "1");
+          imgEl.src = orig;
+          return;
+        }
         var card = imgEl.closest("[data-resource-id]");
         var rid = card ? card.getAttribute("data-resource-id") : "";
         var fb = rid ? photoFallback(rid) : "";
-        if (fb && imgEl.getAttribute("src") !== fb) {
+        if (fb && src !== fb && orig !== fb) {
+          imgEl.removeAttribute("data-photo-orig");
           imgEl.src = fb;
           return;
         }
@@ -897,9 +955,9 @@
     el.innerHTML =
       '<div class="esperienze-list__grid" role="list">' +
       items
-        .map(function (item) {
+        .map(function (item, index) {
           return (
-            '<div role="listitem">' + renderItem(item) + "</div>"
+            '<div role="listitem">' + renderItem(item, index) + "</div>"
           );
         })
         .join("") +

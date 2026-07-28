@@ -3,7 +3,7 @@ services:
     name: macugnagabooking
     runtime: python
     plan: starter
-    buildCommand: ""
+    buildCommand: "pip install -r requirements.txt"
     startCommand: python serve.py
     envVars:
       - key: PLANYO_API_KEY

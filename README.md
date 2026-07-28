@@ -17,6 +17,8 @@ Default port is `8765`. Override with `PORT` / `HOST` env vars.
 
 **API cache:** `serve.py` caches safe Planyo reads for **12 hours** by default (`PROXY_CACHE_TTL_SEC`). Browser list/ticker use **localStorage** with the same 12h hard TTL. After admin changes to activities/calendar: bump the `CACHE_KEY` in `js/esperienze-list.js` / `js/availability-bar.js`, clear those `localStorage` keys, restart `serve.py` (or hit `/api/planyo-cache-purge`), or lower `PROXY_CACHE_TTL_SEC`.
 
+**Card images:** `GET /api/img?u=<https>&w=640` resizes/compresses allowlisted Planyo/S3 photos to WebP (disk cache under `.cache/img/`). Requires `pip install -r requirements.txt` (Pillow).
+
 ## Secrets
 
 Never commit:
