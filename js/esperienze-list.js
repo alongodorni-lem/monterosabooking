@@ -51,8 +51,69 @@
     return window.MB_I18N ? window.MB_I18N.t(siteLang()) : {};
   }
 
+  /* Optional date window via #esperienze-list data-date-from/to or MB_ESPERIENZE_RANGE. */
+  function getDateRange() {
+    var from = "";
+    var to = "";
+    var cfg = window.MB_ESPERIENZE_RANGE;
+    if (cfg && typeof cfg === "object") {
+      from = String(cfg.from || cfg.start || "").trim();
+      to = String(cfg.to || cfg.end || "").trim();
+    }
+    var el = mountEl();
+    if (el) {
+      if (!from) from = String(el.getAttribute("data-date-from") || "").trim();
+      if (!to) to = String(el.getAttribute("data-date-to") || "").trim();
+    }
+    if (
+      /^\d{4}-\d{2}-\d{2}$/.test(from) &&
+      /^\d{4}-\d{2}-\d{2}$/.test(to) &&
+      from <= to
+    ) {
+      return { from: from, to: to };
+    }
+    return null;
+  }
+
+  function formatDayMonth(ymd) {
+    var d = new Date(ymd + "T12:00:00");
+    return d.toLocaleDateString(localeForDates(), {
+      day: "numeric",
+      month: "long",
+    });
+  }
+
+  function rangeSpecialLabel(range) {
+    var L = ui();
+    if (L.rangeInWindow) return L.rangeInWindow;
+    return (
+      "Disponibile dal " +
+      formatDayMonth(range.from) +
+      " al " +
+      formatDayMonth(range.to)
+    );
+  }
+
+  function filterDaysByRange(days, range, todayYmd) {
+    if (!days || !days.length) return [];
+    var lower = todayYmd || romeYmd(0);
+    var upper = null;
+    if (range) {
+      if (range.from > lower) lower = range.from;
+      upper = range.to;
+    }
+    return days.filter(function (ymd) {
+      if (ymd < lower) return false;
+      if (upper && ymd > upper) return false;
+      return true;
+    });
+  }
+
   function cacheKey() {
-    return CACHE_KEY_BASE + "_" + siteLang();
+    var key = CACHE_KEY_BASE + "_" + siteLang();
+    var range = getDateRange();
+    if (range) key += "_" + range.from + "_" + range.to;
+    return key;
   }
 
   function localeForDates() {
@@ -523,34 +584,38 @@
   }
 
   /* get_resource_info.event_dates: "01-08-2026 8:30am, 01-08-2026 6pm, ..." */
-  function daysFromEventDatesString(raw, todayYmd) {
+  function daysFromEventDatesString(raw, todayYmd, range) {
     var days = [];
     var seen = {};
     String(raw || "")
       .split(",")
       .forEach(function (chunk) {
         var ymd = ymdFromDayToken(chunk);
-        if (!ymd || ymd < todayYmd) return;
+        if (!ymd) return;
         if (seen[ymd]) return;
         seen[ymd] = true;
         days.push(ymd);
       });
     days.sort();
-    return days.slice(0, MAX_DATE_LABELS);
+    days = filterDaysByRange(days, range, todayYmd);
+    var maxLabels = range ? 8 : MAX_DATE_LABELS;
+    return days.slice(0, maxLabels);
   }
 
-  function uniqueUpcomingDays(eventTimes, todayYmd) {
+  function uniqueUpcomingDays(eventTimes, todayYmd, range) {
     var days = [];
     var seen = {};
     asList(eventTimes).forEach(function (item) {
       var ymd = eventItemYmd(item);
-      if (!ymd || ymd < todayYmd) return;
+      if (!ymd) return;
       if (seen[ymd]) return;
       seen[ymd] = true;
       days.push(ymd);
     });
     days.sort();
-    return days.slice(0, MAX_DATE_LABELS);
+    days = filterDaysByRange(days, range, todayYmd);
+    var maxLabels = range ? 8 : MAX_DATE_LABELS;
+    return days.slice(0, maxLabels);
   }
 
   function reserveUrl(resourceId) {
@@ -632,7 +697,7 @@
   }
 
   /* Fallback when get_event_times is empty/stale but resource_info lists dates. */
-  function getResourceEventDateDays(apiKey, resourceId, todayYmd) {
+  function getResourceEventDateDays(apiKey, resourceId, todayYmd, range) {
     return apiCall({
       method: "get_resource_info",
       api_key: apiKey,
@@ -642,18 +707,18 @@
       .then(function (json) {
         if (!json || Number(json.response_code) !== 0) return [];
         var data = json.data || {};
-        return daysFromEventDatesString(data.event_dates, todayYmd);
+        return daysFromEventDatesString(data.event_dates, todayYmd, range);
       })
       .catch(function () {
         return [];
       });
   }
 
-  function loadUpcomingDays(apiKey, resourceId, todayYmd) {
+  function loadUpcomingDays(apiKey, resourceId, todayYmd, range) {
     return getEventTimes(apiKey, resourceId).then(function (times) {
-      var days = uniqueUpcomingDays(times, todayYmd);
+      var days = uniqueUpcomingDays(times, todayYmd, range);
       if (days.length) return days;
-      return getResourceEventDateDays(apiKey, resourceId, todayYmd);
+      return getResourceEventDateDays(apiKey, resourceId, todayYmd, range);
     });
   }
 
@@ -673,22 +738,25 @@
     return String((r && r.name) || "").trim();
   }
 
-  function stubFromResource(r, today, augustMode) {
+  function stubFromResource(r, today, augustMode, range) {
     var id = String(r.id || r.resource_id || "");
     var name = resourceDisplayName(r);
     if (!id || !name) return null;
     var L = ui();
 
     var photo = firstPhotoUrl(r, id);
-    var special = augustMode && isSpecialResource(id, name);
+    var special =
+      (augustMode || !!range) && isSpecialResource(id, name);
     if (special) {
       return {
         resourceId: id,
         name: name,
         description: resourceDescription(r),
         photo: photo,
-        sortKey: today,
-        dateLabels: [L.augustLabel || "Tutto Agosto"],
+        sortKey: range ? range.from : today,
+        dateLabels: range
+          ? [rangeSpecialLabel(range)]
+          : [L.augustLabel || "Tutto Agosto"],
         upcoming: true,
         specialAugust: true,
         datesPending: false,
@@ -752,17 +820,20 @@
 
   function enrichPendingDates(items, apiKey) {
     var today = romeYmd(0);
+    var range = getDateRange();
     var pending = items.filter(function (item) {
       return item && item.datesPending;
     });
     if (!pending.length) return Promise.resolve(items);
 
     return mapPool(pending, EVENT_TIMES_CONCURRENCY, function (item) {
-      return loadUpcomingDays(apiKey, item.resourceId, today).then(function (days) {
-        applyUpcomingDays(item, days);
-        patchCardDates(item);
-        return item;
-      });
+      return loadUpcomingDays(apiKey, item.resourceId, today, range).then(
+        function (days) {
+          applyUpcomingDays(item, days);
+          patchCardDates(item);
+          return item;
+        }
+      );
     }).then(function () {
       return items;
     });
@@ -1024,10 +1095,13 @@
     var L = ui();
     var showImages = withImages === true;
     if (!items || !items.length) {
+      var emptyMsg = getDateRange()
+        ? L.listEmptyRange ||
+          L.listEmpty ||
+          "Nessuna esperienza prenotabile in queste date."
+        : L.listEmpty || "Nessuna esperienza disponibile al momento.";
       el.innerHTML =
-        '<p class="esperienze-list__status">' +
-        (L.listEmpty || "Nessuna esperienza disponibile al momento.") +
-        "</p>";
+        '<p class="esperienze-list__status">' + emptyMsg + "</p>";
       return;
     }
     el.innerHTML =
@@ -1122,20 +1196,31 @@
     }
 
     return listWithFallback().then(function (resources) {
+      var range = getDateRange();
       var stubs = resources
         .map(function (r) {
-          return stubFromResource(r, today, augustMode);
+          return stubFromResource(r, today, augustMode, range);
         })
         .filter(Boolean)
         .sort(function (a, b) {
           return String(a.name).localeCompare(String(b.name), loc);
         });
 
-      /* First paint: text + CTAs; photos hydrate after paint via /api/img. */
-      render(stubs, false);
+      /* Full catalog: text-first paint, then date patches. Windowed pages wait
+         until dates are filtered so the list doesn't flash unrelated cards. */
+      if (!range) {
+        render(stubs, false);
+      }
 
       return enrichPendingDates(stubs, apiKey).then(function (items) {
-        var sorted = sortItems(items).map(function (item) {
+        var kept = items;
+        if (range) {
+          /* Windowed landing: only bookable-in-range (+ August specials). */
+          kept = items.filter(function (item) {
+            return item && (item.specialAugust || item.upcoming);
+          });
+        }
+        var sorted = sortItems(kept).map(function (item) {
           return {
             resourceId: item.resourceId,
             name: item.name,

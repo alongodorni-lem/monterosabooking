@@ -27,6 +27,7 @@ Each public HTML page is mirrored under `/en/`, `/fr/`, and `/de/` with the same
 ## Key pages (Italian)
 - Home: https://www.macugnagabooking.it/
 - All experiences (catalog): https://www.macugnagabooking.it/esperienze.html
+- Family mountain week 1–8 August: https://www.macugnagabooking.it/esperienze-1-8-agosto-macugnaga.html
 - Map: https://www.macugnagabooking.it/mappa.html
 - Weekend: https://www.macugnagabooking.it/weekend.html
 - Families: https://www.macugnagabooking.it/famiglie.html

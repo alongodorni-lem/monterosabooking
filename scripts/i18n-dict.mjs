@@ -526,6 +526,26 @@ export const PAGE_META = {
       ogTitle: "Familienwanderungen in Macugnaga",
     },
   },
+  "esperienze-1-8-agosto-macugnaga.html": {
+    en: {
+      title: "Family mountain activities 1–8 August | Macugnaga Monte Rosa",
+      description:
+        "What to do in the mountains with the whole family from 1 to 8 August in Macugnaga Monte Rosa: escape the heat, woods, nature and bookable experiences near Milan and the lakes.",
+      ogTitle: "Family mountain week 1–8 August | Macugnaga",
+    },
+    fr: {
+      title: "Activités famille en montagne du 1er au 8 août | Macugnaga Monte Rosa",
+      description:
+        "Que faire en montagne en famille du 1er au 8 août à Macugnaga Monte Rosa : fraîcheur, forêts, nature et expériences réservables près de Milan et des lacs.",
+      ogTitle: "Semaine famille 1–8 août | Macugnaga",
+    },
+    de: {
+      title: "Familien-Bergaktivitäten 1.–8. August | Macugnaga Monte Rosa",
+      description:
+        "Was man vom 1. bis 8. August mit der ganzen Familie in Macugnaga Monte Rosa unternehmen kann: Hitzeflucht, Wälder, Natur und buchbare Erlebnisse nahe Mailand und den Seen.",
+      ogTitle: "Familienwoche 1.–8. August | Macugnaga",
+    },
+  },
   "credits.html": {
     en: {
       title: "Credits | Macugnaga Booking",
