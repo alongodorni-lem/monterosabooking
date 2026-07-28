@@ -272,6 +272,9 @@
       "<span>" +
       (L.copyright || "") +
       "</span>" +
+      '<span class="footer-bottom__updated">' +
+      (L.siteUpdated || "") +
+      "</span>" +
       '<span class="footer-bottom__links"><a href="chi-siamo.html">' +
       (L.project || "") +
       '</a> · <a href="privacy.html">' +

@@ -56,6 +56,7 @@
       langLabel: "Lingua",
       translationNote:
         "Traduzione automatica dalla versione ufficiale in lingua italiana",
+      siteUpdated: "Sito aggiornato il 28 luglio 2026",
       calPrev: "precedente",
       calNext: "successivo",
       calToday: "oggi",
@@ -188,6 +189,7 @@
       langLabel: "Language",
       translationNote:
         "Automatic translation from the official Italian version.",
+      siteUpdated: "Site updated 28 July 2026",
       calPrev: "previous",
       calNext: "next",
       calToday: "today",
@@ -320,6 +322,7 @@
       langLabel: "Langue",
       translationNote:
         "Traduction automatique à partir de la version officielle en italien.",
+      siteUpdated: "Site mis à jour le 28 juillet 2026",
       calPrev: "précédent",
       calNext: "suivant",
       calToday: "aujourd’hui",
@@ -454,6 +457,7 @@
       langLabel: "Sprache",
       translationNote:
         "Automatische Übersetzung der offiziellen italienischen Fassung.",
+      siteUpdated: "Website aktualisiert am 28. Juli 2026",
       calPrev: "zurück",
       calNext: "weiter",
       calToday: "heute",

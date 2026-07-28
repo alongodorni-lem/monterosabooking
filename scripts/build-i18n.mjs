@@ -97,18 +97,18 @@ function injectScripts(html, lang) {
   );
   out = out.replace(
     /<script src="(\.\.\/)?js\/partials\.js\?v=\d+"><\/script>/g,
-    `<script src="${prefix}js/i18n.js?v=4"></script>\n  <script src="${prefix}js/partials.js?v=11"></script>`
+    `<script src="${prefix}js/i18n.js?v=6"></script>\n  <script src="${prefix}js/partials.js?v=13"></script>`
   );
   out = out.replace(
     /(\.\.\/)?js\/esperienze-list\.js\?v=\d+/g,
-    `${prefix}js/esperienze-list.js?v=9`
+    `${prefix}js/esperienze-list.js?v=10`
   );
   out = out.replace(
     /(\.\.\/)?js\/embed-widget\.js\?v=\d+/g,
     `${prefix}js/embed-widget.js?v=3`
   );
   out = out.replace(/(\.\.\/)?js\/main\.js/g, `${prefix}js/main.js`);
-  out = out.replace(/(\.\.\/)?css\/style\.css\?v=\d+/g, `${prefix}css/style.css?v=13`);
+  out = out.replace(/(\.\.\/)?css\/style\.css\?v=\d+/g, `${prefix}css/style.css?v=15`);
   return out;
 }
 
@@ -260,15 +260,15 @@ function patchItalian(srcHtml, file) {
   if (!html.includes("js/i18n.js")) {
     html = html.replace(
       /<script src="js\/partials\.js\?v=\d+"><\/script>/g,
-      '<script src="js/i18n.js?v=4"></script>\n  <script src="js/partials.js?v=11"></script>'
+      '<script src="js/i18n.js?v=6"></script>\n  <script src="js/partials.js?v=13"></script>'
     );
   } else {
-    html = html.replace(/js\/i18n\.js\?v=\d+/g, "js/i18n.js?v=4");
-    html = html.replace(/js\/partials\.js\?v=\d+/g, "js/partials.js?v=11");
+    html = html.replace(/js\/i18n\.js\?v=\d+/g, "js/i18n.js?v=6");
+    html = html.replace(/js\/partials\.js\?v=\d+/g, "js/partials.js?v=13");
   }
-  html = html.replace(/js\/esperienze-list\.js\?v=\d+/g, "js/esperienze-list.js?v=9");
+  html = html.replace(/js\/esperienze-list\.js\?v=\d+/g, "js/esperienze-list.js?v=10");
   html = html.replace(/js\/embed-widget\.js\?v=\d+/g, "js/embed-widget.js?v=3");
-  html = html.replace(/css\/style\.css\?v=\d+/g, "css/style.css?v=13");
+  html = html.replace(/css\/style\.css\?v=\d+/g, "css/style.css?v=15");
   /* Shorter nav label in static seo fallback */
   html = html.replace(
     /(<nav class="seo-nav-fallback"[\s\S]*?>)([\s\S]*?)(<\/nav>)/,

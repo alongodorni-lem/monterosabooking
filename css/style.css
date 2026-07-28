@@ -1723,6 +1723,11 @@ a.btn.btn-primary:hover {
   align-items: center;
 }
 
+.footer-bottom__updated {
+  opacity: 0.85;
+  font-size: 0.8rem;
+}
+
 /* ——— Cookie banner (compact, Kreas / parcominerarioalagna pattern) ——— */
 .cookie-banner {
   position: fixed;
