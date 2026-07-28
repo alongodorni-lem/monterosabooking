@@ -4,9 +4,9 @@
 
   var SITE_ID = 70864;
   /* Hard TTL in localStorage. Force refresh after Planyo admin changes: bump
-     CACHE_KEY (e.g. v8), or clear localStorage key mem_avail_bar_*. */
-  var CACHE_KEY_BASE = "mem_avail_bar_v9_ticker15";
-  var CACHE_MS = 12 * 60 * 60 * 1000;
+     CACHE_KEY (e.g. v10), or clear localStorage key mem_avail_bar_*. */
+  var CACHE_KEY_BASE = "mem_avail_bar_v10_ticker15";
+  var CACHE_MS = 24 * 60 * 60 * 1000;
   var MAX_ITEMS = 15;
   var MIN_DAYS = 7;
   var MAX_DAYS = 14;
@@ -492,9 +492,20 @@
       });
   }
 
+  function scheduleBoot() {
+    var run = function () {
+      boot();
+    };
+    if (typeof requestIdleCallback === "function") {
+      requestIdleCallback(run, { timeout: 2500 });
+    } else {
+      setTimeout(run, 200);
+    }
+  }
+
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", boot);
+    document.addEventListener("DOMContentLoaded", scheduleBoot);
   } else {
-    boot();
+    scheduleBoot();
   }
 })();

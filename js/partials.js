@@ -308,6 +308,16 @@
       "</div></div>";
   }
 
+  function whenIdle(fn, timeoutMs) {
+    if (typeof requestIdleCallback === "function") {
+      requestIdleCallback(function () {
+        fn();
+      }, { timeout: timeoutMs || 2500 });
+    } else {
+      setTimeout(fn, Math.min(200, timeoutMs || 200));
+    }
+  }
+
   function loadScript(src) {
     return new Promise(function (resolve, reject) {
       if (document.querySelector('script[src="' + src + '"]')) {
@@ -316,6 +326,7 @@
       }
       var s = document.createElement("script");
       s.src = src;
+      /* Sequential loads via Promise chain; keep order for Planyo deps. */
       s.async = false;
       s.onload = function () {
         resolve();
@@ -508,7 +519,7 @@
         /* missing config: bar stays hidden */
       })
       .then(function () {
-        return loadScript(p + "js/availability-bar.js?v=9");
+        return loadScript(p + "js/availability-bar.js?v=10");
       })
       .catch(function () {
         /* quiet fail */
@@ -525,7 +536,10 @@
   renderTranslationNote();
   renderFooter();
   renderCookieBanner();
-  mountSearchWidget().then(function () {
-    return mountAvailabilityBar();
-  });
+  /* Defer Planyo search CSS/JS + availability ticker until after first paint. */
+  whenIdle(function () {
+    mountSearchWidget().then(function () {
+      return mountAvailabilityBar();
+    });
+  }, 2800);
 })();

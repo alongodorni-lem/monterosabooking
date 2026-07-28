@@ -17,12 +17,15 @@ Fetches allowlisted Planyo/S3 images, resizes/compresses to WebP (JPEG
 fallback), and caches on disk under .cache/img/. Cuts multi‑MB PNGs down
 to ~30–80KB card thumbnails.
 
-Long-lived in-memory cache (PROXY_CACHE_TTL_SEC, default 12h) for safe
+Long-lived in-memory cache (PROXY_CACHE_TTL_SEC, default 24h) for safe
 read methods: list_resources / get_event_times / get_resource_info /
 resource_search. api_test is never cached. Cache key = method + sorted
 query params (api_key excluded). Cleared on process restart, or via
 GET /api/planyo-cache-purge. After Planyo admin changes: bump client
 cache keys, clear localStorage, restart serve, or POST/GET the purge URL.
+
+Static assets (css/js/images/fonts) get Cache-Control via end_headers;
+HTML stays short-lived. /api/img responses use IMG_CACHE_CONTROL (30d).
 """
 
 from __future__ import annotations
@@ -61,8 +64,8 @@ CACHEABLE_METHODS = {
     "get_event_times",
     "get_resource_info",
 }
-# Experiences/calendar change rarely — default 12 hours (set PROXY_CACHE_TTL_SEC to override).
-PROXY_CACHE_TTL_SEC = int(os.environ.get("PROXY_CACHE_TTL_SEC", str(12 * 60 * 60)))
+# Experiences/calendar change rarely — default 24 hours (set PROXY_CACHE_TTL_SEC to override).
+PROXY_CACHE_TTL_SEC = int(os.environ.get("PROXY_CACHE_TTL_SEC", str(24 * 60 * 60)))
 PROXY_CACHE_MAX_ENTRIES = int(os.environ.get("PROXY_CACHE_MAX_ENTRIES", "256"))
 
 ALLOWED_IMG_HOSTS = {
@@ -75,7 +78,29 @@ IMG_DEFAULT_WIDTH = 640
 IMG_MAX_WIDTH = 1200
 IMG_DEFAULT_QUALITY = 72
 IMG_CACHE_DIR = Path(os.environ.get("IMG_CACHE_DIR", ".cache/img"))
-IMG_CACHE_CONTROL = "public, max-age=604800, stale-while-revalidate=86400"
+# Proxied card thumbs: 30 days (+ SWR). Bump client ?v= / cache keys when needed.
+IMG_CACHE_CONTROL = "public, max-age=2592000, stale-while-revalidate=86400"
+
+STATIC_LONG_CACHE_EXTS = {
+    ".css",
+    ".js",
+    ".mjs",
+    ".png",
+    ".jpg",
+    ".jpeg",
+    ".webp",
+    ".gif",
+    ".svg",
+    ".ico",
+    ".woff",
+    ".woff2",
+    ".ttf",
+    ".otf",
+    ".map",
+    ".pdf",
+}
+STATIC_ASSET_CACHE_CONTROL = "public, max-age=604800, stale-while-revalidate=86400"
+HTML_CACHE_CONTROL = "public, max-age=300, must-revalidate"
 
 _cache_lock = threading.Lock()
 _cache: dict[str, tuple[float, bytes]] = {}
@@ -189,6 +214,18 @@ def _encode_card_image(raw: bytes, width: int, quality: int, prefer_webp: bool) 
 
 
 class Handler(SimpleHTTPRequestHandler):
+    def end_headers(self) -> None:  # noqa: D401
+        """Attach Cache-Control for static files (not /api/*)."""
+        parsed = urllib.parse.urlparse(self.path)
+        path = urllib.parse.unquote(parsed.path or "/")
+        if not path.startswith("/api/"):
+            ext = Path(path).suffix.lower()
+            if ext in STATIC_LONG_CACHE_EXTS:
+                self.send_header("Cache-Control", STATIC_ASSET_CACHE_CONTROL)
+            elif ext in (".html", ".htm") or path.endswith("/") or ext == "":
+                self.send_header("Cache-Control", HTML_CACHE_CONTROL)
+        super().end_headers()
+
     def do_GET(self):  # noqa: N802
         parsed = urllib.parse.urlparse(self.path)
         if parsed.path in ("/api/planyo-cache-purge", "/api/planyo-cache-purge/"):

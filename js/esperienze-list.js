@@ -4,15 +4,16 @@
 
   var SITE_ID = 70864;
   /* Hard TTL in localStorage. Force refresh after Planyo admin changes: bump
-     CACHE_KEY (e.g. v8), or clear localStorage key mem_esperienze_list_*. */
-  var CACHE_KEY_BASE = "mem_esperienze_list_v12";
-  var CACHE_MS = 12 * 60 * 60 * 1000;
+     CACHE_KEY (e.g. v14), or clear localStorage key mem_esperienze_list_*. */
+  var CACHE_KEY_BASE = "mem_esperienze_list_v13";
+  var CACHE_MS = 24 * 60 * 60 * 1000;
   var EVENT_TIMES_CONCURRENCY = 6;
   var MAX_DATE_LABELS = 5;
   var DESC_MAX = 220;
   var CARD_IMG_WIDTH = 640;
   var CARD_IMG_HEIGHT = 400;
-  var EAGER_PHOTO_COUNT = 2;
+  /* No eager card photos — LCP is the page hero; hydrate after text paint. */
+  var EAGER_PHOTO_COUNT = 0;
   var REST_URL = "https://www.planyo.com/rest/";
   var SPECIAL_RESOURCE_IDS = {
     "253398": true /* Casa Museo Walser */,
@@ -816,29 +817,46 @@
     }
   }
 
-  function renderItem(item, index) {
+  function renderItem(item, index, withImages) {
     var L = ui();
     var reserve = reserveUrl(item.resourceId);
     var detail = resourceDescUrl(item.resourceId);
     var rawPhoto = item.photo || photoFallback(item.resourceId) || "";
     var photoSrc = optimizePhotoUrl(rawPhoto);
-    var eager = typeof index === "number" && index < EAGER_PHOTO_COUNT;
-    var loadingAttrs = eager
-      ? 'loading="eager" fetchpriority="high"'
-      : 'loading="lazy"';
-    var img = photoSrc
-      ? '<div class="esperienze-card__media"><img src="' +
-        escapeHtml(photoSrc) +
-        '" alt="" width="' +
-        CARD_IMG_WIDTH +
-        '" height="' +
-        CARD_IMG_HEIGHT +
-        '" ' +
-        loadingAttrs +
-        ' decoding="async" data-photo-fallback="1" data-photo-orig="' +
-        escapeHtml(rawPhoto) +
-        '"></div>'
-      : '<div class="esperienze-card__media esperienze-card__media--empty" aria-hidden="true"></div>';
+    var img;
+    if (!withImages) {
+      /* Text-first: reserve media box; hydrate /api/img after first paint. */
+      img =
+        '<div class="esperienze-card__media esperienze-card__media--pending' +
+        (rawPhoto ? "" : " esperienze-card__media--empty") +
+        '" aria-hidden="true"' +
+        (rawPhoto
+          ? ' data-pending-photo="' +
+            escapeHtml(rawPhoto) +
+            '" data-photo-index="' +
+            (typeof index === "number" ? index : 99) +
+            '"'
+          : "") +
+        "></div>";
+    } else {
+      var eager = typeof index === "number" && index < EAGER_PHOTO_COUNT;
+      var loadingAttrs = eager
+        ? 'loading="eager" fetchpriority="low"'
+        : 'loading="lazy"';
+      img = photoSrc
+        ? '<div class="esperienze-card__media"><img src="' +
+          escapeHtml(photoSrc) +
+          '" alt="" width="' +
+          CARD_IMG_WIDTH +
+          '" height="' +
+          CARD_IMG_HEIGHT +
+          '" sizes="(max-width: 720px) 100vw, 640px" ' +
+          loadingAttrs +
+          ' decoding="async" data-photo-fallback="1" data-photo-orig="' +
+          escapeHtml(rawPhoto) +
+          '"></div>'
+        : '<div class="esperienze-card__media esperienze-card__media--empty" aria-hidden="true"></div>';
+    }
 
     var datesClass =
       "esperienze-card__dates" +
@@ -909,7 +927,13 @@
       });
     });
 
+    bindPhotoFallbacks(el);
+  }
+
+  function bindPhotoFallbacks(el) {
     el.querySelectorAll("img[data-photo-fallback]").forEach(function (imgEl) {
+      if (imgEl.dataset.fallbackBound === "1") return;
+      imgEl.dataset.fallbackBound = "1";
       imgEl.addEventListener("error", function onPhotoError() {
         var src = imgEl.getAttribute("src") || "";
         var orig = imgEl.getAttribute("data-photo-orig") || "";
@@ -941,10 +965,64 @@
     });
   }
 
-  function render(items) {
+  /* After text paint: inject /api/img (or local) into pending media boxes. */
+  function hydratePhotos(el) {
+    if (!el) return;
+    var pending = el.querySelectorAll("[data-pending-photo]");
+    if (!pending.length) return;
+
+    pending.forEach(function (media) {
+      var rawPhoto = media.getAttribute("data-pending-photo") || "";
+      var index = parseInt(media.getAttribute("data-photo-index") || "99", 10);
+      var photoSrc = optimizePhotoUrl(rawPhoto);
+      if (!photoSrc) {
+        media.classList.add("esperienze-card__media--empty");
+        media.removeAttribute("data-pending-photo");
+        return;
+      }
+      var eager = index < EAGER_PHOTO_COUNT;
+      var imgEl = document.createElement("img");
+      imgEl.src = photoSrc;
+      imgEl.alt = "";
+      imgEl.width = CARD_IMG_WIDTH;
+      imgEl.height = CARD_IMG_HEIGHT;
+      imgEl.decoding = "async";
+      imgEl.sizes = "(max-width: 720px) 100vw, 640px";
+      imgEl.loading = eager ? "eager" : "lazy";
+      if (eager) imgEl.fetchPriority = "low";
+      imgEl.setAttribute("data-photo-fallback", "1");
+      imgEl.setAttribute("data-photo-orig", rawPhoto);
+      media.classList.remove("esperienze-card__media--pending");
+      media.classList.remove("esperienze-card__media--empty");
+      media.removeAttribute("data-pending-photo");
+      media.removeAttribute("data-photo-index");
+      media.appendChild(imgEl);
+    });
+
+    bindPhotoFallbacks(el);
+  }
+
+  function schedulePhotoHydration(el) {
+    var run = function () {
+      hydratePhotos(el);
+    };
+    /* Two rAFs ≈ after first paint of text cards. */
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        if (typeof requestIdleCallback === "function") {
+          requestIdleCallback(run, { timeout: 800 });
+        } else {
+          setTimeout(run, 50);
+        }
+      });
+    });
+  }
+
+  function render(items, withImages) {
     var el = mountEl();
     if (!el) return;
     var L = ui();
+    var showImages = withImages === true;
     if (!items || !items.length) {
       el.innerHTML =
         '<p class="esperienze-list__status">' +
@@ -957,7 +1035,9 @@
       items
         .map(function (item, index) {
           return (
-            '<div role="listitem">' + renderItem(item, index) + "</div>"
+            '<div role="listitem">' +
+            renderItem(item, index, showImages) +
+            "</div>"
           );
         })
         .join("") +
@@ -972,6 +1052,9 @@
     });
 
     bindListInteractions(el);
+    if (!showImages) {
+      schedulePhotoHydration(el);
+    }
   }
 
   function fetchAndRender() {
@@ -1048,8 +1131,8 @@
           return String(a.name).localeCompare(String(b.name), loc);
         });
 
-      /* First paint: cards + CTAs as soon as list_resources returns. */
-      render(stubs);
+      /* First paint: text + CTAs; photos hydrate after paint via /api/img. */
+      render(stubs, false);
 
       return enrichPendingDates(stubs, apiKey).then(function (items) {
         var sorted = sortItems(items).map(function (item) {
@@ -1065,7 +1148,8 @@
           };
         });
         writeCache(sorted);
-        render(sorted);
+        /* Re-sort may reorder cards — keep text-first then hydrate images. */
+        render(sorted, false);
       });
     });
   }
@@ -1079,7 +1163,7 @@
         if (!forceRefresh) {
           var cached = readCache();
           if (cached) {
-            render(cached);
+            render(cached, false);
             return;
           }
         }
@@ -1091,11 +1175,27 @@
       });
   }
 
+  function scheduleBoot(forceRefresh) {
+    var run = function () {
+      boot(forceRefresh);
+    };
+    /* Let hero/copy paint before Planyo list work (still soon). */
+    if (forceRefresh) {
+      run();
+      return;
+    }
+    if (typeof requestIdleCallback === "function") {
+      requestIdleCallback(run, { timeout: 1200 });
+    } else {
+      setTimeout(run, 0);
+    }
+  }
+
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", function () {
-      boot(false);
+      scheduleBoot(false);
     });
   } else {
-    boot(false);
+    scheduleBoot(false);
   }
 })();

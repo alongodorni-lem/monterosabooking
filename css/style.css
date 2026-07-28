@@ -1455,6 +1455,33 @@ h1.hero__claim {
     var(--cream-deep);
 }
 
+.esperienze-card__media--pending {
+  background:
+    linear-gradient(
+      110deg,
+      var(--cream-deep) 0%,
+      rgba(255, 255, 255, 0.45) 45%,
+      var(--cream-deep) 90%
+    );
+  background-size: 200% 100%;
+  animation: esperienze-media-shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes esperienze-media-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .esperienze-card__media--pending {
+    animation: none;
+  }
+}
+
 .esperienze-card__body {
   padding: 1.15rem 1.25rem 1.3rem;
   display: flex;
