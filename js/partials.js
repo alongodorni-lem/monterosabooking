@@ -206,7 +206,7 @@
       '<a class="footer-brand__comune" href="https://www.comune.macugnaga.vb.it/it-it/home" target="_blank" rel="noopener">' +
       '<img class="comune-mark" src="' +
       p +
-      'assets/web/comune-macugnaga-logo.png" width="120" height="75" alt="' +
+      'assets/web/comune-macugnaga-logo.png" width="168" height="164" alt="' +
       (L.comune || "Comune di Macugnaga") +
       '" loading="lazy" decoding="async">' +
       "</a>" +
