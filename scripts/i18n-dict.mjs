@@ -790,6 +790,16 @@ export const PHRASES = {
     fr: "Montagne avec les enfants",
     de: "Berg mit Kindern",
   },
+  "Montagna per tutti": {
+    en: "Mountains for everyone",
+    fr: "La montagne pour tous",
+    de: "Berge für alle",
+  },
+  "Montagna per tutti a Macugnaga Monte Rosa": {
+    en: "Mountains for everyone in Macugnaga Monte Rosa",
+    fr: "La montagne pour tous à Macugnaga Monte Rosa",
+    de: "Berge für alle in Macugnaga Monte Rosa",
+  },
   "Percorsi facili, sicurezza e divertimento per tutta la famiglia.": {
     en: "Easy routes, safety and fun for the whole family.",
     fr: "Parcours faciles, sécurité et plaisir pour toute la famille.",
