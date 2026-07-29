@@ -49,6 +49,7 @@ function hreflangBlock(file) {
 function fixRelativePaths(html) {
   return html
     .replace(/(href|src)=(")(?!https?:|mailto:|#|\/\/)(assets\/|css\/|js\/)/g, "$1=$2../$3")
+    .replace(/(data-img)=(")(?!https?:|\/\/|\.\.\/)(assets\/)/g, "$1=$2../$3")
     .replace(
       /(srcset=["'])([^"']+)/g,
       (_, attr, value) =>

@@ -900,6 +900,26 @@ export const PHRASES = {
     fr: "Organiser le week-end",
     de: "Wochenende planen",
   },
+  "Natura, relax e montagna.": {
+    en: "Nature, relax and mountains.",
+    fr: "Nature, détente et montagne.",
+    de: "Natur, Entspannung und Berge.",
+  },
+  "Il programma dall'1 all'8 agosto.": {
+    en: "The programme from 1–8 August.",
+    fr: "Le programme du 1er au 8 août.",
+    de: "Das Programm vom 1. bis 8. August.",
+  },
+  "VEDI ATTIVITÀ": {
+    en: "SEE ACTIVITIES",
+    fr: "VOIR LES ACTIVITÉS",
+    de: "AKTIVITÄTEN ANSEHEN",
+  },
+  'data-close="Chiudi"': {
+    en: 'data-close="Close"',
+    fr: 'data-close="Fermer"',
+    de: 'data-close="Schließen"',
+  },
   "Dove dormire": {
     en: "Where to stay",
     fr: "Où dormir",

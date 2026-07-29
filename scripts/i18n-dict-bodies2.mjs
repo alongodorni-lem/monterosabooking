@@ -762,15 +762,25 @@ export const PHRASES_BODIES_2 = {
     fr: "Paysage de Macugnaga dans le Val Anzasca",
     de: "Landschaft von Macugnaga im Anzasca-Tal",
   },
-  "Due notti tra natura e villaggio": {
-    en: "Two nights between nature and village",
-    fr: "Deux nuits entre nature et village",
-    de: "Zwei Nächte zwischen Natur und Dorf",
+  "Soggiorno con pernottamento": {
+    en: "Stay with overnight accommodation",
+    fr: "Séjour avec nuitée",
+    de: "Aufenthalt mit Übernachtung",
   },
-  "Tra l’1 e l’8 agosto un <strong>weekend con pernottamento</strong> rende la fuga dal caldo più completa: alba e tramonto sul Monte Rosa, una o due esperienze prenotate online, passeggiate in paese e cucina locale.": {
-    en: "Between 1 and 8 August a <strong>weekend with overnight stay</strong> makes the heat escape more complete: sunrise and sunset on Monte Rosa, one or two experiences booked online, village walks and local food.",
-    fr: "Entre le 1er et le 8 août, un <strong>week-end avec nuitée</strong> rend l’échappée à la chaleur plus complète : aube et coucher de soleil sur le Monte Rosa, une ou deux expériences réservées en ligne, balades au village et cuisine locale.",
-    de: "Zwischen dem 1. und 8. August macht ein <strong>Wochenende mit Übernachtung</strong> die Hitzeflucht vollständiger: Sonnenauf- und -untergang am Monte Rosa, ein oder zwei online gebuchte Erlebnisse, Dorfspaziergänge und lokale Küche.",
+  "Dormire e risvegliarsi ai piedi del Rosa…": {
+    en: "Sleep and wake up at the foot of the Rosa…",
+    fr: "Dormir et se réveiller au pied du Rosa…",
+    de: "Schlafen und erwachen am Fuße des Rosa…",
+  },
+  "Tra l’1 e l’8 agosto un <strong>soggiorno con pernottamento</strong> rende la fuga dal caldo più completa: alba e tramonto sul Monte Rosa, una o due esperienze prenotate online, passeggiate in paese e cucina locale.": {
+    en: "Between 1 and 8 August a <strong>stay with overnight accommodation</strong> makes the heat escape more complete: sunrise and sunset on Monte Rosa, one or two experiences booked online, village walks and local food.",
+    fr: "Entre le 1er et le 8 août, un <strong>séjour avec nuitée</strong> rend l’échappée à la chaleur plus complète : aube et coucher de soleil sur le Monte Rosa, une ou deux expériences réservées en ligne, balades au village et cuisine locale.",
+    de: "Zwischen dem 1. und 8. August macht ein <strong>Aufenthalt mit Übernachtung</strong> die Hitzeflucht vollständiger: Sonnenauf- und -untergang am Monte Rosa, ein oder zwei online gebuchte Erlebnisse, Dorfspaziergänge und lokale Küche.",
+  },
+  "Organizza soggiorno": {
+    en: "Plan your stay",
+    fr: "Organiser le séjour",
+    de: "Aufenthalt planen",
   },
   "Scegli hotel, B&amp;B o casa vacanza, poi prenota le attività qui sotto. Guida pratica su <a href=\"weekend.html\">Idee weekend</a>.": {
     en: "Choose a hotel, B&amp;B or holiday home, then book the activities below. Practical guide on <a href=\"weekend.html\">Weekend ideas</a>.",
