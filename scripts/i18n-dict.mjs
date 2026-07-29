@@ -544,7 +544,7 @@ export const PAGE_META = {
         "Échapper à la chaleur entre forêts et nature : expériences réservables pour toute la famille à Macugnaga, à peu de distance de Milan et des lacs.",
     },
     de: {
-      title: "Was man vom 1. bis 8. August mit der Familie in den Bergen unternehmen kann | Macugnaga Monte Rosa",
+      title: "Familie 1.–8. August in den Bergen | Macugnaga Monte Rosa",
       description:
         "Was man vom 1. bis 8. August mit der ganzen Familie in Macugnaga Monte Rosa unternehmen kann: Hitzeflucht, Wälder, Natur und online buchbare Erlebnisse. Ideal von Mailand, Lago Maggiore, Orta, Mergozzo, Varese und Novara — auch für ein Wochenende mit Übernachtung.",
       ogTitle: "Familie in den Bergen 1.–8. August | Macugnaga Monte Rosa",
@@ -784,6 +784,16 @@ export const PHRASES = {
     en: "Book the visit online: Walser history in a 17th-century house.",
     fr: "Réservez la visite en ligne : histoire walser dans une maison du XVIIe siècle.",
     de: "Besuch online buchen: Walser-Geschichte in einem Haus aus dem 17. Jahrhundert.",
+  },
+  "Esperienze prenotabili a Macugnaga Monte Rosa": {
+    en: "Bookable experiences in Macugnaga Monte Rosa",
+    fr: "Expériences réservables à Macugnaga Monte Rosa",
+    de: "Buchbare Erlebnisse in Macugnaga Monte Rosa",
+  },
+  "Catalogo di esperienze in montagna prenotabili online a Macugnaga: visite culturali, escursioni, benessere e idee per famiglie.": {
+    en: "Catalogue of mountain experiences bookable online in Macugnaga: cultural visits, hikes, wellness and family ideas.",
+    fr: "Catalogue d’expériences en montagne réservables en ligne à Macugnaga : visites culturelles, randonnées, bien-être et idées familles.",
+    de: "Katalog buchbarer Bergerlebnisse in Macugnaga: Kulturbesuche, Wanderungen, Wellness und Ideen für Familien.",
   },
   "Montagna con i bambini": {
     en: "Mountains with children",
