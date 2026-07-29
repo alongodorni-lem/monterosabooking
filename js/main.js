@@ -1,15 +1,49 @@
-/* Menu, GDPR cookie banner, reveal animations, hero ready */
+/* Menu, GDPR cookie banner, reveal animations, hero ready, Analytics */
 (function () {
   "use strict";
 
   var COOKIE_KEY = "mem_macugnaga_cookie_consent";
+  var GA_ID = "G-E5SCQ7QC8L";
+
+  function loadGoogleAnalytics() {
+    if (window.__mbGtagLoaded) return;
+    window.__mbGtagLoaded = true;
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      window.dataLayer.push(arguments);
+    }
+    window.gtag = gtag;
+    gtag("js", new Date());
+    gtag("config", GA_ID);
+
+    var s = document.createElement("script");
+    s.async = true;
+    s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+    document.head.appendChild(s);
+  }
+
+  function consentAllowsAnalytics() {
+    try {
+      return localStorage.getItem(COOKIE_KEY) === "all";
+    } catch (e) {
+      return false;
+    }
+  }
 
   function initCookieBanner() {
     var banner = document.getElementById("cookie-banner");
-    if (!banner) return;
+    if (!banner) {
+      if (consentAllowsAnalytics()) loadGoogleAnalytics();
+      return;
+    }
 
     try {
-      if (localStorage.getItem(COOKIE_KEY)) return;
+      var existing = localStorage.getItem(COOKIE_KEY);
+      if (existing) {
+        if (existing === "all") loadGoogleAnalytics();
+        return;
+      }
     } catch (e) {
       /* ignore */
     }
@@ -26,6 +60,7 @@
         /* ignore */
       }
       banner.classList.remove("is-visible");
+      if (value === "all") loadGoogleAnalytics();
     }
 
     if (accept) accept.addEventListener("click", function () { save("all"); });
