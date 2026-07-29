@@ -692,15 +692,30 @@ export const PHRASES_BODIES_2 = {
     fr: "Échapper à la chaleur",
     de: "Der Hitze entkommen",
   },
+  "Aria fresca, boschi e accoglienza": {
+    en: "Fresh air, woods and hospitality",
+    fr: "Air frais, forêts et accueil",
+    de: "Frische Luft, Wälder und Gastfreundschaft",
+  },
   "Aria fresca, boschi e ritmo di villaggio": {
     en: "Fresh air, woods and village pace",
     fr: "Air frais, forêts et rythme de village",
     de: "Frische Luft, Wälder und Dorfrhythmus",
   },
+  "Quando in pianura e sui laghi l’afa pesa, Macugnaga offre <strong>clima alpino</strong>, sentieri tra i larici e proposte a contatto con la natura pensate per tutti.": {
+    en: "When the plain and the lakes feel muggy, Macugnaga offers an <strong>alpine climate</strong>, trails among the larches and nature experiences designed for everyone.",
+    fr: "Quand la plaine et les lacs étouffent sous la chaleur, Macugnaga offre un <strong>climat alpin</strong>, des sentiers parmi les mélèzes et des propositions nature pensées pour tous.",
+    de: "Wenn in der Ebene und an den Seen die Schwüle drückt, bietet Macugnaga <strong>Alpenklima</strong>, Wege zwischen Lärchen und Naturangebote, die für alle gedacht sind.",
+  },
   "Quando in pianura e sui laghi l’afa pesa, Macugnaga offre <strong>clima alpino</strong>, sentieri tra i larici e proposte a contatto con la natura pensate anche per i bambini.": {
     en: "When the plain and the lakes feel muggy, Macugnaga offers an <strong>alpine climate</strong>, trails among the larches and nature experiences designed with children in mind too.",
     fr: "Quand la plaine et les lacs étouffent sous la chaleur, Macugnaga offre un <strong>climat alpin</strong>, des sentiers parmi les mélèzes et des propositions nature pensées aussi pour les enfants.",
     de: "Wenn in der Ebene und an den Seen die Schwüle drückt, bietet Macugnaga <strong>Alpenklima</strong>, Wege zwischen Lärchen und Naturangebote, die auch für Kinder gedacht sind.",
+  },
+  "Veduta del Dorf di Macugnaga con case walser e Monte Rosa": {
+    en: "View of Macugnaga Dorf with Walser houses and Monte Rosa",
+    fr: "Vue du Dorf de Macugnaga avec maisons walser et Monte Rosa",
+    de: "Blick auf das Dorf Macugnaga mit Walser-Häusern und Monte Rosa",
   },
   "Dal <strong>1° all’8 agosto</strong> il portale di prenotazione raccoglie le esperienze disponibili online: benessere in bosco, visite culturali, miniera d’oro e attività soft per famiglie.": {
     en: "From <strong>1 to 8 August</strong> the booking portal lists experiences available online: forest wellness, cultural visits, the gold mine and gentle family activities.",
