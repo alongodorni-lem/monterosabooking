@@ -197,11 +197,20 @@
       '<footer class="site-footer">' +
       '<div class="container footer-grid">' +
       '<div class="footer-brand">' +
+      '<div class="footer-brand__logos">' +
       '<img class="stemma-mark" src="' +
       p +
       'assets/stemma.png" width="72" height="72" alt="' +
       (L.brandLine || "") +
       '" loading="lazy">' +
+      '<a class="footer-brand__comune" href="https://www.comune.macugnaga.vb.it/it-it/home" target="_blank" rel="noopener">' +
+      '<img class="comune-mark" src="' +
+      p +
+      'assets/web/comune-macugnaga-logo.png" width="120" height="75" alt="' +
+      (L.comune || "Comune di Macugnaga") +
+      '" loading="lazy" decoding="async">' +
+      "</a>" +
+      "</div>" +
       "<div><strong>" +
       (L.brandLine || "") +
       "</strong>" +

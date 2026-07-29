@@ -1675,9 +1675,16 @@ a.btn.btn-primary:hover {
   align-items: flex-start;
 }
 
+.footer-brand__logos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+  flex-shrink: 0;
+}
+
 /* Stemma Unione Montana: graphic fills PNG edges — pad inside white box */
-.stemma-mark,
-.footer-brand img {
+.stemma-mark {
   width: 72px;
   height: 72px;
   flex-shrink: 0;
@@ -1689,10 +1696,30 @@ a.btn.btn-primary:hover {
   overflow: visible;
 }
 
+.footer-brand__comune {
+  display: block;
+  line-height: 0;
+  text-decoration: none;
+}
+
+.comune-mark {
+  display: block;
+  width: 118px;
+  height: auto;
+  max-width: 118px;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  object-fit: contain;
+}
+
 .stemma-mark--lg {
   width: 160px;
   height: 160px;
   padding: 1.15rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  object-fit: contain;
 }
 
 .footer-brand p {
