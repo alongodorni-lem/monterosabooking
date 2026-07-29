@@ -11,7 +11,7 @@
   var MAX_DATE_LABELS = 5;
   var DESC_MAX = 220;
   var CARD_IMG_WIDTH = 640;
-  var CARD_IMG_HEIGHT = 400;
+  var CARD_IMG_HEIGHT = 360; /* 16:9 — matches .esperienze-card__media */
   /* No eager card photos — LCP is the page hero; hydrate after text paint. */
   var EAGER_PHOTO_COUNT = 0;
   var REST_URL = "https://www.planyo.com/rest/";
