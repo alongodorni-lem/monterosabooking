@@ -2036,3 +2036,52 @@ a.btn.btn-primary:hover {
 .embed-footer-note {
   margin-top: 2.5rem;
 }
+
+/* ——— Mobile floating PRENOTA CTA (always visible bottom-right) ——— */
+.book-fab {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .book-fab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    right: max(0.85rem, env(safe-area-inset-right, 0px));
+    bottom: max(0.85rem, env(safe-area-inset-bottom, 0px));
+    z-index: 1900; /* below cookie banner (2000), above page chrome */
+    min-height: 2.85rem;
+    padding: 0.7rem 1.15rem;
+    border-radius: 999px;
+    background: var(--green-dark);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: 0 10px 28px rgba(47, 69, 34, 0.35);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .book-fab:hover,
+  .book-fab:focus-visible {
+    background: var(--green-mid);
+    color: var(--white);
+    outline: 2px solid var(--cream);
+    outline-offset: 2px;
+  }
+
+  /* Lift above compact cookie bar while it is visible */
+  body:has(.cookie-banner.is-visible) .book-fab {
+    bottom: max(5.75rem, calc(env(safe-area-inset-bottom, 0px) + 5rem));
+  }
+}
+
+@media print {
+  .book-fab {
+    display: none !important;
+  }
+}

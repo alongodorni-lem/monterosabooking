@@ -531,11 +531,25 @@
     if (skip) skip.textContent = ui().skip || skip.textContent;
   }
 
+  function renderMobileBookFab() {
+    if (document.getElementById("book-fab")) return;
+    var L = ui();
+    var label = L.bookFab || L.bookOnline || "Prenota";
+    var a = document.createElement("a");
+    a.id = "book-fab";
+    a.className = "book-fab";
+    a.href = "esperienze.html";
+    a.setAttribute("aria-label", L.bookOnline || label);
+    a.textContent = label;
+    document.body.appendChild(a);
+  }
+
   localizeSkipLink();
   renderHeader();
   renderTranslationNote();
   renderFooter();
   renderCookieBanner();
+  renderMobileBookFab();
   /* Defer Planyo search CSS/JS + availability ticker until after first paint. */
   whenIdle(function () {
     mountSearchWidget().then(function () {
