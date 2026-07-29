@@ -590,4 +590,256 @@ export const PHRASES_BODIES_2 = {
     fr: "Cette page a une finalité informative. Pour les détails sur le traitement des données lors de la réservation, consultez aussi l’information du système de réservation en ligne utilisé.",
     de: "Diese Seite dient der Information. Details zur Datenverarbeitung bei der Buchung finden Sie auch in der Information des verwendeten Online-Buchungssystems.",
   },
+
+  /* —— Esperienze 1–8 agosto (family heat-escape landing) —— */
+  "Cosa fare in montagna con la famiglia dall’1 all’8 agosto a Macugnaga": {
+    en: "What to do in the mountains with the family from 1 to 8 August in Macugnaga",
+    fr: "Que faire en montagne en famille du 1er au 8 août à Macugnaga",
+    de: "Was man vom 1. bis 8. August mit der Familie in den Bergen in Macugnaga unternehmen kann",
+  },
+  "Cosa fare in montagna con la famiglia dall’1 all’8 agosto": {
+    en: "What to do in the mountains with the family from 1 to 8 August",
+    fr: "Que faire en montagne en famille du 1er au 8 août",
+    de: "Was man vom 1. bis 8. August mit der Familie in den Bergen unternehmen kann",
+  },
+  "Cosa fare in montagna con tutta la famiglia dall’1 all’8 agosto a Macugnaga?": {
+    en: "What to do in the mountains with the whole family from 1 to 8 August in Macugnaga?",
+    fr: "Que faire en montagne avec toute la famille du 1er au 8 août à Macugnaga ?",
+    de: "Was kann man vom 1. bis 8. August mit der ganzen Familie in den Bergen in Macugnaga unternehmen?",
+  },
+  "Cosa fare in montagna con tutta la famiglia dall’1 all’8 agosto?": {
+    en: "What to do in the mountains with the whole family from 1 to 8 August?",
+    fr: "Que faire en montagne avec toute la famille du 1er au 8 août ?",
+    de: "Was kann man vom 1. bis 8. August mit der ganzen Familie in den Bergen unternehmen?",
+  },
+  "Esperienze prenotabili online a Macugnaga Monte Rosa tra il 1 e l’8 agosto: boschi, natura e attività per tutta la famiglia, a poca distanza da Milano e dai laghi.": {
+    en: "Bookable online experiences in Macugnaga Monte Rosa from 1 to 8 August: woods, nature and activities for the whole family, a short trip from Milan and the lakes.",
+    fr: "Expériences réservables en ligne à Macugnaga Monte Rosa du 1er au 8 août : forêts, nature et activités pour toute la famille, à peu de distance de Milan et des lacs.",
+    de: "Online buchbare Erlebnisse in Macugnaga Monte Rosa vom 1. bis 8. August: Wälder, Natur und Aktivitäten für die ganze Familie, nah bei Mailand und den Seen.",
+  },
+  "Esperienze prenotabili a Macugnaga dall’1 all’8 agosto": {
+    en: "Bookable experiences in Macugnaga from 1 to 8 August",
+    fr: "Expériences réservables à Macugnaga du 1er au 8 août",
+    de: "Buchbare Erlebnisse in Macugnaga vom 1. bis 8. August",
+  },
+  "Esperienze prenotabili dall’1 all’8 agosto": {
+    en: "Bookable experiences from 1 to 8 August",
+    fr: "Expériences réservables du 1er au 8 août",
+    de: "Buchbare Erlebnisse vom 1. bis 8. August",
+  },
+  "Esperienze prenotabili 1–8 agosto": {
+    en: "Bookable experiences 1–8 August",
+    fr: "Expériences réservables 1–8 août",
+    de: "Buchbare Erlebnisse 1.–8. August",
+  },
+  "Attività in montagna per famiglie e non solo, prenotabili online a Macugnaga Monte Rosa tra il 1 e l’8 agosto 2026.": {
+    en: "Mountain activities for families and beyond, bookable online in Macugnaga Monte Rosa from 1 to 8 August 2026.",
+    fr: "Activités de montagne pour les familles et au-delà, réservables en ligne à Macugnaga Monte Rosa du 1er au 8 août 2026.",
+    de: "Bergaktivitäten für Familien und mehr, online buchbar in Macugnaga Monte Rosa vom 1. bis 8. August 2026.",
+  },
+  "Miniera d’oro della Guia": {
+    en: "Guia gold mine",
+    fr: "Mine d’or de la Guia",
+    de: "Goldmine Guia",
+  },
+  "Casa Museo Walser di Borca": {
+    en: "Walser House Museum in Borca",
+    fr: "Maison-musée Walser de Borca",
+    de: "Walser-Hausmuseum in Borca",
+  },
+  "Weekend a Macugnaga": {
+    en: "Weekend in Macugnaga",
+    fr: "Week-end à Macugnaga",
+    de: "Wochenende in Macugnaga",
+  },
+  "1–8 agosto in famiglia": {
+    en: "1–8 August with the family",
+    fr: "1–8 août en famille",
+    de: "1.–8. August mit der Familie",
+  },
+  "1–8 agosto con la famiglia": {
+    en: "1–8 August with the family",
+    fr: "1–8 août en famille",
+    de: "1.–8. August mit der Familie",
+  },
+  "1–8 agosto": {
+    en: "1–8 August",
+    fr: "1–8 août",
+    de: "1.–8. August",
+  },
+  "arricchisci la tua vacanza o il weekend a Macugnaga con proposte per famiglie, adulti, giovani e gruppi — anche come idea gita dalla pianura. Per la settimana <a href=\"esperienze-1-8-agosto-macugnaga.html\">1–8 agosto con la famiglia</a> vedi l’elenco filtrato; per panorami in quota con seggiovia e funivia (biglietti presso la società impianti) vedi": {
+    en: "enrich your holiday or weekend in Macugnaga with ideas for families, adults, young people and groups — also as a day-trip idea from the plain. For the week <a href=\"esperienze-1-8-agosto-macugnaga.html\">1–8 August with the family</a> see the filtered list; for high-altitude views by chairlift and cableway (tickets from the lift company) see",
+    fr: "enrichissez vos vacances ou votre week-end à Macugnaga avec des propositions pour familles, adultes, jeunes et groupes — aussi comme idée de sortie depuis la plaine. Pour la semaine <a href=\"esperienze-1-8-agosto-macugnaga.html\">1–8 août en famille</a>, voir la liste filtrée ; pour les panoramas en altitude en télésiège et téléphérique (billets auprès de la société des remontées), voir",
+    de: "bereichern Sie Urlaub oder Wochenende in Macugnaga mit Angeboten für Familien, Erwachsene, Jugendliche und Gruppen — auch als Ausflugsidee aus der Ebene. Für die Woche <a href=\"esperienze-1-8-agosto-macugnaga.html\">1.–8. August mit der Familie</a> siehe die gefilterte Liste; für Panoramen in der Höhe mit Sessellift und Seilbahn (Tickets bei der Bergbahngesellschaft) siehe",
+  },
+  "Per la settimana <a href=\"esperienze-1-8-agosto-macugnaga.html\">1–8 agosto in famiglia</a> trovi esperienze prenotabili filtrate per data.": {
+    en: "For the week <a href=\"esperienze-1-8-agosto-macugnaga.html\">1–8 August with the family</a> you will find bookable experiences filtered by date.",
+    fr: "Pour la semaine <a href=\"esperienze-1-8-agosto-macugnaga.html\">1–8 août en famille</a>, vous trouverez des expériences réservables filtrées par date.",
+    de: "Für die Woche <a href=\"esperienze-1-8-agosto-macugnaga.html\">1.–8. August mit der Familie</a> finden Sie buchbare Erlebnisse nach Datum gefiltert.",
+  },
+  "Fuga dal caldo tra boschi e natura a Macugnaga Monte Rosa: esperienze prenotabili per tutta la famiglia, a poca distanza da Milano e dai laghi.": {
+    en: "Escape the heat among woods and nature in Macugnaga Monte Rosa: bookable experiences for the whole family, a short trip from Milan and the lakes.",
+    fr: "Échapper à la chaleur entre forêts et nature à Macugnaga Monte Rosa : expériences réservables pour toute la famille, à peu de distance de Milan et des lacs.",
+    de: "Der Hitze entkommen zwischen Wäldern und Natur in Macugnaga Monte Rosa: buchbare Erlebnisse für die ganze Familie, nah bei Mailand und den Seen.",
+  },
+  "Fuga dal caldo tra boschi e natura: esperienze prenotabili per tutta la famiglia a Macugnaga, a poca distanza da Milano e dai laghi.": {
+    en: "Escape the heat among woods and nature: bookable experiences for the whole family in Macugnaga, a short trip from Milan and the lakes.",
+    fr: "Échapper à la chaleur entre forêts et nature : expériences réservables pour toute la famille à Macugnaga, à peu de distance de Milan et des lacs.",
+    de: "Der Hitze entkommen zwischen Wäldern und Natur: buchbare Erlebnisse für die ganze Familie in Macugnaga, nah bei Mailand und den Seen.",
+  },
+  "Fuga dal caldo": {
+    en: "Escape the heat",
+    fr: "Échapper à la chaleur",
+    de: "Der Hitze entkommen",
+  },
+  "Aria fresca, boschi e ritmo di villaggio": {
+    en: "Fresh air, woods and village pace",
+    fr: "Air frais, forêts et rythme de village",
+    de: "Frische Luft, Wälder und Dorfrhythmus",
+  },
+  "Quando in pianura e sui laghi l’afa pesa, Macugnaga offre <strong>clima alpino</strong>, sentieri tra i larici e proposte a contatto con la natura pensate anche per i bambini.": {
+    en: "When the plain and the lakes feel muggy, Macugnaga offers an <strong>alpine climate</strong>, trails among the larches and nature experiences designed with children in mind too.",
+    fr: "Quand la plaine et les lacs étouffent sous la chaleur, Macugnaga offre un <strong>climat alpin</strong>, des sentiers parmi les mélèzes et des propositions nature pensées aussi pour les enfants.",
+    de: "Wenn in der Ebene und an den Seen die Schwüle drückt, bietet Macugnaga <strong>Alpenklima</strong>, Wege zwischen Lärchen und Naturangebote, die auch für Kinder gedacht sind.",
+  },
+  "Dal <strong>1° all’8 agosto</strong> il portale di prenotazione raccoglie le esperienze disponibili online: benessere in bosco, visite culturali, miniera d’oro e attività soft per famiglie.": {
+    en: "From <strong>1 to 8 August</strong> the booking portal lists experiences available online: forest wellness, cultural visits, the gold mine and gentle family activities.",
+    fr: "Du <strong>1er au 8 août</strong>, le portail de réservation regroupe les expériences disponibles en ligne : bien-être en forêt, visites culturelles, mine d’or et activités douces pour les familles.",
+    de: "Vom <strong>1. bis 8. August</strong> bündelt das Buchungsportal die online verfügbaren Erlebnisse: Wald-Wellness, Kulturbesuche, Goldmine und sanfte Familienaktivitäten.",
+  },
+  "Operatori autorizzati e guide qualificate": {
+    en: "Authorised operators and qualified guides",
+    fr: "Opérateurs autorisés et guides qualifiés",
+    de: "Autorisierte Anbieter und qualifizierte Guides",
+  },
+  "Prenotazione online con conferma immediata": {
+    en: "Online booking with instant confirmation",
+    fr: "Réservation en ligne avec confirmation immédiate",
+    de: "Online-Buchung mit sofortiger Bestätigung",
+  },
+  "Idee per giornata o weekend con pernottamento": {
+    en: "Ideas for a day trip or weekend with overnight stay",
+    fr: "Idées pour une journée ou un week-end avec nuitée",
+    de: "Ideen für einen Tagesausflug oder ein Wochenende mit Übernachtung",
+  },
+  "Boschi e benessere a Macugnaga": {
+    en: "Woods and wellness in Macugnaga",
+    fr: "Forêts et bien-être à Macugnaga",
+    de: "Wälder und Wellness in Macugnaga",
+  },
+  "Vicino alle città e ai laghi": {
+    en: "Close to the cities and the lakes",
+    fr: "Près des villes et des lacs",
+    de: "Nah bei den Städten und Seen",
+  },
+  "La montagna vera, a portata di strada": {
+    en: "Real mountains, within easy reach",
+    fr: "La vraie montagne, à portée de route",
+    de: "Echte Berge, gut erreichbar",
+  },
+  "Macugnaga è raggiungibile in circa 1,5–2,5 ore da <strong>Milano</strong>, <strong>Varese</strong>, <strong>Novara</strong> e dal <strong>Lago Maggiore</strong> — e anche da <strong>Orta</strong>, <strong>Mergozzo</strong> e Torino.": {
+    en: "Macugnaga is about 1.5–2.5 hours from <strong>Milan</strong>, <strong>Varese</strong>, <strong>Novara</strong> and <strong>Lake Maggiore</strong> — and also from <strong>Orta</strong>, <strong>Mergozzo</strong> and Turin.",
+    fr: "Macugnaga est accessible en environ 1 h 30–2 h 30 depuis <strong>Milan</strong>, <strong>Varese</strong>, <strong>Novare</strong> et le <strong>lac Majeur</strong> — et aussi depuis <strong>Orta</strong>, <strong>Mergozzo</strong> et Turin.",
+    de: "Macugnaga ist in etwa 1,5–2,5 Stunden von <strong>Mailand</strong>, <strong>Varese</strong>, <strong>Novara</strong> und dem <strong>Lago Maggiore</strong> erreichbar — und auch von <strong>Orta</strong>, <strong>Mergozzo</strong> und Turin.",
+  },
+  "Perfetta come <a href=\"fuga-citta.html\">fuga dalla città</a> o come giornata in montagna se soggiorni in hotel o campeggio sui laghi: aria fresca, paese alpino e panorami sul Monte Rosa senza lunghi trasferimenti.": {
+    en: "Perfect as a <a href=\"fuga-citta.html\">city escape</a> or a mountain day trip if you are staying in a hotel or campsite by the lakes: fresh air, alpine village and Monte Rosa views without long transfers.",
+    fr: "Parfaite comme <a href=\"fuga-citta.html\">échappée hors de la ville</a> ou comme journée en montagne si vous séjournez à l’hôtel ou au camping près des lacs : air frais, village alpin et panoramas sur le Monte Rosa sans longs trajets.",
+    de: "Perfekt als <a href=\"fuga-citta.html\">Stadtflucht</a> oder Bergtag, wenn Sie in einem Hotel oder Campingplatz an den Seen übernachten: frische Luft, Alpendorf und Monte-Rosa-Panorama ohne lange Anreise.",
+  },
+  "Famiglia in montagna a Macugnaga Monte Rosa": {
+    en: "Family in the mountains in Macugnaga Monte Rosa",
+    fr: "Famille en montagne à Macugnaga Monte Rosa",
+    de: "Familie in den Bergen in Macugnaga Monte Rosa",
+  },
+  "Macugnaga e Monte Rosa visti dall’alto": {
+    en: "Macugnaga and Monte Rosa from above",
+    fr: "Macugnaga et le Monte Rosa vus du ciel",
+    de: "Macugnaga und Monte Rosa von oben",
+  },
+  "Paesaggio di Macugnaga in Valle Anzasca": {
+    en: "Macugnaga landscape in the Anzasca Valley",
+    fr: "Paysage de Macugnaga dans le Val Anzasca",
+    de: "Landschaft von Macugnaga im Anzasca-Tal",
+  },
+  "Due notti tra natura e villaggio": {
+    en: "Two nights between nature and village",
+    fr: "Deux nuits entre nature et village",
+    de: "Zwei Nächte zwischen Natur und Dorf",
+  },
+  "Tra l’1 e l’8 agosto un <strong>weekend con pernottamento</strong> rende la fuga dal caldo più completa: alba e tramonto sul Monte Rosa, una o due esperienze prenotate online, passeggiate in paese e cucina locale.": {
+    en: "Between 1 and 8 August a <strong>weekend with overnight stay</strong> makes the heat escape more complete: sunrise and sunset on Monte Rosa, one or two experiences booked online, village walks and local food.",
+    fr: "Entre le 1er et le 8 août, un <strong>week-end avec nuitée</strong> rend l’échappée à la chaleur plus complète : aube et coucher de soleil sur le Monte Rosa, une ou deux expériences réservées en ligne, balades au village et cuisine locale.",
+    de: "Zwischen dem 1. und 8. August macht ein <strong>Wochenende mit Übernachtung</strong> die Hitzeflucht vollständiger: Sonnenauf- und -untergang am Monte Rosa, ein oder zwei online gebuchte Erlebnisse, Dorfspaziergänge und lokale Küche.",
+  },
+  "Scegli hotel, B&amp;B o casa vacanza, poi prenota le attività qui sotto. Guida pratica su <a href=\"weekend.html\">Idee weekend</a>.": {
+    en: "Choose a hotel, B&amp;B or holiday home, then book the activities below. Practical guide on <a href=\"weekend.html\">Weekend ideas</a>.",
+    fr: "Choisissez un hôtel, un B&amp;B ou une maison de vacances, puis réservez les activités ci-dessous. Guide pratique sur <a href=\"weekend.html\">Idées week-end</a>.",
+    de: "Wählen Sie Hotel, B&amp;B oder Ferienhaus und buchen Sie dann die Aktivitäten unten. Praktischer Leitfaden unter <a href=\"weekend.html\">Wochenend-Ideen</a>.",
+  },
+  "Elenco aggiornato delle attività con disponibilità tra il <strong>1°</strong> e l’<strong>8 agosto</strong>. Scegli data e posti, paga online e ricevi subito conferma con i contatti delle guide. Per il catalogo completo vedi <a href=\"esperienze.html\">tutte le esperienze</a>.": {
+    en: "Updated list of activities with availability between <strong>1</strong> and <strong>8 August</strong>. Choose date and places, pay online and receive instant confirmation with the guides’ contacts. For the full catalogue see <a href=\"esperienze.html\">all experiences</a>.",
+    fr: "Liste à jour des activités disponibles entre le <strong>1er</strong> et le <strong>8 août</strong>. Choisissez date et places, payez en ligne et recevez aussitôt la confirmation avec les contacts des guides. Pour le catalogue complet, voir <a href=\"esperienze.html\">toutes les expériences</a>.",
+    de: "Aktuelle Liste der Aktivitäten mit Verfügbarkeit zwischen dem <strong>1.</strong> und <strong>8. August</strong>. Datum und Plätze wählen, online bezahlen und sofort die Bestätigung mit den Kontakten der Guides erhalten. Für den vollständigen Katalog siehe <a href=\"esperienze.html\">alle Erlebnisse</a>.",
+  },
+  "Tutte le esperienze prenotabili": {
+    en: "All bookable experiences",
+    fr: "Toutes les expériences réservables",
+    de: "Alle buchbaren Erlebnisse",
+  },
+  "Idee weekend a Macugnaga": {
+    en: "Weekend ideas in Macugnaga",
+    fr: "Idées week-end à Macugnaga",
+    de: "Wochenend-Ideen in Macugnaga",
+  },
+  "Domande frequenti sulla settimana 1–8 agosto": {
+    en: "Frequently asked questions about the week of 1–8 August",
+    fr: "Questions fréquentes sur la semaine du 1er au 8 août",
+    de: "Häufige Fragen zur Woche vom 1. bis 8. August",
+  },
+  "Prenota esperienze tra boschi e natura, <a href=\"casa-museo-walser.html\">Casa Museo Walser</a>, <a href=\"miniera-oro.html\">miniera d’oro</a> e attività soft per bambini. L’elenco sopra mostra solo le proposte con disponibilità in quelle date.": {
+    en: "Book experiences among woods and nature, the <a href=\"casa-museo-walser.html\">Walser House Museum</a>, the <a href=\"miniera-oro.html\">gold mine</a> and gentle activities for children. The list above shows only offers with availability on those dates.",
+    fr: "Réservez des expériences entre forêts et nature, la <a href=\"casa-museo-walser.html\">Maison-musée Walser</a>, la <a href=\"miniera-oro.html\">mine d’or</a> et des activités douces pour les enfants. La liste ci-dessus n’affiche que les propositions disponibles à ces dates.",
+    de: "Buchen Sie Erlebnisse zwischen Wäldern und Natur, dem <a href=\"casa-museo-walser.html\">Walser-Hausmuseum</a>, der <a href=\"miniera-oro.html\">Goldmine</a> und sanften Aktivitäten für Kinder. Die Liste oben zeigt nur Angebote mit Verfügbarkeit an diesen Daten.",
+  },
+  "Macugnaga è adatta per una fuga dal caldo vicino a Milano e ai laghi?": {
+    en: "Is Macugnaga a good heat escape near Milan and the lakes?",
+    fr: "Macugnaga convient-elle pour échapper à la chaleur près de Milan et des lacs ?",
+    de: "Eignet sich Macugnaga als Hitzeflucht nahe Mailand und den Seen?",
+  },
+  "Sì: clima fresco alpino a poca distanza da Milano, Varese, Novara e dai laghi Maggiore, d’Orta e di Mergozzo. Vedi anche <a href=\"fuga-citta.html\">Fuga dalla città</a>.": {
+    en: "Yes: cool alpine air a short trip from Milan, Varese, Novara and Lakes Maggiore, Orta and Mergozzo. See also <a href=\"fuga-citta.html\">City escape</a>.",
+    fr: "Oui : un climat alpin frais à peu de distance de Milan, Varese, Novare et des lacs Majeur, d’Orta et de Mergozzo. Voir aussi <a href=\"fuga-citta.html\">Échappée hors de la ville</a>.",
+    de: "Ja: kühles Alpenklima nah bei Mailand, Varese, Novara und den Seen Maggiore, Orta und Mergozzo. Siehe auch <a href=\"fuga-citta.html\">Stadtflucht</a>.",
+  },
+  "Sì: Macugnaga offre aria fresca alpina a poca distanza da Milano, Varese, Novara e dai laghi Maggiore, d’Orta e di Mergozzo. Ideale per una giornata o un weekend con pernottamento fuori città.": {
+    en: "Yes: Macugnaga offers cool alpine air a short trip from Milan, Varese, Novara and Lakes Maggiore, Orta and Mergozzo. Ideal for a day trip or a weekend with overnight stay away from the city.",
+    fr: "Oui : Macugnaga offre un air alpin frais à peu de distance de Milan, Varese, Novare et des lacs Majeur, d’Orta et de Mergozzo. Idéal pour une journée ou un week-end avec nuitée hors de la ville.",
+    de: "Ja: Macugnaga bietet kühle Alpenluft nah bei Mailand, Varese, Novara und den Seen Maggiore, Orta und Mergozzo. Ideal für einen Tagesausflug oder ein Wochenende mit Übernachtung außerhalb der Stadt.",
+  },
+  "Come organizzare un weekend con pernottamento dal 1 all’8 agosto?": {
+    en: "How to plan a weekend with overnight stay from 1 to 8 August?",
+    fr: "Comment organiser un week-end avec nuitée du 1er au 8 août ?",
+    de: "Wie plant man ein Wochenende mit Übernachtung vom 1. bis 8. August?",
+  },
+  "Come organizzare un weekend con pernottamento?": {
+    en: "How to plan a weekend with overnight stay?",
+    fr: "Comment organiser un week-end avec nuitée ?",
+    de: "Wie plant man ein Wochenende mit Übernachtung?",
+  },
+  "Scegli un hotel, B&B o casa vacanza a Macugnaga, prenota online una o due esperienze della settimana 1–8 agosto e combina passeggiate in paese, boschi e, se aperti, gli impianti di risalita. Consulta le pagine Weekend e Dove dormire.": {
+    en: "Choose a hotel, B&B or holiday home in Macugnaga, book online one or two experiences for the week of 1–8 August and combine village walks, woods and, if open, the ski lifts. See the Weekend and Where to stay pages.",
+    fr: "Choisissez un hôtel, un B&B ou une maison de vacances à Macugnaga, réservez en ligne une ou deux expériences de la semaine du 1er au 8 août et combinez balades au village, forêts et, s’ils sont ouverts, les remontées mécaniques. Consultez les pages Week-end et Où dormir.",
+    de: "Wählen Sie Hotel, B&B oder Ferienhaus in Macugnaga, buchen Sie online ein oder zwei Erlebnisse der Woche vom 1. bis 8. August und kombinieren Sie Dorfspaziergänge, Wälder und – falls geöffnet – die Bergbahnen. Siehe die Seiten Wochenende und Unterkunft.",
+  },
+  "Alloggio a Macugnaga, una o due esperienze prenotate online e passeggiate in paese. Guida su <a href=\"weekend.html\">Weekend</a> e elenco <a href=\"https://macugnaga-monterosa.it/contenuti/306635/dove-dormire\" target=\"_blank\" rel=\"noopener\">dove dormire</a>.": {
+    en: "Stay in Macugnaga, book one or two experiences online and enjoy village walks. Guide on <a href=\"weekend.html\">Weekend</a> and the <a href=\"https://macugnaga-monterosa.it/contenuti/306635/dove-dormire\" target=\"_blank\" rel=\"noopener\">where to stay</a> list.",
+    fr: "Hébergement à Macugnaga, une ou deux expériences réservées en ligne et balades au village. Guide sur <a href=\"weekend.html\">Week-end</a> et liste <a href=\"https://macugnaga-monterosa.it/contenuti/306635/dove-dormire\" target=\"_blank\" rel=\"noopener\">où dormir</a>.",
+    de: "Unterkunft in Macugnaga, ein oder zwei online gebuchte Erlebnisse und Dorfspaziergänge. Leitfaden unter <a href=\"weekend.html\">Wochenende</a> und Liste <a href=\"https://macugnaga-monterosa.it/contenuti/306635/dove-dormire\" target=\"_blank\" rel=\"noopener\">Unterkünfte</a>.",
+  },
+  "Tra il 1 e l’8 agosto puoi prenotare online esperienze a contatto con boschi e natura, visite alla Casa Museo Walser e alla miniera d’oro, laboratori per bambini e attività soft per tutta la famiglia ai piedi del Monte Rosa.": {
+    en: "Between 1 and 8 August you can book online experiences among woods and nature, visits to the Walser House Museum and the gold mine, children’s workshops and gentle activities for the whole family at the foot of Monte Rosa.",
+    fr: "Entre le 1er et le 8 août, vous pouvez réserver en ligne des expériences au contact des forêts et de la nature, des visites de la Maison-musée Walser et de la mine d’or, des ateliers pour enfants et des activités douces pour toute la famille au pied du Monte Rosa.",
+    de: "Zwischen dem 1. und 8. August können Sie online Erlebnisse in Wäldern und Natur, Besuche im Walser-Hausmuseum und in der Goldmine, Kinderwerkstätten und sanfte Aktivitäten für die ganze Familie am Fuße des Monte Rosa buchen.",
+  },
 };

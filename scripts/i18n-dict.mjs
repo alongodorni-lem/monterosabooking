@@ -528,22 +528,28 @@ export const PAGE_META = {
   },
   "esperienze-1-8-agosto-macugnaga.html": {
     en: {
-      title: "Family mountain activities 1–8 August | Macugnaga Monte Rosa",
+      title: "What to do in the mountains with the family, 1–8 August | Macugnaga Monte Rosa",
       description:
-        "What to do in the mountains with the whole family from 1 to 8 August in Macugnaga Monte Rosa: escape the heat, woods, nature and bookable experiences near Milan and the lakes.",
-      ogTitle: "Family mountain week 1–8 August | Macugnaga",
+        "What to do in the mountains with the whole family from 1 to 8 August in Macugnaga Monte Rosa: escape the heat, woods, nature and bookable experiences online. Ideal from Milan, Lake Maggiore, Orta, Mergozzo, Varese and Novara — also for a weekend with overnight stay.",
+      ogTitle: "Family in the mountains 1–8 August | Macugnaga Monte Rosa",
+      ogDescription:
+        "Escape the heat among woods and nature: bookable experiences for the whole family in Macugnaga, a short trip from Milan and the lakes.",
     },
     fr: {
-      title: "Activités famille en montagne du 1er au 8 août | Macugnaga Monte Rosa",
+      title: "Que faire en montagne en famille du 1er au 8 août | Macugnaga Monte Rosa",
       description:
-        "Que faire en montagne en famille du 1er au 8 août à Macugnaga Monte Rosa : fraîcheur, forêts, nature et expériences réservables près de Milan et des lacs.",
-      ogTitle: "Semaine famille 1–8 août | Macugnaga",
+        "Que faire en montagne avec toute la famille du 1er au 8 août à Macugnaga Monte Rosa : fraîcheur, forêts, nature et expériences réservables en ligne. Idéal depuis Milan, le lac Majeur, Orta, Mergozzo, Varese et Novare — aussi en week-end avec nuitée.",
+      ogTitle: "Famille en montagne 1–8 août | Macugnaga Monte Rosa",
+      ogDescription:
+        "Échapper à la chaleur entre forêts et nature : expériences réservables pour toute la famille à Macugnaga, à peu de distance de Milan et des lacs.",
     },
     de: {
-      title: "Familien-Bergaktivitäten 1.–8. August | Macugnaga Monte Rosa",
+      title: "Was man vom 1. bis 8. August mit der Familie in den Bergen unternehmen kann | Macugnaga Monte Rosa",
       description:
-        "Was man vom 1. bis 8. August mit der ganzen Familie in Macugnaga Monte Rosa unternehmen kann: Hitzeflucht, Wälder, Natur und buchbare Erlebnisse nahe Mailand und den Seen.",
-      ogTitle: "Familienwoche 1.–8. August | Macugnaga",
+        "Was man vom 1. bis 8. August mit der ganzen Familie in Macugnaga Monte Rosa unternehmen kann: Hitzeflucht, Wälder, Natur und online buchbare Erlebnisse. Ideal von Mailand, Lago Maggiore, Orta, Mergozzo, Varese und Novara — auch für ein Wochenende mit Übernachtung.",
+      ogTitle: "Familie in den Bergen 1.–8. August | Macugnaga Monte Rosa",
+      ogDescription:
+        "Hitzeflucht zwischen Wäldern und Natur: buchbare Erlebnisse für die ganze Familie in Macugnaga, nah bei Mailand und den Seen.",
     },
   },
   "credits.html": {
@@ -644,10 +650,10 @@ export const PHRASES = {
     fr: "Si vous séjournez à l’hôtel ou au camping sur",
     de: "Wenn Sie in einem Hotel oder Campingplatz am",
   },
-  "o sul": {
-    en: "or on",
-    fr: "ou sur",
-    de: "oder am",
+  " o sul ": {
+    en: " or on ",
+    fr: " ou sur ",
+    de: " oder am ",
   },
   "e cerchi una meta in montagna, Macugnaga / Monterosa è raggiungibile per una giornata tra sentieri, paese e panorami:": {
     en: "and looking for a mountain destination, Macugnaga / Monterosa is reachable for a day among trails, village and views:",
