@@ -412,23 +412,26 @@
     var bookingPage = prefix() + "prenota.html";
 
     /* Search results open inline on prenota.html (not Planyo lightbox). */
-    window.mb_submit_search_inline = function () {
-      var startEl = document.getElementById("box_start_date");
-      var endEl = document.getElementById("box_end_date");
-      var start = startEl ? String(startEl.value || "").trim() : "";
-      var end = endEl ? String(endEl.value || "").trim() : "";
-      if (!start || !end) {
-        if (typeof window.planyo_verify_search_fields === "function") {
-          return window.planyo_verify_search_fields();
+    window.mb_submit_search_inline = function (evt) {
+      if (typeof window.planyo_verify_search_fields === "function") {
+        var fakeEvt = evt || { preventDefault: function () {} };
+        if (window.planyo_verify_search_fields(fakeEvt) === false) {
+          return false;
         }
-        return false;
+      } else {
+        var startEl = document.getElementById("box_start_date");
+        var endEl = document.getElementById("box_end_date");
+        var start0 = startEl ? String(startEl.value || "").trim() : "";
+        var end0 = endEl ? String(endEl.value || "").trim() : "";
+        if (!start0 || !end0) return false;
       }
-      if (
-        typeof window.planyo_verify_search_fields === "function" &&
-        window.planyo_verify_search_fields() === false
-      ) {
-        return false;
-      }
+      var start = String(
+        (document.getElementById("box_start_date") || {}).value || ""
+      ).trim();
+      var end = String(
+        (document.getElementById("box_end_date") || {}).value || ""
+      ).trim();
+      if (!start || !end) return false;
       var q = [
         "mode=search",
         "start_date=" + encodeURIComponent(start),

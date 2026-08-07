@@ -116,8 +116,20 @@
 
   function redirectTo(lang) {
     var href = localHref(lang, currentPageFile());
-    href = stripLangQuery(href);
     if (!href) return;
+    /* Keep booking/search query (resource_id, mode, dates…); only drop ?lang=. */
+    try {
+      var dest = new URL(href, location.href);
+      var cur = new URL(location.href);
+      cur.searchParams.forEach(function (value, key) {
+        if (key === "lang") return;
+        if (!dest.searchParams.has(key)) dest.searchParams.set(key, value);
+      });
+      dest.searchParams.delete("lang");
+      href = dest.pathname + dest.search + dest.hash;
+    } catch (e) {
+      href = stripLangQuery(href);
+    }
     location.replace(href);
   }
 
