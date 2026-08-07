@@ -5,7 +5,9 @@
   var SITE_ID = 70864;
   /* Hard TTL in localStorage. Force refresh after Planyo admin changes: bump
      CACHE_KEY (e.g. v14), or clear localStorage key mem_esperienze_list_*. */
-  var CACHE_KEY_BASE = "mem_esperienze_list_v16";
+  var CACHE_KEY_BASE = "mem_esperienze_list_v17";
+  /* Bust /api/img + browser cache when Planyo replaces a photo at the same URL. */
+  var PHOTO_CACHE_BUST = "17";
   var CACHE_MS = 24 * 60 * 60 * 1000;
   var EVENT_TIMES_CONCURRENCY = 6;
   var MAX_DATE_LABELS = 5;
@@ -514,13 +516,18 @@
     var u = String(url || "").trim();
     if (!u) return "";
     if (u.indexOf("/api/img") === 0) return u;
-    if (!isRemotePlanyoPhoto(u)) return u;
+    if (!isRemotePlanyoPhoto(u)) {
+      /* Local fallbacks / static assets: query bust when PHOTO_CACHE_BUST changes. */
+      var sep = u.indexOf("?") >= 0 ? "&" : "?";
+      return u + sep + "v=" + encodeURIComponent(PHOTO_CACHE_BUST);
+    }
     return (
       "/api/img?u=" +
       encodeURIComponent(u) +
       "&w=" +
       CARD_IMG_WIDTH +
-      "&q=72&f=webp"
+      "&q=72&f=webp&cb=" +
+      encodeURIComponent(PHOTO_CACHE_BUST)
     );
   }
 

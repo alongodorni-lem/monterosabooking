@@ -535,7 +535,7 @@
         /* missing config: bar stays hidden */
       })
       .then(function () {
-        return loadScript(p + "js/availability-bar.js?v=11");
+        return loadScript(p + "js/availability-bar.js?v=12");
       })
       .catch(function () {
         /* quiet fail */

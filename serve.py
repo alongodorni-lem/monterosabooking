@@ -161,8 +161,13 @@ def _parse_int(raw: str | None, default: int, lo: int, hi: int) -> int:
     return max(lo, min(hi, n))
 
 
-def _img_cache_path(url: str, width: int, quality: int, fmt: str) -> Path:
-    digest = hashlib.sha256(f"{url}|{width}|{quality}|{fmt}".encode("utf-8")).hexdigest()[:40]
+def _img_cache_path(
+    url: str, width: int, quality: int, fmt: str, bust: str = ""
+) -> Path:
+    # Include optional client bust token so in-place Planyo photo replaces invalidate disk cache.
+    digest = hashlib.sha256(
+        f"{url}|{width}|{quality}|{fmt}|{bust}".encode("utf-8")
+    ).hexdigest()[:40]
     return IMG_CACHE_DIR / f"{digest}.{fmt}"
 
 
@@ -284,6 +289,8 @@ class Handler(SimpleHTTPRequestHandler):
         if fmt_param == "jpeg" or fmt_param == "jpg":
             prefer_webp = False
 
+        bust = ((params.get("cb") or params.get("v") or [""])[-1] or "").strip()
+
         if Image is None:
             # Soft-degrade: redirect to original so cards still render.
             self.send_response(302)
@@ -293,7 +300,7 @@ class Handler(SimpleHTTPRequestHandler):
             return
 
         fmt = "webp" if prefer_webp else "jpg"
-        cache_path = _img_cache_path(raw_url, width, quality, fmt)
+        cache_path = _img_cache_path(raw_url, width, quality, fmt, bust)
         try:
             if cache_path.is_file() and cache_path.stat().st_size > 0:
                 body = cache_path.read_bytes()
