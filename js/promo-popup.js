@@ -2,7 +2,7 @@
 (function () {
   "use strict";
 
-  var STORAGE_KEY = "mb_promo_popup_aug26";
+  var STORAGE_KEY_DEFAULT = "mb_promo_popup_aug8_20_26";
   var DELAY_MS = 3000;
   var script =
     document.currentScript ||
@@ -13,9 +13,13 @@
     return script.getAttribute("data-" + name) || fallback;
   }
 
+  function storageKey() {
+    return cfg("storage-key", STORAGE_KEY_DEFAULT);
+  }
+
   function alreadySeen() {
     try {
-      return sessionStorage.getItem(STORAGE_KEY) === "1";
+      return sessionStorage.getItem(storageKey()) === "1";
     } catch (e) {
       return false;
     }
@@ -23,17 +27,20 @@
 
   function markSeen() {
     try {
-      sessionStorage.setItem(STORAGE_KEY, "1");
+      sessionStorage.setItem(storageKey(), "1");
     } catch (e) {
       /* ignore */
     }
   }
 
   function build() {
-    var title = cfg("title", "Natura, relax e montagna.");
-    var text = cfg("text", "Il programma dall'1 all'8 agosto.");
+    var title = cfg("title", "Montagna d’agosto");
+    var text = cfg(
+      "text",
+      "Tutte le esperienze prenotabili dall’8 al 20 agosto ai piedi del Monte Rosa."
+    );
     var cta = cfg("cta", "VEDI ATTIVITÀ");
-    var href = cfg("href", "esperienze-1-8-agosto-macugnaga.html");
+    var href = cfg("href", "montagna-dagosto-8-20-agosto.html");
     var img = cfg("img", "assets/web/promo-popup-agosto.jpg");
     var closeLabel = cfg("close", "Chiudi");
 

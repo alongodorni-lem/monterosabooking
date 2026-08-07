@@ -5,7 +5,7 @@
   var SITE_ID = 70864;
   /* Hard TTL in localStorage. Force refresh after Planyo admin changes: bump
      CACHE_KEY (e.g. v14), or clear localStorage key mem_esperienze_list_*. */
-  var CACHE_KEY_BASE = "mem_esperienze_list_v14";
+  var CACHE_KEY_BASE = "mem_esperienze_list_v15";
   var CACHE_MS = 24 * 60 * 60 * 1000;
   var EVENT_TIMES_CONCURRENCY = 6;
   var MAX_DATE_LABELS = 5;
@@ -92,13 +92,14 @@
 
   function rangeSpecialLabel(range) {
     var L = ui();
-    if (L.rangeInWindow) return L.rangeInWindow;
-    return (
-      "Disponibile dal " +
-      formatDayMonth(range.from) +
-      " al " +
-      formatDayMonth(range.to)
-    );
+    var fromLbl = formatDayMonth(range.from);
+    var toLbl = formatDayMonth(range.to);
+    if (L.rangeFromTo) {
+      return String(L.rangeFromTo)
+        .replace(/\{from\}/g, fromLbl)
+        .replace(/\{to\}/g, toLbl);
+    }
+    return "Disponibile dal " + fromLbl + " al " + toLbl;
   }
 
   function filterDaysByRange(days, range, todayYmd) {
