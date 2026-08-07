@@ -1381,6 +1381,48 @@ h1.hero__claim {
   min-height: 320px;
 }
 
+/* Inline booking embed (prenota.html) — no lightbox */
+.planyo-wrap--inline {
+  background: var(--cream);
+  padding: 1.25rem 0 3.5rem;
+}
+
+.planyo-wrap--inline .container {
+  max-width: min(52rem, 100%);
+}
+
+.planyo-wrap--inline #planyo_content {
+  min-height: 480px;
+  max-width: 100%;
+  overflow-x: auto;
+  background: var(--white);
+  border: 1px solid rgba(28, 42, 34, 0.08);
+  border-radius: var(--radius);
+  padding: 1rem 1.1rem 1.5rem;
+  box-sizing: border-box;
+}
+
+.planyo-wrap--inline #planyo_content img {
+  max-width: 100%;
+  height: auto;
+}
+
+.planyo-wrap--inline #planyo_content table {
+  max-width: 100%;
+}
+
+.page-hero--compact .page-hero__content {
+  max-width: 40rem;
+}
+
+.page-hero--compact .page-hero__content h1 {
+  font-size: clamp(1.75rem, 4vw, 2.4rem);
+}
+
+.page-hero--compact .page-hero__content > p:not(.breadcrumb) {
+  max-width: 36rem;
+}
+
 /* ——— Experiences API list ——— */
 .esperienze-list-wrap {
   padding-top: 0.5rem;

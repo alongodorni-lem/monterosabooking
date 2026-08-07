@@ -408,7 +408,41 @@
     ensureStylesheet(
       "https://www.planyo.com/schemes/?calendar=70864&detect_mobile=auto&sel=scheme_css"
     );
-    ensureStylesheet("https://www.planyo.com/li.css");
+
+    var bookingPage = prefix() + "prenota.html";
+
+    /* Search results open inline on prenota.html (not Planyo lightbox). */
+    window.mb_submit_search_inline = function () {
+      var startEl = document.getElementById("box_start_date");
+      var endEl = document.getElementById("box_end_date");
+      var start = startEl ? String(startEl.value || "").trim() : "";
+      var end = endEl ? String(endEl.value || "").trim() : "";
+      if (!start || !end) {
+        if (typeof window.planyo_verify_search_fields === "function") {
+          return window.planyo_verify_search_fields();
+        }
+        return false;
+      }
+      if (
+        typeof window.planyo_verify_search_fields === "function" &&
+        window.planyo_verify_search_fields() === false
+      ) {
+        return false;
+      }
+      var q = [
+        "mode=search",
+        "start_date=" + encodeURIComponent(start),
+        "end_date=" + encodeURIComponent(end),
+        "range_search=flx2",
+        "sort=name",
+        "ppp_refcode=landing",
+        "custom-language=" + encodeURIComponent(pl),
+        "planyo_lang=" + encodeURIComponent(pl),
+        "submitted=true",
+      ].join("&");
+      window.location.href = bookingPage + "?" + q;
+      return false;
+    };
 
     return loadScript("https://www.planyo.com/utils.js")
       .then(function () {
@@ -418,9 +452,6 @@
         if (typeof planyo_mobile_check === "function" && planyo_mobile_check()) {
           document.is_mobile = 1;
         }
-        return loadScript("https://www.planyo.com/li.js?v=3");
-      })
-      .then(function () {
         mount.innerHTML =
           '<aside class="site-search" aria-label="' +
           (L.searchAria || "Search") +
@@ -434,7 +465,9 @@
           "#search_form label {display:block;float:none;width:100%}" +
           "form#search_form li.planyo_static_help {margin-left:0px;}" +
           "</style>" +
-          "<form id='box_search_form' name='search_form' class=' title_above form-inline' action='https://www.planyo.com/booking.php' role='form' target='planyo_li_iframe' onsubmit=\"return planyo_li_on_submit_form()\" method='get'>" +
+          "<form id='box_search_form' name='search_form' class=' title_above form-inline' action='" +
+          bookingPage +
+          "' role='form' onsubmit=\"return mb_submit_search_inline()\" method='get'>" +
           "<input type='hidden' value='70864' id='calendar' name='calendar' />" +
           "<input type='hidden' value='flx2' id='range_search' name='range_search' />" +
           "<div style='position:absolute;visibility:hidden;z-index:5000;' class='picker_dropdown ' id='box_start_datecal' onmousedown='var e=arguments[0] || window.event;e.stopPropagation();' onclick='var e=arguments[0] || window.event;e.stopPropagation();'></div>" +
@@ -443,7 +476,7 @@
           (L.startDate || "Start date") +
           "<em>*</em></label>" +
           "<div class='input-group '>" +
-          "<input class='with-status-border form-control' type='text' id='box_start_date' name='box_start_date' autocomplete='off' value='' " +
+          "<input class='with-status-border form-control' type='text' id='box_start_date' name='start_date' autocomplete='off' value='' " +
           "onfocus=\"planyo_close_calendar();planyo_show_calendar('box_start_date',null);\" " +
           "onmousedown='var e=arguments[0] || window.event;e.stopPropagation();' " +
           "onclick='var e=arguments[0] || window.event;e.stopPropagation();' />" +
@@ -456,7 +489,7 @@
           (L.endDate || "End date") +
           "<em>*</em></label>" +
           "<div class='input-group '>" +
-          "<input class='with-status-border form-control' type='text' id='box_end_date' name='box_end_date' autocomplete='off' value='' " +
+          "<input class='with-status-border form-control' type='text' id='box_end_date' name='end_date' autocomplete='off' value='' " +
           "onfocus=\"planyo_close_calendar();planyo_show_calendar('box_end_date',null);\" " +
           "onmousedown='var e=arguments[0] || window.event;e.stopPropagation();' " +
           "onclick='var e=arguments[0] || window.event;e.stopPropagation();' />" +
@@ -471,7 +504,9 @@
           "<input type='hidden' value='" +
           pl +
           "' id='custom-language' name='custom-language' />" +
-          "<input type='hidden' value='1' id='lightbox' name='lightbox' />" +
+          "<input type='hidden' value='" +
+          pl +
+          "' id='planyo_lang' name='planyo_lang' />" +
           "<div id='res_form_buttons'><label for='box_submit_button'>&nbsp;</label>" +
           "<input class='btn btn-primary btn-lg' id='box_submit_button' name='submit_button' type='submit' value='" +
           (L.search || "Search") +
@@ -535,7 +570,7 @@
         /* missing config: bar stays hidden */
       })
       .then(function () {
-        return loadScript(p + "js/availability-bar.js?v=13");
+        return loadScript(p + "js/availability-bar.js?v=14");
       })
       .catch(function () {
         /* quiet fail */
