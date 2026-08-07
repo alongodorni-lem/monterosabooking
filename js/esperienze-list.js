@@ -5,7 +5,7 @@
   var SITE_ID = 70864;
   /* Hard TTL in localStorage. Force refresh after Planyo admin changes: bump
      CACHE_KEY (e.g. v14), or clear localStorage key mem_esperienze_list_*. */
-  var CACHE_KEY_BASE = "mem_esperienze_list_v15";
+  var CACHE_KEY_BASE = "mem_esperienze_list_v16";
   var CACHE_MS = 24 * 60 * 60 * 1000;
   var EVENT_TIMES_CONCURRENCY = 6;
   var MAX_DATE_LABELS = 5;
@@ -15,9 +15,13 @@
   /* No eager card photos — LCP is the page hero; hydrate after text paint. */
   var EAGER_PHOTO_COUNT = 0;
   var REST_URL = "https://www.planyo.com/rest/";
+  /* Daily lifts pinned first (seggiovia Belvedere, then funivia Alpe Bill). */
+  var PINNED_RESOURCE_IDS = ["253658", "253679"];
   var SPECIAL_RESOURCE_IDS = {
     "253398": true /* Casa Museo Walser */,
     "252705": true /* Miniera d'Oro della Guia */,
+    "253658": true /* Seggiovia Pecetto–Burki–Belvedere */,
+    "253679": true /* Funivie Macugnaga Staffa–Alpe Bill */,
   };
   /* Booking deadline notice under available dates (id → i18n key). */
   var DEADLINE_NOTICES = {
@@ -40,6 +44,8 @@
     "252699": "assets/web/trekking-salute.jpg",
     "253399": "assets/web/ricerca-oro.jpg",
     "253421": "assets/web/casa-museo-pane.jpg",
+    "253658": "assets/web/funivia-belvedere.jpg",
+    "253679": "assets/web/funivia-alpe-bill.jpg",
   };
 
   function siteLang() {
@@ -215,7 +221,15 @@
     if (n.indexOf("miniera d'oro") >= 0 || n.indexOf("miniera d’oro") >= 0) {
       return true;
     }
+    if (n.indexOf("seggiovia") >= 0 && n.indexOf("belvedere") >= 0) return true;
+    if (n.indexOf("funivie") >= 0 && n.indexOf("alpe bill") >= 0) return true;
+    if (n.indexOf("funivia") >= 0 && n.indexOf("alpe bill") >= 0) return true;
     return false;
+  }
+
+  function pinRank(resourceId) {
+    var idx = PINNED_RESOURCE_IDS.indexOf(String(resourceId || ""));
+    return idx === -1 ? 999 : idx;
   }
 
   function deadlineNoticeFor(resourceId, name) {
@@ -745,6 +759,9 @@
   function sortItems(items) {
     var loc = localeForDates();
     return items.slice().sort(function (a, b) {
+      var pa = pinRank(a.resourceId);
+      var pb = pinRank(b.resourceId);
+      if (pa !== pb) return pa - pb;
       if (a.sortKey < b.sortKey) return -1;
       if (a.sortKey > b.sortKey) return 1;
       return String(a.name).localeCompare(String(b.name), loc);
@@ -1223,6 +1240,9 @@
         })
         .filter(Boolean)
         .sort(function (a, b) {
+          var pa = pinRank(a.resourceId);
+          var pb = pinRank(b.resourceId);
+          if (pa !== pb) return pa - pb;
           return String(a.name).localeCompare(String(b.name), loc);
         });
 

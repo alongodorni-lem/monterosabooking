@@ -1696,7 +1696,8 @@ a.btn.btn-primary:hover {
   overflow: visible;
 }
 
-.footer-brand__comune {
+.footer-brand__comune,
+.footer-brand__regione {
   display: block;
   line-height: 0;
   text-decoration: none;
@@ -1713,6 +1714,19 @@ a.btn.btn-primary:hover {
   object-fit: contain;
 }
 
+/* Regione Piemonte: wide JPG with white bg — height matched to stemma/comune */
+.regione-mark {
+  display: block;
+  width: auto;
+  height: 72px;
+  max-width: 210px;
+  padding: 0.35rem 0.45rem;
+  background: #fff;
+  border-radius: 8px;
+  object-fit: contain;
+  object-position: center;
+}
+
 .stemma-mark--lg {
   width: 160px;
   height: 160px;
@@ -1720,6 +1734,26 @@ a.btn.btn-primary:hover {
   background: rgba(255, 255, 255, 0.95);
   border-radius: 8px;
   object-fit: contain;
+}
+
+.regione-mark--lg {
+  height: 96px;
+  max-width: 280px;
+  padding: 0.5rem 0.65rem;
+}
+
+.partner-marks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.partner-marks__regione {
+  display: block;
+  line-height: 0;
+  text-decoration: none;
 }
 
 .footer-brand p {

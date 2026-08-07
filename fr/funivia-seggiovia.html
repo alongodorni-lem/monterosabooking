@@ -33,8 +33,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Open+Sans:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
-  <link rel="preload" href="../css/style.css?v=21" as="style">
-  <link rel="stylesheet" href="../css/style.css?v=21">
+  <link rel="preload" href="../css/style.css?v=24" as="style">
+  <link rel="stylesheet" href="../css/style.css?v=24">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -83,7 +83,7 @@
         "offers": {
           "@type": "Offer",
           "url": "https://macugnagamonterosaski.com/",
-          "description": "Billets e aperture: sito ufficiale impianti (non venduti su questo portale)",
+          "description": "Prenotazione online biglietti seggiovia Belvedere e funivia Alpe Bill su Macugnaga Booking; aperture anche sul sito ufficiale impianti",
           "availability": "https://schema.org/InStock",
           "priceCurrency": "EUR"
         }
@@ -128,7 +128,7 @@
             "name": "Si prenotano i biglietti funivia sul portale di prenotazione?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "No: biglietti e orari degli impianti sono gestiti dalla società funivie sui siti ufficiali. Il portale di prenotazione Macugnaga Booking – Expériences au pied du Monte Rosa offre invece esperienze guidate e visite culturali (escursioni, benessere, Maison Walser, mine d’or) da abbinare al soggiorno."
+              "text": "Sì: sul portale Macugnaga Booking puoi prenotare online i biglietti della seggiovia Pecetto–Burki–Belvedere e della funivia Staffa–Alpe Bill (pagamento sul posto). Orari e stato impianti restano aggiornati anche sul sito ufficiale della società funivie."
             }
           },
           {
@@ -178,7 +178,8 @@
         <h1>Téléphérique et télésiège in quota</h1>
         <p>Télésiège pour le Belvedere et téléphérique pour Alpe Bill et Passo Moro : des remontées qui rapprochent de la face Est du Monte Rosa. Vérifiez les ouvertures officielles et enrichissez le séjour avec les expériences du portail de réservation.</p>
         <div class="btn-row">
-          <a class="btn btn--primary" href="esperienze.html">Expériences du portail</a>
+          <a role="button" class="btn btn-primary btn--primary" href="javascript:planyo_show_plugin_lightbox('https://www.planyo.com/booking.php?mode=reserve&amp;calendar=70864&amp;resource_id=253658&amp;ppp_refcode=landing')">Réserver télésiège Belvedere</a>
+          <a role="button" class="btn btn-primary btn--primary" href="javascript:planyo_show_plugin_lightbox('https://www.planyo.com/booking.php?mode=reserve&amp;calendar=70864&amp;resource_id=253679&amp;ppp_refcode=landing')">Réserver téléphérique Alpe Bill</a>
           <a class="btn btn--ghost" href="https://macugnagamonterosaski.com/impianti/" target="_blank" rel="noopener">État officiel des remontées</a>
         </div>
       </div>
@@ -200,6 +201,29 @@
       </div>
     </section>
 
+    <section class="section section--cream" id="mappa-impianti">
+      <div class="container">
+        <p class="section__eyebrow reveal">Carte</p>
+        <h2 class="reveal">Carte des remontées</h2>
+        <figure class="reveal" style="margin:1.25rem 0 0">
+          <img src="../assets/mappaimpianti.webp" alt="Carte des remontées mécaniques de Macugnaga : télésièges Belvedere et téléphériques Monte Moro" width="2560" height="1768" loading="lazy" decoding="async" style="border-radius:12px">
+          <figcaption class="note">Carte des remontées</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section section--white" id="prenota-impianti">
+      <div class="container">
+        <p class="section__eyebrow reveal">Réserver en ligne</p>
+        <h2 class="reveal">Billets télésiège et téléphérique</h2>
+        <p class="lead reveal">Réservez en ligne les billets des remontées ouvertes chaque jour en saison (paiement sur place). Télésiège Belvedere dès 17&nbsp;€ · Téléphérique Alpe Bill dès 12&nbsp;€.</p>
+        <div class="btn-row reveal" style="margin-top:1.25rem">
+          <a role="button" class="btn btn-primary btn--primary" href="javascript:planyo_show_plugin_lightbox('https://www.planyo.com/booking.php?mode=reserve&amp;calendar=70864&amp;resource_id=253658&amp;ppp_refcode=landing')">Réserver télésiège Belvedere</a>
+          <a role="button" class="btn btn-primary btn--primary" href="javascript:planyo_show_plugin_lightbox('https://www.planyo.com/booking.php?mode=reserve&amp;calendar=70864&amp;resource_id=253679&amp;ppp_refcode=landing')">Réserver téléphérique Alpe Bill</a>
+        </div>
+      </div>
+    </section>
+
     <section class="section section--cream" id="esperienze-quota">
       <div class="container">
         <p class="section__eyebrow reveal">En altitude</p>
@@ -211,6 +235,9 @@
             <div class="exp-card__body">
               <h3>Belvedere et Alpe Burki</h3>
               <p>Vue sur la face Est, silence et pâturages. À l’Alpe Burki, chalets et refuges avec cuisine alpine : base parfaite pour une demi-journée à basse–moyenne altitude.</p>
+              <div class="btn-row" style="margin-top:0.75rem">
+                <a role="button" class="btn btn-primary btn--primary" href="javascript:planyo_show_plugin_lightbox('https://www.planyo.com/booking.php?mode=reserve&amp;calendar=70864&amp;resource_id=253658&amp;ppp_refcode=landing')">Réserver le télésiège</a>
+              </div>
             </div>
           </article>
           <article class="exp-card reveal">
@@ -225,6 +252,9 @@
             <div class="exp-card__body">
               <h3>Alpe Bill et Passo Moro</h3>
               <p>Le téléphérique rapproche d’Alpe Bill et, quand le second tronçon est ouvert, du Passo Moro : vue à 360° sur les Alpes et vers la Suisse, avec la <strong>Madonna della Neve</strong> près de l’arrivée en altitude.</p>
+              <div class="btn-row" style="margin-top:0.75rem">
+                <a role="button" class="btn btn-primary btn--primary" href="javascript:planyo_show_plugin_lightbox('https://www.planyo.com/booking.php?mode=reserve&amp;calendar=70864&amp;resource_id=253679&amp;ppp_refcode=landing')">Réserver le téléphérique</a>
+              </div>
             </div>
           </article>
         </div>
@@ -280,11 +310,11 @@
       <div class="container reveal" style="text-align:center;max-width:40rem;margin-inline:auto">
         <p class="section__eyebrow">Portale di prenotazione</p>
         <h2>Après l’altitude, une expérience authentique</h2>
-        <p class="lead" style="color:rgba(255,255,255,.9);margin-inline:auto">Les billets de téléphérique et télésiège s’achètent auprès de la société des remontées. Sur le <strong>portail de réservation</strong> vous trouvez plutôt randonnées, bien-être, Maison-musée Walser et mine d’or — pour compléter la journée ou le week-end à Macugnaga.</p>
+        <p class="lead" style="color:rgba(255,255,255,.9);margin-inline:auto">Réservez en ligne les billets du <strong>télésiège Belvedere</strong> et du <strong>téléphérique Alpe Bill</strong>, ou complétez la journée avec randonnées, bien-être, Maison-musée Walser et mine d’or.</p>
         <div class="btn-row" style="justify-content:center">
-          <a class="btn btn--primary" href="esperienze.html">Réserver une expérience</a>
-          <a class="btn btn--ghost" href="casa-museo-walser.html">Maison Walser</a>
-          <a class="btn btn--ghost" href="miniera-oro.html">Mine d’or</a>
+          <a role="button" class="btn btn-primary btn--primary" href="javascript:planyo_show_plugin_lightbox('https://www.planyo.com/booking.php?mode=reserve&amp;calendar=70864&amp;resource_id=253658&amp;ppp_refcode=landing')">Réserver le télésiège</a>
+          <a role="button" class="btn btn-primary btn--primary" href="javascript:planyo_show_plugin_lightbox('https://www.planyo.com/booking.php?mode=reserve&amp;calendar=70864&amp;resource_id=253679&amp;ppp_refcode=landing')">Réserver le téléphérique</a>
+          <a class="btn btn--ghost" href="esperienze.html">Autres expériences</a>
         </div>
       </div>
     </section>
@@ -308,7 +338,7 @@
           </details>
           <details class="faq-item reveal">
             <summary>Puis-je réserver les billets ici ?</summary>
-            <p class="faq-a">Non. C’est le <strong>portail de réservation</strong> d’expériences guidées et de visites culturelles. Pour billets et forfaits utilisez les canaux de la société des remontées.</p>
+            <p class="faq-a">Oui : vous pouvez réserver en ligne le <a href="javascript:planyo_show_plugin_lightbox('https://www.planyo.com/booking.php?mode=reserve&amp;calendar=70864&amp;resource_id=253658&amp;ppp_refcode=landing')">télésiège Pecetto–Burki–Belvedere</a> et le <a href="javascript:planyo_show_plugin_lightbox('https://www.planyo.com/booking.php?mode=reserve&amp;calendar=70864&amp;resource_id=253679&amp;ppp_refcode=landing')">téléphérique Staffa–Alpe Bill</a> (paiement sur place). Pour forfaits et horaires, consultez aussi le site officiel des remontées.</p>
           </details>
           <details class="faq-item reveal">
             <summary>Comment les combiner avec un week-end ?</summary>
@@ -330,8 +360,8 @@
     </div>
   </div>
 
-  <script src="../js/i18n.js?v=8" defer></script>
-  <script src="../js/partials.js?v=18" defer></script>
+  <script src="../js/i18n.js?v=10" defer></script>
+  <script src="../js/partials.js?v=20" defer></script>
   <script src="../js/main.js?v=3" defer></script>
 </body>
 </html>

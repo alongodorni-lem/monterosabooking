@@ -33,8 +33,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Open+Sans:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
-  <link rel="preload" href="../css/style.css?v=21" as="style">
-  <link rel="stylesheet" href="../css/style.css?v=21">
+  <link rel="preload" href="../css/style.css?v=24" as="style">
+  <link rel="stylesheet" href="../css/style.css?v=24">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -83,7 +83,7 @@
         "offers": {
           "@type": "Offer",
           "url": "https://macugnagamonterosaski.com/",
-          "description": "Tickets e aperture: sito ufficiale impianti (non venduti su questo portale)",
+          "description": "Prenotazione online biglietti seggiovia Belvedere e funivia Alpe Bill su Macugnaga Booking; aperture anche sul sito ufficiale impianti",
           "availability": "https://schema.org/InStock",
           "priceCurrency": "EUR"
         }
@@ -128,7 +128,7 @@
             "name": "Si prenotano i biglietti funivia sul portale di prenotazione?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "No: biglietti e orari degli impianti sono gestiti dalla società funivie sui siti ufficiali. Il portale di prenotazione Macugnaga Booking – Erlebnisse am Fuße des Monte Rosa offre invece esperienze guidate e visite culturali (escursioni, benessere, Walser-Haus, Goldmine) da abbinare al soggiorno."
+              "text": "Sì: sul portale Macugnaga Booking puoi prenotare online i biglietti della seggiovia Pecetto–Burki–Belvedere e della funivia Staffa–Alpe Bill (pagamento sul posto). Orari e stato impianti restano aggiornati anche sul sito ufficiale della società funivie."
             }
           },
           {
@@ -178,7 +178,8 @@
         <h1>Seilbahn und Sessellift in quota</h1>
         <p>Sessellift zum Belvedere und Seilbahn zu Alpe Bill und Passo Moro: Anlagen, die näher an die Ostwand des Monte Rosa bringen. Offizielle Öffnungszeiten prüfen und den Aufenthalt mit Erlebnissen aus dem Buchungsportal bereichern.</p>
         <div class="btn-row">
-          <a class="btn btn--primary" href="esperienze.html">Portal-Erlebnisse</a>
+          <a role="button" class="btn btn-primary btn--primary" href="javascript:planyo_show_plugin_lightbox('https://www.planyo.com/booking.php?mode=reserve&amp;calendar=70864&amp;resource_id=253658&amp;ppp_refcode=landing')">Belvedere-Sessellift buchen</a>
+          <a role="button" class="btn btn-primary btn--primary" href="javascript:planyo_show_plugin_lightbox('https://www.planyo.com/booking.php?mode=reserve&amp;calendar=70864&amp;resource_id=253679&amp;ppp_refcode=landing')">Alpe-Bill-Seilbahn buchen</a>
           <a class="btn btn--ghost" href="https://macugnagamonterosaski.com/impianti/" target="_blank" rel="noopener">Offizieller Anlagenstatus</a>
         </div>
       </div>
@@ -200,6 +201,29 @@
       </div>
     </section>
 
+    <section class="section section--cream" id="mappa-impianti">
+      <div class="container">
+        <p class="section__eyebrow reveal">Karte</p>
+        <h2 class="reveal">Karte der Anlagen</h2>
+        <figure class="reveal" style="margin:1.25rem 0 0">
+          <img src="../assets/mappaimpianti.webp" alt="Karte der Aufstiegsanlagen von Macugnaga: Belvedere-Sessellifte und Monte-Moro-Seilbahnen" width="2560" height="1768" loading="lazy" decoding="async" style="border-radius:12px">
+          <figcaption class="note">Karte der Anlagen</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section section--white" id="prenota-impianti">
+      <div class="container">
+        <p class="section__eyebrow reveal">Online buchen</p>
+        <h2 class="reveal">Tickets für Sessellift und Seilbahn</h2>
+        <p class="lead reveal">Buchen Sie Online-Tickets für die täglich geöffneten Sommeranlagen (Zahlung vor Ort). Belvedere-Sessellift ab 17&nbsp;€ · Alpe-Bill-Seilbahn ab 12&nbsp;€.</p>
+        <div class="btn-row reveal" style="margin-top:1.25rem">
+          <a role="button" class="btn btn-primary btn--primary" href="javascript:planyo_show_plugin_lightbox('https://www.planyo.com/booking.php?mode=reserve&amp;calendar=70864&amp;resource_id=253658&amp;ppp_refcode=landing')">Belvedere-Sessellift buchen</a>
+          <a role="button" class="btn btn-primary btn--primary" href="javascript:planyo_show_plugin_lightbox('https://www.planyo.com/booking.php?mode=reserve&amp;calendar=70864&amp;resource_id=253679&amp;ppp_refcode=landing')">Alpe-Bill-Seilbahn buchen</a>
+        </div>
+      </div>
+    </section>
+
     <section class="section section--cream" id="esperienze-quota">
       <div class="container">
         <p class="section__eyebrow reveal">In der Höhe</p>
@@ -211,6 +235,9 @@
             <div class="exp-card__body">
               <h3>Belvedere und Alpe Burki</h3>
               <p>Blick auf die Ostwand, Stille und Weiden. An der Alpe Burki Hütten und Rifugi mit alpiner Küche: perfekte Basis für einen halben Tag in niederer–mittlerer Höhe.</p>
+              <div class="btn-row" style="margin-top:0.75rem">
+                <a role="button" class="btn btn-primary btn--primary" href="javascript:planyo_show_plugin_lightbox('https://www.planyo.com/booking.php?mode=reserve&amp;calendar=70864&amp;resource_id=253658&amp;ppp_refcode=landing')">Sessellift buchen</a>
+              </div>
             </div>
           </article>
           <article class="exp-card reveal">
@@ -225,6 +252,9 @@
             <div class="exp-card__body">
               <h3>Alpe Bill und Passo Moro</h3>
               <p>Die Seilbahn bringt Sie nach Alpe Bill und, wenn der zweite Abschnitt offen ist, zum Passo Moro: 360°-Blick auf die Alpen und Richtung Schweiz, mit der <strong>Madonna della Neve</strong> nahe der Bergstation.</p>
+              <div class="btn-row" style="margin-top:0.75rem">
+                <a role="button" class="btn btn-primary btn--primary" href="javascript:planyo_show_plugin_lightbox('https://www.planyo.com/booking.php?mode=reserve&amp;calendar=70864&amp;resource_id=253679&amp;ppp_refcode=landing')">Seilbahn buchen</a>
+              </div>
             </div>
           </article>
         </div>
@@ -280,11 +310,11 @@
       <div class="container reveal" style="text-align:center;max-width:40rem;margin-inline:auto">
         <p class="section__eyebrow">Portale di prenotazione</p>
         <h2>Nach der Höhe ein authentisches Erlebnis</h2>
-        <p class="lead" style="color:rgba(255,255,255,.9);margin-inline:auto">Tickets für Seilbahn und Sessellift kaufen Sie bei der Anlagen-Gesellschaft. Im <strong>Buchungsportal</strong> finden Sie dagegen Wanderungen, Wellness, Walser-Hausmuseum und Goldmine — um Tag oder Wochenende in Macugnaga zu ergänzen.</p>
+        <p class="lead" style="color:rgba(255,255,255,.9);margin-inline:auto">Buchen Sie online Tickets für den <strong>Belvedere-Sessellift</strong> und die <strong>Alpe-Bill-Seilbahn</strong> — oder ergänzen Sie den Tag mit Wanderungen, Wellness, Walser-Haus und Goldmine.</p>
         <div class="btn-row" style="justify-content:center">
-          <a class="btn btn--primary" href="esperienze.html">Ein Erlebnis buchen</a>
-          <a class="btn btn--ghost" href="casa-museo-walser.html">Walser-Haus</a>
-          <a class="btn btn--ghost" href="miniera-oro.html">Goldmine</a>
+          <a role="button" class="btn btn-primary btn--primary" href="javascript:planyo_show_plugin_lightbox('https://www.planyo.com/booking.php?mode=reserve&amp;calendar=70864&amp;resource_id=253658&amp;ppp_refcode=landing')">Sessellift buchen</a>
+          <a role="button" class="btn btn-primary btn--primary" href="javascript:planyo_show_plugin_lightbox('https://www.planyo.com/booking.php?mode=reserve&amp;calendar=70864&amp;resource_id=253679&amp;ppp_refcode=landing')">Seilbahn buchen</a>
+          <a class="btn btn--ghost" href="esperienze.html">Weitere Erlebnisse</a>
         </div>
       </div>
     </section>
@@ -308,7 +338,7 @@
           </details>
           <details class="faq-item reveal">
             <summary>Kann ich Tickets hier buchen?</summary>
-            <p class="faq-a">Nein. Dies ist das <strong>Buchungsportal</strong> für geführte Erlebnisse und Kulturbesuche. Für Tickets und Skipässe nutzen Sie die Kanäle der Anlagen-Gesellschaft.</p>
+            <p class="faq-a">Ja: Sie können online den <a href="javascript:planyo_show_plugin_lightbox('https://www.planyo.com/booking.php?mode=reserve&amp;calendar=70864&amp;resource_id=253658&amp;ppp_refcode=landing')">Sessellift Pecetto–Burki–Belvedere</a> und die <a href="javascript:planyo_show_plugin_lightbox('https://www.planyo.com/booking.php?mode=reserve&amp;calendar=70864&amp;resource_id=253679&amp;ppp_refcode=landing')">Seilbahn Staffa–Alpe Bill</a> buchen (Zahlung vor Ort). Für Skipässe und Öffnungszeiten auch die offizielle Anlagen-Website prüfen.</p>
           </details>
           <details class="faq-item reveal">
             <summary>Wie mit einem Wochenende kombinieren?</summary>
@@ -330,8 +360,8 @@
     </div>
   </div>
 
-  <script src="../js/i18n.js?v=8" defer></script>
-  <script src="../js/partials.js?v=18" defer></script>
+  <script src="../js/i18n.js?v=10" defer></script>
+  <script src="../js/partials.js?v=20" defer></script>
   <script src="../js/main.js?v=3" defer></script>
 </body>
 </html>

@@ -5,15 +5,19 @@
   var SITE_ID = 70864;
   /* Hard TTL in localStorage. Force refresh after Planyo admin changes: bump
      CACHE_KEY (e.g. v10), or clear localStorage key mem_avail_bar_*. */
-  var CACHE_KEY_BASE = "mem_avail_bar_v10_ticker15";
+  var CACHE_KEY_BASE = "mem_avail_bar_v11_ticker15";
   var CACHE_MS = 24 * 60 * 60 * 1000;
   var MAX_ITEMS = 15;
   var MIN_DAYS = 7;
   var MAX_DAYS = 14;
   var REST_URL = "https://www.planyo.com/rest/";
+  /* Daily lifts pinned first (seggiovia Belvedere, then funivia Alpe Bill). */
+  var PINNED_RESOURCE_IDS = ["253658", "253679"];
   var SPECIAL_RESOURCE_IDS = {
     "253398": true, /* Casa Museo Walser */
     "252705": true, /* Miniera d'Oro della Guia */
+    "253658": true, /* Seggiovia Pecetto–Burki–Belvedere */
+    "253679": true, /* Funivie Macugnaga Staffa–Alpe Bill */
   };
 
   function siteLang() {
@@ -141,7 +145,15 @@
     if (n.indexOf("casa museo walser") >= 0) return true;
     if (n.indexOf("miniera") >= 0 && n.indexOf("guia") >= 0) return true;
     if (n.indexOf("miniera d'oro") >= 0 || n.indexOf("miniera d’oro") >= 0) return true;
+    if (n.indexOf("seggiovia") >= 0 && n.indexOf("belvedere") >= 0) return true;
+    if (n.indexOf("funivie") >= 0 && n.indexOf("alpe bill") >= 0) return true;
+    if (n.indexOf("funivia") >= 0 && n.indexOf("alpe bill") >= 0) return true;
     return false;
+  }
+
+  function pinRank(resourceId) {
+    var idx = PINNED_RESOURCE_IDS.indexOf(String(resourceId || ""));
+    return idx === -1 ? 999 : idx;
   }
 
   function escapeHtml(str) {
@@ -343,12 +355,16 @@
   }
 
   function byDateThenName(a, b) {
+    var pa = pinRank(a.resourceId);
+    var pb = pinRank(b.resourceId);
+    if (pa !== pb) return pa - pb;
     if (a.date < b.date) return -1;
     if (a.date > b.date) return 1;
     return String(a.name).localeCompare(String(b.name), localeForDates());
   }
 
-  /* Prefer including August daily specials when found; fill the rest soonest-first. */
+  /* Prefer including August daily specials when found; fill the rest soonest-first.
+     Pinned lifts (seggiovia/funivia) always sort first via byDateThenName. */
   function finalizeItems(flat) {
     var L = ui();
     var augustDaily = L.augustDaily || "Agosto tutti i giorni";

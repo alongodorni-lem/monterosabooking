@@ -203,6 +203,13 @@
       'assets/stemma.png" width="72" height="72" alt="' +
       (L.brandLine || "") +
       '" loading="lazy">' +
+      '<a class="footer-brand__regione" href="https://www.regione.piemonte.it/" target="_blank" rel="noopener">' +
+      '<img class="regione-mark" src="' +
+      p +
+      'assets/web/logo-regione-piemonte.jpg" width="201" height="72" alt="' +
+      (L.regione || "Regione Piemonte") +
+      '" loading="lazy" decoding="async">' +
+      "</a>" +
       '<a class="footer-brand__comune" href="https://www.comune.macugnaga.vb.it/it-it/home" target="_blank" rel="noopener">' +
       '<img class="comune-mark" src="' +
       p +
@@ -528,7 +535,7 @@
         /* missing config: bar stays hidden */
       })
       .then(function () {
-        return loadScript(p + "js/availability-bar.js?v=10");
+        return loadScript(p + "js/availability-bar.js?v=11");
       })
       .catch(function () {
         /* quiet fail */
