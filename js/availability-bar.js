@@ -5,7 +5,7 @@
   var SITE_ID = 70864;
   /* Hard TTL in localStorage. Force refresh after Planyo admin changes: bump
      CACHE_KEY (e.g. v10), or clear localStorage key mem_avail_bar_*. */
-  var CACHE_KEY_BASE = "mem_avail_bar_v13_ticker15";
+  var CACHE_KEY_BASE = "mem_avail_bar_v14_ticker15";
   var CACHE_MS = 24 * 60 * 60 * 1000;
   var MAX_ITEMS = 15;
   var MIN_DAYS = 7;
@@ -26,6 +26,10 @@
 
   function planyoLangCode() {
     return window.MB_I18N ? window.MB_I18N.planyoLang(siteLang()) : "IT";
+  }
+
+  function assetPrefix() {
+    return window.MB_I18N ? window.MB_I18N.assetPrefix(siteLang()) : "";
   }
 
   function ui() {
@@ -386,25 +390,12 @@
 
   function reserveUrl(resourceId) {
     return (
-      "https://www.planyo.com/booking.php?mode=reserve&calendar=" +
-      encodeURIComponent(getSiteId()) +
-      "&resource_id=" +
+      assetPrefix() +
+      "prenota.html?resource_id=" +
       encodeURIComponent(resourceId) +
-      "&ppp_refcode=landing&planyo_lang=" +
+      "&mode=reserve&ppp_refcode=landing&planyo_lang=" +
       encodeURIComponent(planyoLangCode())
     );
-  }
-
-  function openReserve(resourceId, evt) {
-    if (evt) {
-      evt.preventDefault();
-    }
-    var url = reserveUrl(resourceId);
-    if (typeof window.planyo_show_plugin_lightbox === "function") {
-      window.planyo_show_plugin_lightbox(url);
-      return;
-    }
-    window.location.href = "esperienze.html";
   }
 
   function renderItem(item) {
@@ -454,12 +445,6 @@
       (L.seeAll || "Vedi tutto") +
       "</a>" +
       "</div>";
-
-    el.querySelectorAll("[data-resource-id]").forEach(function (a) {
-      a.addEventListener("click", function (evt) {
-        openReserve(a.getAttribute("data-resource-id"), evt);
-      });
-    });
 
     /* Touch: pause while interacting so a tap can land on a moving link */
     var viewport = el.querySelector(".availability-bar__viewport");

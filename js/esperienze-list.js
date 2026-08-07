@@ -5,7 +5,7 @@
   var SITE_ID = 70864;
   /* Hard TTL in localStorage. Force refresh after Planyo admin changes: bump
      CACHE_KEY (e.g. v14), or clear localStorage key mem_esperienze_list_*. */
-  var CACHE_KEY_BASE = "mem_esperienze_list_v18";
+  var CACHE_KEY_BASE = "mem_esperienze_list_v19";
   /* Bust /api/img + browser cache when Planyo replaces a photo at the same URL. */
   var PHOTO_CACHE_BUST = "18";
   var CACHE_MS = 24 * 60 * 60 * 1000;
@@ -557,15 +557,21 @@
     return id ? photoFallback(id) : "";
   }
 
-  function resourceDescUrl(resourceId) {
-    return (
-      "https://www.planyo.com/booking.php?calendar=" +
-      encodeURIComponent(getSiteId()) +
-      "&mode=resource_desc&resource_id=" +
+  function bookingPageUrl(resourceId, mode, refcode) {
+    var q =
+      "resource_id=" +
       encodeURIComponent(resourceId) +
-      "&presentation_mode=1&planyo_lang=" +
-      encodeURIComponent(planyoLangCode())
-    );
+      "&mode=" +
+      encodeURIComponent(mode || "reserve") +
+      "&ppp_refcode=" +
+      encodeURIComponent(refcode || "landing") +
+      "&planyo_lang=" +
+      encodeURIComponent(planyoLangCode());
+    return assetPrefix() + "prenota.html?" + q;
+  }
+
+  function resourceDescUrl(resourceId) {
+    return bookingPageUrl(resourceId, "resource_desc", "landing");
   }
 
   function resourceDescription(resource) {
@@ -660,43 +666,15 @@
   }
 
   function reserveUrl(resourceId) {
+    return bookingPageUrl(resourceId, "reserve", "landing");
+  }
+
+  function listFallbackUrl() {
     return (
-      "https://www.planyo.com/booking.php?mode=reserve&calendar=" +
-      encodeURIComponent(getSiteId()) +
-      "&resource_id=" +
-      encodeURIComponent(resourceId) +
-      "&ppp_refcode=landing&planyo_lang=" +
+      assetPrefix() +
+      "prenota.html?mode=resource_list&ppp_refcode=landing&planyo_lang=" +
       encodeURIComponent(planyoLangCode())
     );
-  }
-
-  /* On-site Planyo plugin overlay (X to close). Never leave the portal. */
-  function openInLightbox(url, evt) {
-    if (evt) {
-      evt.preventDefault();
-      if (evt.stopPropagation) evt.stopPropagation();
-    }
-    if (!url) return;
-    if (typeof window.planyo_show_plugin_lightbox === "function") {
-      window.planyo_show_plugin_lightbox(url);
-      return;
-    }
-    /* li.js not ready — create overlay DOM if helpers exist */
-    if (typeof window.planyo_li_create === "function") {
-      window.planyo_li_create(url);
-      var liWindow = document.getElementById("planyo_li_window");
-      var liBg = document.getElementById("planyo_li_bg_hider");
-      if (liWindow) liWindow.style.display = "block";
-      if (liBg) liBg.style.display = "block";
-    }
-  }
-
-  function openReserve(resourceId, evt) {
-    openInLightbox(reserveUrl(resourceId), evt);
-  }
-
-  function openDetail(resourceId, evt) {
-    openInLightbox(resourceDescUrl(resourceId), evt);
   }
 
   function listResources(apiKey, siteId) {
@@ -897,11 +875,7 @@
     var el = mountEl();
     if (!el) return;
     var L = ui();
-    var fallback =
-      "https://www.planyo.com/booking.php?calendar=" +
-      encodeURIComponent(getSiteId()) +
-      "&mode=resource_list&ppp_refcode=landing&planyo_lang=" +
-      encodeURIComponent(planyoLangCode());
+    var fallback = listFallbackUrl();
     el.innerHTML =
       '<div class="esperienze-list__fallback" role="alert">' +
       "<p>" +
@@ -914,7 +888,7 @@
       "</button>" +
       '<a class="btn btn--outline" href="' +
       escapeHtml(fallback) +
-      '" data-action="lightbox-fallback">' +
+      '">' +
       (L.listOpenFallback || "Apri elenco prenotazioni") +
       "</a>" +
       "</div></div>";
@@ -922,12 +896,6 @@
     if (btn) {
       btn.addEventListener("click", function () {
         boot(true);
-      });
-    }
-    var fallbackLink = el.querySelector('[data-action="lightbox-fallback"]');
-    if (fallbackLink) {
-      fallbackLink.addEventListener("click", function (evt) {
-        openInLightbox(fallback, evt);
       });
     }
   }
@@ -1030,18 +998,7 @@
   }
 
   function bindListInteractions(el) {
-    el.querySelectorAll('[data-action="reserve"]').forEach(function (a) {
-      a.addEventListener("click", function (evt) {
-        openReserve(a.getAttribute("data-resource-id"), evt);
-      });
-    });
-
-    el.querySelectorAll('[data-action="detail"]').forEach(function (a) {
-      a.addEventListener("click", function (evt) {
-        openDetail(a.getAttribute("data-resource-id"), evt);
-      });
-    });
-
+    /* Reserve / detail are plain links to prenota.html (inline Planyo). */
     bindPhotoFallbacks(el);
   }
 
