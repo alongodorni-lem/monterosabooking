@@ -5,7 +5,7 @@
   var SITE_ID = 70864;
   /* Hard TTL in localStorage. Force refresh after Planyo admin changes: bump
      CACHE_KEY (e.g. v14), or clear localStorage key mem_esperienze_list_*. */
-  var CACHE_KEY_BASE = "mem_esperienze_list_v13";
+  var CACHE_KEY_BASE = "mem_esperienze_list_v14";
   var CACHE_MS = 24 * 60 * 60 * 1000;
   var EVENT_TIMES_CONCURRENCY = 6;
   var MAX_DATE_LABELS = 5;
@@ -19,9 +19,16 @@
     "253398": true /* Casa Museo Walser */,
     "252705": true /* Miniera d'Oro della Guia */,
   };
-  /* Booking deadline notice under available dates (id + name match). */
-  var DEADLINE_RESOURCE_IDS = {
-    "253421": true /* La via del pane */,
+  /* Booking deadline notice under available dates (id → i18n key). */
+  var DEADLINE_NOTICES = {
+    "253421": {
+      key: "viaDelPaneDeadline",
+      fallback: "Prenotazioni entro il 17 agosto",
+    },
+    "253656": {
+      key: "alpigianoDeadline",
+      fallback: "Prenotazione obbligatoria entro il 23 agosto",
+    },
   };
   /* Local fallbacks only when Planyo HTTPS photo fails (onerror). Prefer API. */
   var PHOTO_FALLBACKS = {
@@ -210,21 +217,33 @@
     return false;
   }
 
-  function hasBookingDeadline(resourceId, name) {
-    if (DEADLINE_RESOURCE_IDS[String(resourceId)]) return true;
+  function deadlineNoticeFor(resourceId, name) {
+    var id = String(resourceId || "");
+    if (DEADLINE_NOTICES[id]) return DEADLINE_NOTICES[id];
     var n = String(name || "")
       .toLowerCase()
       .replace(/\s+/g, " ");
-    return n.indexOf("via del pane") >= 0;
+    if (n.indexOf("via del pane") >= 0) return DEADLINE_NOTICES["253421"];
+    if (
+      n.indexOf("alpigiano") >= 0 ||
+      n.indexOf("alpagiste") >= 0 ||
+      n.indexOf("alpine farmer") >= 0 ||
+      n.indexOf("älpler") >= 0 ||
+      n.indexOf("alpler") >= 0
+    ) {
+      return DEADLINE_NOTICES["253656"];
+    }
+    return null;
   }
 
   function deadlineNoticeHtml(item) {
-    if (!item || !hasBookingDeadline(item.resourceId, item.name)) return "";
+    if (!item) return "";
+    var cfg = deadlineNoticeFor(item.resourceId, item.name);
+    if (!cfg) return "";
     var L = ui();
+    var text = (L && L[cfg.key]) || cfg.fallback;
     return (
-      '<p class="esperienze-card__deadline">' +
-      escapeHtml(L.viaDelPaneDeadline || "Prenotazioni entro il 17 agosto") +
-      "</p>"
+      '<p class="esperienze-card__deadline">' + escapeHtml(text) + "</p>"
     );
   }
 
