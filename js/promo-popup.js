@@ -2,7 +2,7 @@
 (function () {
   "use strict";
 
-  var STORAGE_KEY_DEFAULT = "mb_promo_popup_aug8_20_26";
+  var STORAGE_KEY_DEFAULT = "mb_promo_popup_aug_tutto_30_26";
   var DELAY_MS = 3000;
   var script =
     document.currentScript ||
@@ -34,10 +34,10 @@
   }
 
   function build() {
-    var title = cfg("title", "Montagna d’agosto");
+    var title = cfg("title", "Attività per tutto agosto");
     var text = cfg(
       "text",
-      "Tutte le esperienze prenotabili dall’8 al 20 agosto ai piedi del Monte Rosa."
+      "Esperienze in programma da oggi fino al 30 agosto ai piedi del Monte Rosa."
     );
     var cta = cfg("cta", "VEDI ATTIVITÀ");
     var href = cfg("href", "montagna-dagosto-8-20-agosto.html");

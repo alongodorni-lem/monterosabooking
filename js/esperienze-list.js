@@ -66,7 +66,18 @@
     return window.MB_I18N ? window.MB_I18N.t(siteLang()) : {};
   }
 
-  /* Optional date window via #esperienze-list data-date-from/to or MB_ESPERIENZE_RANGE. */
+  /* Optional date window via #esperienze-list data-date-from/to or MB_ESPERIENZE_RANGE.
+     data-date-from="today" (or empty when data-date-to is set) resolves to Europe/Rome today. */
+  function resolveRangeBound(token, allowTodayFallback) {
+    var raw = String(token || "").trim();
+    var lower = raw.toLowerCase();
+    if (!raw || lower === "today") {
+      return allowTodayFallback ? romeYmd(0) : "";
+    }
+    if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) return raw;
+    return "";
+  }
+
   function getDateRange() {
     var from = "";
     var to = "";
@@ -80,6 +91,9 @@
       if (!from) from = String(el.getAttribute("data-date-from") || "").trim();
       if (!to) to = String(el.getAttribute("data-date-to") || "").trim();
     }
+    to = resolveRangeBound(to, false);
+    /* Dynamic start: "today", or missing from when an end date is set. */
+    from = resolveRangeBound(from, !!to);
     if (
       /^\d{4}-\d{2}-\d{2}$/.test(from) &&
       /^\d{4}-\d{2}-\d{2}$/.test(to) &&
