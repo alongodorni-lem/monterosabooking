@@ -5,7 +5,7 @@
   var SITE_ID = 70864;
   /* Hard TTL in localStorage. Force refresh after Planyo admin changes: bump
      CACHE_KEY (e.g. v14), or clear localStorage key mem_esperienze_list_*. */
-  var CACHE_KEY_BASE = "mem_esperienze_list_v19";
+  var CACHE_KEY_BASE = "mem_esperienze_list_v20";
   /* Bust /api/img + browser cache when Planyo replaces a photo at the same URL. */
   var PHOTO_CACHE_BUST = "18";
   var CACHE_MS = 24 * 60 * 60 * 1000;
@@ -121,7 +121,7 @@
         .replace(/\{from\}/g, fromLbl)
         .replace(/\{to\}/g, toLbl);
     }
-    return "Disponibile dal " + fromLbl + " al " + toLbl;
+    return "Available from " + fromLbl + " to " + toLbl;
   }
 
   function filterDaysByRange(days, range, todayYmd) {
@@ -805,7 +805,7 @@
       description: resourceDescription(r),
       photo: photo,
       sortKey: "9999-12-30",
-      dateLabels: [L.datesLoading || "Caricamento date…"],
+      dateLabels: [L.datesLoading || "Loading dates…"],
       upcoming: true,
       specialAugust: false,
       datesPending: true,
@@ -816,7 +816,7 @@
     var L = ui();
     if (!days || !days.length) {
       item.sortKey = "9999-12-31";
-      item.dateLabels = [L.soon || "Prossimamente"];
+      item.dateLabels = [L.soon || "Coming soon"];
       item.upcoming = false;
     } else {
       item.sortKey = days[0];
@@ -843,7 +843,7 @@
       (item.datesPending ? " esperienze-card__dates--loading" : "");
     datesEl.innerHTML =
       '<span class="esperienze-card__dates-label">' +
-      (L.nextDates || "Prossime date:") +
+      (L.nextDates || "Upcoming dates:") +
       "</span> " +
       escapeHtml(item.dateLabels.join(" · "));
     syncDeadlineNotice(card, item);
@@ -881,7 +881,7 @@
     var L = ui();
     el.innerHTML =
       '<p class="esperienze-list__status">' +
-      (L.listLoading || "Caricamento esperienze…") +
+      (L.listLoading || "Loading experiences…") +
       "</p>";
   }
 
@@ -903,7 +903,7 @@
       '<a class="btn btn--outline" href="' +
       escapeHtml(fallback) +
       '">' +
-      (L.listOpenFallback || "Apri elenco prenotazioni") +
+      (L.listOpenFallback || "Open booking list") +
       "</a>" +
       "</div></div>";
     var btn = el.querySelector("[data-esperienze-retry]");
@@ -963,7 +963,7 @@
       '<p class="' +
       datesClass +
       '"><span class="esperienze-card__dates-label">' +
-      (L.nextDates || "Prossime date:") +
+      (L.nextDates || "Upcoming dates:") +
       "</span> " +
       escapeHtml(item.dateLabels.join(" · ")) +
       "</p>" +
@@ -984,7 +984,7 @@
       '" data-resource-id="' +
       escapeHtml(item.resourceId) +
       '" data-action="reserve">' +
-      (L.bookNow || "Effettua prenotazione") +
+      (L.bookNow || "Book now") +
       "</a>";
 
     return (
@@ -1113,8 +1113,8 @@
       var emptyMsg = getDateRange()
         ? L.listEmptyRange ||
           L.listEmpty ||
-          "Nessuna esperienza prenotabile in queste date."
-        : L.listEmpty || "Nessuna esperienza disponibile al momento.";
+          "No bookable experiences in these dates."
+        : L.listEmpty || "No experiences available at the moment.";
       el.innerHTML =
         '<p class="esperienze-list__status">' + emptyMsg + "</p>";
       return;
