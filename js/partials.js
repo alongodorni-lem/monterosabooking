@@ -573,7 +573,7 @@
         /* missing config: bar stays hidden */
       })
       .then(function () {
-        return loadScript(p + "js/availability-bar.js?v=14");
+        return loadScript(p + "js/availability-bar.js?v=15");
       })
       .catch(function () {
         /* quiet fail */
