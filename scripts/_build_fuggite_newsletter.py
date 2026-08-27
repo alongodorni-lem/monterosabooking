@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Build Mailchimp HTML + plain-text + ZIP for 9–30 agosto 2026 newsletter."""
+"""Build Mailchimp HTML + plain-text + ZIP for 9–30 agosto 2026 newsletter.
+
+For the LEM/Grotta «codice personalizzato» footer (logo + CTA), use
+scripts/_mailchimp_footer.py — see .cursor/rules/mailchimp-newsletter-footer.mdc.
+"""
 from __future__ import annotations
 
 import html

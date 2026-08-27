@@ -1,0 +1,24 @@
+---
+description: Standard Mailchimp newsletter footer links and copy for Macugnaga Booking / Grotta
+globs: assets/mailchimp/**,scripts/*newsletter*,scripts/_mailchimp*
+alwaysApply: false
+---
+
+# Mailchimp newsletter footer (standard)
+
+When building or editing Mailchimp newsletters, use the shared module `scripts/_mailchimp_footer.py` (`footer_lem_block()`).
+
+## Required links
+
+- **LEM logo** → `https://raccontidigitali.it/chi-siamo.html`  
+  Wrap the logo `<img>` in `<a … target="_blank" rel="noopener noreferrer">`.
+- **CTA text** «Scopri i nostri eventi per tutta la famiglia» → `https://www.grottadibabbonatale.it/`  
+  Do **not** reuse the old copy «Clicca qui per conoscerci meglio» or the old `/organizzazione-eventi-per-famiglie` URL for this CTA.
+
+## Keep as-is (unless asked)
+
+- Credit line: Grotta di Babbo Natale / Lem s.r.l. Verbania
+- Dark bar with link to `https://www.raccontidigitali.it/`
+- Segreteria: `info@grottadibabbonatale.it`, phone `0323 497349`, hours **lun–ven 8:30–12:30**
+- No «ferie» / closed-for-holidays line unless explicitly requested
+- Mailchimp merge tags `*|UNSUB|*` and `*|HTML:LIST_ADDRESS_HTML|*`
