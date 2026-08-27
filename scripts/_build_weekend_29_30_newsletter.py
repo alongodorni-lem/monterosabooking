@@ -18,8 +18,10 @@ OUT_ZIP = MAIL / f"{BASENAME}.zip"
 
 SITE = "https://www.macugnagabooking.it"
 HOSPITALITY_URL = "https://macugnaga-monterosa.it/contenuti/306635/dove-dormire"
+GROTTA_PROMO_URL = "https://www.grottadibabbonatale.it/"
 FOLLETTI_PHOTO = f"{SITE}/assets/web/folletti-museo-walser-collage.jpg"
 HOSP_PHOTO = f"{SITE}/assets/web/ossola-macugnaga-800.jpg"
+GROTTA_PROMO_BANNER = f"{SITE}/assets/web/banner-grotta-villaggio-zucche-promo.jpg"
 GROTTA_LOGO = f"{SITE}/assets/web/logo-grotta-babbo-natale.png?v=2"
 LEM_LOGO = f"{SITE}/assets/web/logo-lem-eventi.png"
 FEATURED_ID = "252697"
@@ -257,6 +259,15 @@ def build_html(items: list[dict]) -> str:
             </td>
           </tr>
 
+          <!-- Promo: Villaggio delle Zucche + Grotta di Babbo Natale -->
+          <tr>
+            <td bgcolor="#ffffff" style="background:#ffffff;padding:0 0 8px 0;">
+              <a href="{GROTTA_PROMO_URL}" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+                <img src="{GROTTA_PROMO_BANNER}" width="600" alt="Prenotazioni aperte con super promo: Villaggio delle Zucche e Grotta di Babbo Natale" style="display:block;width:100%;max-width:600px;height:auto;border:0;" />
+              </a>
+            </td>
+          </tr>
+
           <!-- Footer LEM / Grotta -->
           <tr>
             <td bgcolor="#ffffff" style="background:#ffffff;padding:24px 20px 16px 20px;border-top:1px solid #e8e8e8;">
@@ -332,6 +343,8 @@ def main() -> None:
                 "count": len(items),
                 "featured": FEATURED_ID,
                 "hospitality": HOSPITALITY_URL,
+                "promo_banner": GROTTA_PROMO_BANNER,
+                "promo_link": GROTTA_PROMO_URL,
             },
             ensure_ascii=False,
             indent=2,
