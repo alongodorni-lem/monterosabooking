@@ -18,7 +18,6 @@ OUT_ZIP = MAIL / f"{BASENAME}.zip"
 
 SITE = "https://www.macugnagabooking.it"
 HOSPITALITY_URL = "https://macugnaga-monterosa.it/contenuti/306635/dove-dormire"
-HERO = f"{SITE}/assets/web/landing-agosto-aria-fresca-800.jpg"
 FOLLETTI_PHOTO = f"{SITE}/assets/web/folletti-museo-walser-collage.jpg"
 HOSP_PHOTO = f"{SITE}/assets/web/ossola-macugnaga-800.jpg"
 GROTTA_LOGO = f"{SITE}/assets/web/logo-grotta-babbo-natale.png?v=2"
@@ -136,13 +135,6 @@ def build_html(items: list[dict]) -> str:
               <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.4;color:#ffffff;font-weight:bold;text-align:center;">
                 Weekend a Macugnaga · 29–30 agosto 2026
               </p>
-            </td>
-          </tr>
-          <tr>
-            <td bgcolor="#ffffff" style="background:#ffffff;padding:0;">
-              <a href="{SITE}/esperienze.html" target="_blank" style="text-decoration:none;">
-                <img src="{HERO}" width="600" alt="Macugnaga ai piedi del Monte Rosa" style="display:block;width:100%;max-width:600px;height:auto;border:0;" />
-              </a>
             </td>
           </tr>
 
