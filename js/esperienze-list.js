@@ -5,9 +5,9 @@
   var SITE_ID = 70864;
   /* Hard TTL in localStorage. Force refresh after Planyo admin changes: bump
      CACHE_KEY (e.g. v14), or clear localStorage key mem_esperienze_list_*. */
-  var CACHE_KEY_BASE = "mem_esperienze_list_v22";
+  var CACHE_KEY_BASE = "mem_esperienze_list_v23";
   /* Bust /api/img + browser cache when Planyo replaces a photo at the same URL. */
-  var PHOTO_CACHE_BUST = "20";
+  var PHOTO_CACHE_BUST = "21";
   var CACHE_MS = 24 * 60 * 60 * 1000;
   var EVENT_TIMES_CONCURRENCY = 6;
   var MAX_DATE_LABELS = 5;
@@ -48,6 +48,8 @@
     "253421": "assets/web/casa-museo-pane.jpg",
     "253658": "assets/web/funivia-belvedere.jpg",
     "253679": "assets/web/funivia-alpe-bill.jpg",
+    "254066": "assets/web/favole-walser-quota.jpg",
+    "254067": "assets/web/camminata-lanternit.jpg",
   };
 
   function siteLang() {
