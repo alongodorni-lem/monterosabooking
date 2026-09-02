@@ -778,6 +778,70 @@ def list_row(rid: str, title: str, date_label: str) -> str:
                       </tr>"""
 
 
+def highlight_title(text: str) -> str:
+    return f"""          <tr>
+            <td bgcolor="#ffffff" style="background:#ffffff;padding:20px 24px 0 24px;">
+              <p style="margin:0;font-family:Georgia,'Times New Roman',serif;font-size:20px;line-height:1.4;color:{GREEN_DARK};font-weight:bold;text-align:left;">
+                {esc(text)}
+              </p>
+            </td>
+          </tr>"""
+
+
+def villaggio_zucche_block() -> str:
+    href = GROTTA_HOME_URL
+    huntrix = f"{SITE}/assets/web/villaggio-zucche-huntrix.jpg"
+    mercoledi = f"{SITE}/assets/web/villaggio-zucche-mercoledi.jpg"
+    title = (
+        "Prenota il biglietto anteprima per il nostro Villaggio delle Zucche al Parco Le Cicogne "
+        "di Buronzo (Novara) - Per te l'accesso alla nuova esperienza prima degli spettacoli: "
+        "prova le coreografie come le Huntrix e Mercoledì"
+    )
+    return f"""          <!-- Promo: Villaggio delle Zucche anteprima -->
+          <tr>
+            <td bgcolor="#ffffff" style="background:#ffffff;padding:8px 0 8px 0;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#ffffff;border:1px solid #e2e6de;border-radius:6px;">
+                <tr>
+                  <td style="padding:0;">
+                    <a href="{href}" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                          <td width="50%" valign="top" style="width:50%;padding:0;">
+                            <img src="{huntrix}" width="300" alt="Prova le coreografie come le Huntrix — Villaggio delle Zucche" style="display:block;width:100%;max-width:300px;height:auto;border:0;border-radius:6px 0 0 0;" />
+                          </td>
+                          <td width="50%" valign="top" style="width:50%;padding:0;">
+                            <img src="{mercoledi}" width="300" alt="Prova le coreografie come Mercoledì — Villaggio delle Zucche" style="display:block;width:100%;max-width:300px;height:auto;border:0;border-radius:0 6px 0 0;" />
+                          </td>
+                        </tr>
+                      </table>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:18px 24px 10px 24px;">
+                    <p style="margin:0;font-family:Georgia,'Times New Roman',serif;font-size:18px;line-height:1.4;color:{GREEN_DARK};font-weight:bold;text-align:left;">
+                      {esc(title)}
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:0 24px 22px 24px;" align="left">
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td bgcolor="{GREEN}" style="border-radius:4px;">
+                          <a href="{href}" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:12px 22px;font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:bold;color:#ffffff;text-decoration:none;border-radius:4px;background:{GREEN};">
+                            Scopri e prenota
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>"""
+
+
 def build_newsletter() -> str:
     landing = abs_url("it")
     oro = featured_block(
@@ -804,10 +868,28 @@ def build_newsletter() -> str:
         photo=f"{SITE}/assets/web/favole-walser-quota.jpg",
         photo_alt="Favole Walser in quota, con funivia e merenda",
     )
+    lanternit_intro = highlight_title(
+        "E dopo le esperienze in giornata vivi un'emozione unica: la Camminata dei Lanternit"
+    )
+    lanternit = featured_block(
+        rid="254067",
+        title="Camminata dei Lanternit",
+        date_label="Sabato 5 settembre · ore 19:00",
+        price_label="€ 40 a persona",
+        desc=(
+            "Passeggiata serale con i tradizionali lanternit tra natura, storie e sapori locali: "
+            "partenza dall’Azienda Agricola Salvavegia, tappe suggestive e degustazione finale — "
+            "un’esperienza per tutta la famiglia."
+        ),
+        photo=f"{SITE}/assets/web/camminata-lanternit.jpg",
+        photo_alt="Camminata dei Lanternit",
+    )
     others = "\n".join(
         [
             list_row("252697", "Piccoli Folletti al Museo Walser", "Sabato 5 settembre"),
-            list_row("254067", "Camminata dei Lanternit", "Sabato 5 settembre"),
+            list_row("252705", "Miniera d’Oro della Guia", "Weekend 5–6 settembre"),
+            list_row("253679", "Funivia Staffa–Alpe Bill", "Sabato–domenica 5–6 settembre"),
+            list_row("253658", "Seggiovia Pecetto–Belvedere", "Sabato–domenica 5–6 settembre"),
         ]
     )
     intro = (
@@ -815,8 +897,8 @@ def build_newsletter() -> str:
         "Per una giornata, un weekend o per l’ultima vacanza prima della riapertura delle scuole."
     )
     preview = (
-        "Prima del ritorno a scuola: ricerca dell’oro, Favole Walser e weekend 5–6 settembre a Macugnaga. "
-        "Prenota con Grotta di Babbo Natale."
+        "Prima del ritorno a scuola: ricerca dell’oro, Favole Walser, Camminata dei Lanternit "
+        "e weekend 5–6 settembre a Macugnaga. Prenota con Grotta di Babbo Natale."
     )
     return f"""<!DOCTYPE html>
 <html lang="it" xmlns="http://www.w3.org/1999/xhtml">
@@ -874,6 +956,10 @@ def build_newsletter() -> str:
 
 {favole}
 
+{lanternit_intro}
+
+{lanternit}
+
           <!-- Other weekend 5–6 settembre titles -->
           <tr>
             <td bgcolor="#ffffff" style="background:#ffffff;padding:20px 24px 8px 24px;">
@@ -881,7 +967,7 @@ def build_newsletter() -> str:
                 Anche questo weekend (5–6 settembre)
               </p>
               <p style="margin:0 0 16px 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.55;color:#333333;text-align:left;">
-                Altre esperienze in programma per sabato 5 settembre (disponibilità verificata su Planyo). Domenica 6 settembre: aria di montagna, paese e impianti — scegli e prenota online.
+                Altre esperienze in programma per il weekend: sabato 5 settembre e domenica 6 settembre — aria di montagna, paese e impianti. Scegli e prenota online.
               </p>
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
 {others}
@@ -904,14 +990,7 @@ def build_newsletter() -> str:
             </td>
           </tr>
 
-          <!-- Promo: Villaggio delle Zucche + Grotta di Babbo Natale -->
-          <tr>
-            <td bgcolor="#ffffff" style="background:#ffffff;padding:0 0 8px 0;">
-              <a href="{GROTTA_HOME_URL}" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
-                <img src="{SITE}/assets/web/banner-grotta-villaggio-zucche-promo.jpg" width="600" alt="Prenotazioni aperte con super promo: Villaggio delle Zucche e Grotta di Babbo Natale" style="display:block;width:100%;max-width:600px;height:auto;border:0;" />
-              </a>
-            </td>
-          </tr>
+{villaggio_zucche_block()}
 
 {footer_lem_block(green=GREEN)}
 
