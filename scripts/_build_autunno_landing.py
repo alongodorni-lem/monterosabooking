@@ -14,7 +14,7 @@ CSS_V = "25"
 I18N_V = "13"
 PARTIALS_V = "24"
 MAIN_V = "3"
-LIST_V = "24"
+LIST_V = "25"
 
 NAV = {
     "it": [
