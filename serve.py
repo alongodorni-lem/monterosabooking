@@ -121,6 +121,12 @@ PRENOTA_PATHS = {
     "/fr/prenota.html",
     "/de/prenota.html",
 }
+RETIRED_PAGE_REDIRECTS = {
+    "/vivi-la-montagna-prima-del-ritorno-a-scuola.html": "/esperienze.html",
+    "/en/vivi-la-montagna-prima-del-ritorno-a-scuola.html": "/en/esperienze.html",
+    "/fr/vivi-la-montagna-prima-del-ritorno-a-scuola.html": "/fr/esperienze.html",
+    "/de/vivi-la-montagna-prima-del-ritorno-a-scuola.html": "/de/esperienze.html",
+}
 DESC_MAX_CHARS = 220
 
 _cache_lock = threading.Lock()
@@ -501,6 +507,22 @@ class Handler(SimpleHTTPRequestHandler):
                 self.send_header("Cache-Control", HTML_CACHE_CONTROL)
         super().end_headers()
 
+    def _redirect_retired(self, path: str) -> bool:
+        dest = RETIRED_PAGE_REDIRECTS.get(path)
+        if not dest:
+            return False
+        self.send_response(301)
+        self.send_header("Location", dest)
+        self.end_headers()
+        return True
+
+    def do_HEAD(self):  # noqa: N802
+        parsed = urllib.parse.urlparse(self.path)
+        path = urllib.parse.unquote(parsed.path or "/")
+        if self._redirect_retired(path):
+            return
+        super().do_HEAD()
+
     def do_GET(self):  # noqa: N802
         parsed = urllib.parse.urlparse(self.path)
         path = urllib.parse.unquote(parsed.path or "/")
@@ -513,6 +535,8 @@ class Handler(SimpleHTTPRequestHandler):
             return
         if parsed.path in ("/api/img", "/api/img/"):
             self.proxy_image(parsed.query)
+            return
+        if self._redirect_retired(path):
             return
         if path in PRENOTA_PATHS:
             qs = urllib.parse.parse_qs(parsed.query, keep_blank_values=True)

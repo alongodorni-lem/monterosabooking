@@ -5,7 +5,7 @@
   var SITE_ID = 70864;
   /* Hard TTL in localStorage. Force refresh after Planyo admin changes: bump
      CACHE_KEY (e.g. v14), or clear localStorage key mem_esperienze_list_*. */
-  var CACHE_KEY_BASE = "mem_esperienze_list_v23";
+  var CACHE_KEY_BASE = "mem_esperienze_list_v24";
   /* Bust /api/img + browser cache when Planyo replaces a photo at the same URL. */
   var PHOTO_CACHE_BUST = "21";
   var CACHE_MS = 24 * 60 * 60 * 1000;
@@ -601,18 +601,55 @@
     return truncateText(stripHtml(raw), DESC_MAX);
   }
 
+  function horizonYmd(range) {
+    if (range && range.to) return range.to;
+    return romeYmd(180);
+  }
+
   /* Accept YYYY-MM-DD, DD.MM.YYYY, DD-MM-YYYY (Planyo event_times / event_dates). */
   function ymdFromDayToken(token) {
-    var part = String(token || "")
-      .trim()
-      .split(/\s+/)[0];
-    if (!part) return null;
-    if (/^\d{4}-\d{2}-\d{2}$/.test(part)) return part;
-    var m = part.match(/^(\d{1,2})[.\-/](\d{1,2})[.\-/](\d{4})$/);
-    if (!m) return null;
-    var day = m[1].length === 1 ? "0" + m[1] : m[1];
-    var month = m[2].length === 1 ? "0" + m[2] : m[2];
-    return m[3] + "-" + month + "-" + day;
+    var raw = String(token || "").trim();
+    if (!raw) return null;
+    var iso = raw.match(/(\d{4})-(\d{2})-(\d{2})/);
+    if (iso) return iso[1] + "-" + iso[2] + "-" + iso[3];
+    var dmy = raw.match(/(\d{1,2})[.\-/](\d{1,2})[.\-/](\d{4})/);
+    if (dmy) {
+      var day = dmy[1].length === 1 ? "0" + dmy[1] : dmy[1];
+      var month = dmy[2].length === 1 ? "0" + dmy[2] : dmy[2];
+      return dmy[3] + "-" + month + "-" + day;
+    }
+    var months = {
+      gennaio: "01",
+      january: "01",
+      febbraio: "02",
+      february: "02",
+      marzo: "03",
+      march: "03",
+      aprile: "04",
+      april: "04",
+      maggio: "05",
+      may: "05",
+      giugno: "06",
+      june: "06",
+      luglio: "07",
+      july: "07",
+      agosto: "08",
+      august: "08",
+      settembre: "09",
+      september: "09",
+      ottobre: "10",
+      october: "10",
+      novembre: "11",
+      november: "11",
+      dicembre: "12",
+      december: "12",
+    };
+    var named = raw.toLowerCase().match(/(\d{1,2})\s+([a-zàèé]+)\s+(\d{4})/i);
+    if (named && months[named[2]]) {
+      var nd = named[1].length === 1 ? "0" + named[1] : named[1];
+      return named[3] + "-" + months[named[2]] + "-" + nd;
+    }
+    return null;
   }
 
   function ymdFromTimestamp(ts) {
@@ -632,18 +669,29 @@
 
   function eventItemYmd(item) {
     if (item == null) return null;
-    if (typeof item === "string") {
-      return ymdFromDayToken(item);
+    if (typeof item === "string" || typeof item === "number") {
+      return ymdFromDayToken(item) || ymdFromTimestamp(item);
     }
     if (typeof item !== "object") return null;
-    if (item.available === 0 || item.available === "0" || item.available === false) {
-      /* still list the day if it's a scheduled event slot */
-    }
-    var fromTs = ymdFromTimestamp(item.timestamp);
+    var fromTs = ymdFromTimestamp(
+      item.timestamp || item.start_timestamp || item.unix_timestamp
+    );
     if (fromTs) return fromTs;
-    var text = String(item.text || item.start_time || item.date || "").trim();
-    if (!text) return null;
-    return ymdFromDayToken(text);
+    var keys = [
+      "date",
+      "start_date",
+      "event_date",
+      "day",
+      "text",
+      "start_time",
+      "unit",
+    ];
+    var i;
+    for (i = 0; i < keys.length; i++) {
+      var ymd = ymdFromDayToken(item[keys[i]]);
+      if (ymd) return ymd;
+    }
+    return null;
   }
 
   /* get_resource_info.event_dates: "01-08-2026 8:30am, 01-08-2026 6pm, ..." */
@@ -713,11 +761,13 @@
     });
   }
 
-  function getEventTimes(apiKey, resourceId) {
+  function getEventTimes(apiKey, resourceId, todayYmd, range) {
     return apiCall({
       method: "get_event_times",
       api_key: apiKey,
       resource_id: resourceId,
+      start_date: todayYmd,
+      end_date: horizonYmd(range),
       future_only: "true",
       format: "array",
       language: planyoLangCode(),
@@ -742,18 +792,57 @@
       .then(function (json) {
         if (!json || Number(json.response_code) !== 0) return [];
         var data = json.data || {};
-        return daysFromEventDatesString(data.event_dates, todayYmd, range);
+        var props = data.properties || {};
+        return mergeYmdLists(
+          daysFromEventDatesString(data.event_dates, todayYmd, range),
+          daysFromEventDatesString(data.specified_dates, todayYmd, range),
+          daysFromEventDatesString(props.event_dates, todayYmd, range),
+          daysFromEventDatesString(props.specified_dates, todayYmd, range)
+        );
       })
       .catch(function () {
         return [];
       });
   }
 
-  function loadUpcomingDays(apiKey, resourceId, todayYmd, range) {
-    return getEventTimes(apiKey, resourceId).then(function (times) {
-      var days = uniqueUpcomingDays(times, todayYmd, range);
-      if (days.length) return days;
-      return getResourceEventDateDays(apiKey, resourceId, todayYmd, range);
+  function mergeYmdLists() {
+    var seen = {};
+    var out = [];
+    Array.prototype.forEach.call(arguments, function (arr) {
+      (arr || []).forEach(function (ymd) {
+        if (!ymd || seen[ymd]) return;
+        seen[ymd] = true;
+        out.push(ymd);
+      });
+    });
+    out.sort();
+    return out;
+  }
+
+  function daysFromResourcePayload(resource, todayYmd, range) {
+    if (!resource) return [];
+    var raw =
+      resource.event_dates ||
+      resource.specified_dates ||
+      (resource.properties &&
+        (resource.properties.event_dates || resource.properties.specified_dates)) ||
+      "";
+    return daysFromEventDatesString(raw, todayYmd, range);
+  }
+
+  function loadUpcomingDays(apiKey, resourceId, todayYmd, range, seedDays) {
+    return Promise.all([
+      getEventTimes(apiKey, resourceId, todayYmd, range),
+      getResourceEventDateDays(apiKey, resourceId, todayYmd, range),
+    ]).then(function (parts) {
+      var days = mergeYmdLists(
+        seedDays,
+        uniqueUpcomingDays(parts[0], todayYmd, range),
+        parts[1]
+      );
+      days = filterDaysByRange(days, range, todayYmd);
+      var maxLabels = range ? 8 : MAX_DATE_LABELS;
+      return days.slice(0, maxLabels);
     });
   }
 
@@ -783,6 +872,7 @@
     var L = ui();
 
     var photo = firstPhotoUrl(r, id);
+    var seedDays = daysFromResourcePayload(r, today, range);
     var special =
       (augustMode || !!range) && isSpecialResource(id, name);
     if (special) {
@@ -798,10 +888,11 @@
         upcoming: true,
         specialAugust: true,
         datesPending: false,
+        seedDays: seedDays,
       };
     }
 
-    return {
+    var item = {
       resourceId: id,
       name: name,
       description: resourceDescription(r),
@@ -811,7 +902,13 @@
       upcoming: true,
       specialAugust: false,
       datesPending: true,
+      seedDays: seedDays,
     };
+    if (seedDays.length) {
+      applyUpcomingDays(item, seedDays);
+      item.datesPending = true;
+    }
+    return item;
   }
 
   function applyUpcomingDays(item, days) {
@@ -865,13 +962,17 @@
     if (!pending.length) return Promise.resolve(items);
 
     return mapPool(pending, EVENT_TIMES_CONCURRENCY, function (item) {
-      return loadUpcomingDays(apiKey, item.resourceId, today, range).then(
-        function (days) {
-          applyUpcomingDays(item, days);
-          patchCardDates(item);
-          return item;
-        }
-      );
+      return loadUpcomingDays(
+        apiKey,
+        item.resourceId,
+        today,
+        range,
+        item.seedDays
+      ).then(function (days) {
+        applyUpcomingDays(item, days);
+        patchCardDates(item);
+        return item;
+      });
     }).then(function () {
       return items;
     });
