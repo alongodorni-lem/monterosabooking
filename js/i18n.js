@@ -137,6 +137,8 @@
       soon: "Prossimamente",
       augustLabel: "Tutto Agosto",
       datesLoading: "Caricamento date…",
+      guidaWalserOnRequest:
+        "Su prenotazione al {phone} nel fine settimana con minimo 3 persone.",
       viaDelPaneDeadline: "Prenotazioni entro il 17 agosto",
       alpigianoDeadline: "Prenotazione obbligatoria entro il 23 agosto",
       details: "Dettagli",
@@ -144,6 +146,11 @@
       seeAll: "Vedi tutto",
       availAria: "Prossime disponibilità",
       augustDaily: "Agosto tutti i giorni",
+      concludedTitle: "Esperienze concluse",
+      concludedLead:
+        "Se sei interessato a queste esperienze torna a visitarci la prossima stagione. Se sei un gruppo oppure un operatore {contact}.",
+      concludedSeason: "Stagione conclusa",
+      contactUs: "contattaci",
     },
     en: {
       skip: "Skip to content",
@@ -274,6 +281,8 @@
       soon: "Coming soon",
       augustLabel: "All of August",
       datesLoading: "Loading dates…",
+      guidaWalserOnRequest:
+        "On request at {phone} at weekends, minimum 3 people.",
       viaDelPaneDeadline: "Bookings by 17 August",
       alpigianoDeadline: "Mandatory booking by 23 August",
       details: "Details",
@@ -281,6 +290,11 @@
       seeAll: "See all",
       availAria: "Upcoming availability",
       augustDaily: "August every day",
+      concludedTitle: "Past experiences",
+      concludedLead:
+        "If you are interested in these experiences, come back next season. If you are a group or an operator, {contact}.",
+      concludedSeason: "Season ended",
+      contactUs: "contact us",
     },
     fr: {
       skip: "Aller au contenu",
@@ -415,6 +429,8 @@
       soon: "Bientôt",
       augustLabel: "Tout le mois d’août",
       datesLoading: "Chargement des dates…",
+      guidaWalserOnRequest:
+        "Sur réservation au {phone} le week-end, minimum 3 personnes.",
       viaDelPaneDeadline: "Réservations jusqu’au 17 août",
       alpigianoDeadline: "Réservation obligatoire avant le 23 août",
       details: "Détails",
@@ -422,6 +438,11 @@
       seeAll: "Tout voir",
       availAria: "Prochaines disponibilités",
       augustDaily: "Août tous les jours",
+      concludedTitle: "Expériences terminées",
+      concludedLead:
+        "Si ces expériences vous intéressent, revenez la saison prochaine. Si vous êtes un groupe ou un opérateur, {contact}.",
+      concludedSeason: "Saison terminée",
+      contactUs: "contactez-nous",
     },
     de: {
       skip: "Zum Inhalt springen",
@@ -555,6 +576,8 @@
       soon: "Demnächst",
       augustLabel: "Ganz August",
       datesLoading: "Termine werden geladen…",
+      guidaWalserOnRequest:
+        "Auf Anfrage unter {phone} am Wochenende, mindestens 3 Personen.",
       viaDelPaneDeadline: "Buchungen bis 17. August",
       alpigianoDeadline: "Verbindliche Buchung bis zum 23. August",
       details: "Details",
@@ -562,6 +585,11 @@
       seeAll: "Alle anzeigen",
       availAria: "Nächste Verfügbarkeiten",
       augustDaily: "August täglich",
+      concludedTitle: "Abgeschlossene Erlebnisse",
+      concludedLead:
+        "Wenn Sie an diesen Erlebnissen interessiert sind, kommen Sie in der nächsten Saison wieder. Sind Sie eine Gruppe oder ein Anbieter, {contact}.",
+      concludedSeason: "Saison beendet",
+      contactUs: "kontaktieren Sie uns",
     },
   };
 

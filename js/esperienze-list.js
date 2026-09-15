@@ -5,7 +5,7 @@
   var SITE_ID = 70864;
   /* Hard TTL in localStorage. Force refresh after Planyo admin changes: bump
      CACHE_KEY (e.g. v14), or clear localStorage key mem_esperienze_list_*. */
-  var CACHE_KEY_BASE = "mem_esperienze_list_v25";
+  var CACHE_KEY_BASE = "mem_esperienze_list_v28";
   /* Bust /api/img + browser cache when Planyo replaces a photo at the same URL. */
   var PHOTO_CACHE_BUST = "21";
   var CACHE_MS = 24 * 60 * 60 * 1000;
@@ -19,6 +19,28 @@
   var REST_URL = "https://www.planyo.com/rest/";
   /* Daily lifts pinned first (seggiovia Belvedere, then funivia Alpe Bill). */
   var PINNED_RESOURCE_IDS = ["253658", "253679"];
+  var CONCLUDED_ORDER = [
+    "252703" /* Capolav-ORO */,
+    "253656" /* Alpigiano per un giorno */,
+    "253657" /* Trekking a Villa Aprilia */,
+    "254067" /* Camminata dei Lanternit */,
+    "252702" /* Macugnaga nel ’900 */,
+    "252698" /* Pane, camino e folletti */,
+  ];
+  var CONCLUDED_RESOURCE_IDS = {};
+  CONCLUDED_ORDER.forEach(function (id) {
+    CONCLUDED_RESOURCE_IDS[id] = true;
+  });
+  var CONTACT_MAIL = "macugnagabooking@gmail.com";
+  var COMING_SOON_IDS = {
+    "252699": true /* Trekking del Benessere */,
+    "253421": true /* La via del pane */,
+  };
+  var ON_REQUEST_IDS = {
+    "253477": true /* Passeggiata con guida walser */,
+  };
+  var ON_REQUEST_PHONE = "349 8515207";
+  var ON_REQUEST_TEL = "+393498515207";
   var SPECIAL_RESOURCE_IDS = {
     "253398": true /* Casa Museo Walser */,
     "252705": true /* Miniera d'Oro della Guia */,
@@ -145,7 +167,96 @@
     var key = CACHE_KEY_BASE + "_" + siteLang();
     var range = getDateRange();
     if (range) key += "_" + range.from + "_" + range.to;
+    if (showConcludedBox()) key += "_conc";
     return key;
+  }
+
+  function showConcludedBox() {
+    var el = mountEl();
+    return !!(el && el.getAttribute("data-show-concluded") === "true");
+  }
+
+  function isConcludedResource(resourceId) {
+    return !!CONCLUDED_RESOURCE_IDS[String(resourceId || "")];
+  }
+
+  function isComingSoonResource(resourceId) {
+    return !!COMING_SOON_IDS[String(resourceId || "")];
+  }
+
+  function isOnRequestResource(resourceId) {
+    return !!ON_REQUEST_IDS[String(resourceId || "")];
+  }
+
+  function markOnRequest(item) {
+    var L = ui();
+    if (!item) return item;
+    item.onRequest = true;
+    item.upcoming = false;
+    item.datesPending = false;
+    item.specialAugust = false;
+    item.comingSoon = false;
+    item.sortKey = "9999-12-29";
+    item.dateLabels = [];
+    item.onRequestText =
+      L.guidaWalserOnRequest ||
+      "Su prenotazione al {phone} nel fine settimana con minimo 3 persone.";
+    return item;
+  }
+
+  function onRequestNoticeHtml(item) {
+    if (!item || !item.onRequest) return "";
+    var raw =
+      item.onRequestText ||
+      "Su prenotazione al {phone} nel fine settimana con minimo 3 persone.";
+    var phoneLink =
+      '<a href="tel:' +
+      ON_REQUEST_TEL +
+      '">' +
+      escapeHtml(ON_REQUEST_PHONE) +
+      "</a>";
+    var html =
+      raw.indexOf("{phone}") >= 0
+        ? raw.split("{phone}").map(escapeHtml).join(phoneLink)
+        : escapeHtml(raw);
+    return '<p class="esperienze-card__on-request">' + html + "</p>";
+  }
+
+  function markComingSoon(item) {
+    var L = ui();
+    if (!item) return item;
+    item.comingSoon = true;
+    item.upcoming = false;
+    item.datesPending = false;
+    item.specialAugust = false;
+    item.sortKey = "9999-12-31";
+    item.dateLabels = [L.soon || "Prossimamente"];
+    return item;
+  }
+
+  function concludedRank(resourceId) {
+    var idx = CONCLUDED_ORDER.indexOf(String(resourceId || ""));
+    return idx === -1 ? 999 : idx;
+  }
+
+  function markConcluded(item) {
+    var L = ui();
+    if (!item) return item;
+    item.concluded = true;
+    item.upcoming = false;
+    item.datesPending = false;
+    item.specialAugust = false;
+    item.dateLabels = [L.concludedSeason || "Stagione conclusa"];
+    return item;
+  }
+
+  function sortConcluded(items) {
+    return items.slice().sort(function (a, b) {
+      var ra = concludedRank(a.resourceId);
+      var rb = concludedRank(b.resourceId);
+      if (ra !== rb) return ra - rb;
+      return String(a.name).localeCompare(String(b.name), localeForDates());
+    });
   }
 
   function localeForDates() {
@@ -339,17 +450,24 @@
       var parsed = JSON.parse(raw);
       if (!parsed || !parsed.ts || !Array.isArray(parsed.items)) return null;
       if (Date.now() - parsed.ts > CACHE_MS) return null;
-      return parsed.items;
+      return {
+        items: parsed.items,
+        concluded: Array.isArray(parsed.concluded) ? parsed.concluded : [],
+      };
     } catch (e) {
       return null;
     }
   }
 
-  function writeCache(items) {
+  function writeCache(items, concluded) {
     try {
       localStorage.setItem(
         cacheKey(),
-        JSON.stringify({ ts: Date.now(), items: items })
+        JSON.stringify({
+          ts: Date.now(),
+          items: items,
+          concluded: concluded || [],
+        })
       );
     } catch (e) {
       /* ignore quota */
@@ -805,6 +923,70 @@
       });
   }
 
+  function getResourceInfo(apiKey, resourceId) {
+    return apiCall({
+      method: "get_resource_info",
+      api_key: apiKey,
+      resource_id: resourceId,
+      language: planyoLangCode(),
+    })
+      .then(function (json) {
+        if (!json || Number(json.response_code) !== 0) return null;
+        var data = json.data || null;
+        if (!data) return null;
+        if (!data.id && !data.resource_id) data.id = resourceId;
+        return data;
+      })
+      .catch(function () {
+        return null;
+      });
+  }
+
+  function loadMissingOnRequest(apiKey, existingIds, today, augustMode, range) {
+    var missing = Object.keys(ON_REQUEST_IDS).filter(function (id) {
+      return existingIds.indexOf(id) === -1;
+    });
+    if (!missing.length) return Promise.resolve([]);
+    return mapPool(missing, 3, function (id) {
+      return getResourceInfo(apiKey, id).then(function (r) {
+        if (!r) return null;
+        return markOnRequest(stubFromResource(r, today, augustMode, range));
+      });
+    }).then(function (rows) {
+      return rows.filter(Boolean);
+    });
+  }
+
+  function loadMissingComingSoon(apiKey, existingIds, today, augustMode, range) {
+    var missing = Object.keys(COMING_SOON_IDS).filter(function (id) {
+      return existingIds.indexOf(id) === -1;
+    });
+    if (!missing.length) return Promise.resolve([]);
+    return mapPool(missing, 3, function (id) {
+      return getResourceInfo(apiKey, id).then(function (r) {
+        if (!r) return null;
+        return markComingSoon(stubFromResource(r, today, augustMode, range));
+      });
+    }).then(function (rows) {
+      return rows.filter(Boolean);
+    });
+  }
+
+  function loadMissingConcluded(apiKey, existingIds, today, augustMode, range) {
+    var missing = CONCLUDED_ORDER.filter(function (id) {
+      return existingIds.indexOf(id) === -1;
+    });
+    if (!missing.length) return Promise.resolve([]);
+    return mapPool(missing, 3, function (id) {
+      return getResourceInfo(apiKey, id).then(function (r) {
+        if (!r) return null;
+        return markConcluded(stubFromResource(r, today, augustMode, range));
+      });
+    }).then(function (rows) {
+      return rows.filter(Boolean);
+    });
+  }
+
   function mergeYmdLists() {
     var seen = {};
     var out = [];
@@ -873,6 +1055,15 @@
 
     var photo = firstPhotoUrl(r, id);
     var seedDays = daysFromResourcePayload(r, today, range);
+    if (isOnRequestResource(id)) {
+      return markOnRequest({
+        resourceId: id,
+        name: name,
+        description: resourceDescription(r),
+        photo: photo,
+        seedDays: seedDays,
+      });
+    }
     var special =
       (augustMode || !!range) && isSpecialResource(id, name);
     if (special) {
@@ -904,6 +1095,9 @@
       datesPending: true,
       seedDays: seedDays,
     };
+    if (isComingSoonResource(id)) {
+      return markComingSoon(item);
+    }
     if (seedDays.length) {
       applyUpcomingDays(item, seedDays);
       item.datesPending = true;
@@ -912,6 +1106,9 @@
   }
 
   function applyUpcomingDays(item, days) {
+    if (item && (item.onRequest || isOnRequestResource(item.resourceId))) {
+      return markOnRequest(item);
+    }
     var L = ui();
     if (!days || !days.length) {
       item.sortKey = "9999-12-31";
@@ -934,6 +1131,19 @@
       '.esperienze-card[data-resource-id="' + item.resourceId + '"]'
     );
     if (!card) return;
+    if (item && (item.onRequest || isOnRequestResource(item.resourceId))) {
+      markOnRequest(item);
+      var datesEl = card.querySelector(".esperienze-card__dates");
+      var noticeEl = card.querySelector(".esperienze-card__on-request");
+      var html = onRequestNoticeHtml(item);
+      if (noticeEl) {
+        noticeEl.outerHTML = html;
+      } else if (datesEl) {
+        datesEl.outerHTML = html;
+      }
+      card.classList.remove("esperienze-card--soon");
+      return;
+    }
     var datesEl = card.querySelector(".esperienze-card__dates");
     if (!datesEl) return;
     datesEl.className =
@@ -1060,17 +1270,32 @@
 
     var datesClass =
       "esperienze-card__dates" +
-      (item.upcoming ? "" : " esperienze-card__dates--soon") +
+      (item.concluded
+        ? " esperienze-card__dates--concluded"
+        : item.upcoming
+          ? ""
+          : " esperienze-card__dates--soon") +
       (item.datesPending ? " esperienze-card__dates--loading" : "");
-    var datesHtml =
-      '<p class="' +
-      datesClass +
-      '"><span class="esperienze-card__dates-label">' +
-      (L.nextDates || "Upcoming dates:") +
-      "</span> " +
-      escapeHtml(item.dateLabels.join(" · ")) +
-      "</p>" +
-      deadlineNoticeHtml(item);
+    var datesHtml = item.concluded
+      ? '<p class="' +
+        datesClass +
+        '">' +
+        escapeHtml(
+          (item.dateLabels && item.dateLabels[0]) ||
+            L.concludedSeason ||
+            "Stagione conclusa"
+        ) +
+        "</p>"
+      : item.onRequest
+        ? onRequestNoticeHtml(item)
+        : '<p class="' +
+          datesClass +
+          '"><span class="esperienze-card__dates-label">' +
+          (L.nextDates || "Upcoming dates:") +
+          "</span> " +
+          escapeHtml(item.dateLabels.join(" · ")) +
+          "</p>" +
+          (item.comingSoon ? "" : deadlineNoticeHtml(item));
 
     var detailBtn =
       '<a role="button" class="btn btn--outline" href="' +
@@ -1081,18 +1306,27 @@
       (L.details || "Dettagli") +
       "</a>";
 
-    var bookBtn =
-      '<a role="button" class="btn btn-primary btn--primary" href="' +
-      escapeHtml(reserve) +
-      '" data-resource-id="' +
-      escapeHtml(item.resourceId) +
-      '" data-action="reserve">' +
-      (L.bookNow || "Book now") +
-      "</a>";
+    var bookBtn = item.concluded
+      ? '<a role="button" class="btn btn--primary" href="mailto:' +
+        CONTACT_MAIL +
+        '">' +
+        (L.contactUs || "Contattaci") +
+        "</a>"
+      : '<a role="button" class="btn btn-primary btn--primary" href="' +
+        escapeHtml(reserve) +
+        '" data-resource-id="' +
+        escapeHtml(item.resourceId) +
+        '" data-action="reserve">' +
+        (L.bookNow || "Book now") +
+        "</a>";
 
     return (
       '<article class="esperienze-card' +
-      (item.upcoming ? "" : " esperienze-card--soon") +
+      (item.concluded
+        ? " esperienze-card--concluded"
+        : item.upcoming || item.onRequest
+          ? ""
+          : " esperienze-card--soon") +
       '" data-resource-id="' +
       escapeHtml(item.resourceId) +
       '">' +
@@ -1207,12 +1441,49 @@
     });
   }
 
-  function render(items, withImages) {
+  function renderGrid(items, showImages, startIndex) {
+    var offset = typeof startIndex === "number" ? startIndex : 0;
+    return (
+      '<div class="esperienze-list__grid" role="list">' +
+      items
+        .map(function (item, index) {
+          return (
+            '<div role="listitem">' +
+            renderItem(item, offset + index, showImages) +
+            "</div>"
+          );
+        })
+        .join("") +
+      "</div>"
+    );
+  }
+
+  function concludedLeadHtml() {
+    var L = ui();
+    var raw =
+      L.concludedLead ||
+      "Se sei interessato a queste esperienze torna a visitarci la prossima stagione. Se sei un gruppo oppure un operatore {contact}.";
+    var label = L.contactUs || "contattaci";
+    var link =
+      '<a href="mailto:' + CONTACT_MAIL + '">' + escapeHtml(label) + "</a>";
+    if (raw.indexOf("{contact}") >= 0) {
+      return raw.split("{contact}").map(escapeHtml).join(link);
+    }
+    return escapeHtml(raw) + " " + link;
+  }
+
+  function render(items, withImages, concluded) {
     var el = mountEl();
     if (!el) return;
     var L = ui();
     var showImages = withImages === true;
-    if (!items || !items.length) {
+    var active = (items || []).map(function (item) {
+      return isOnRequestResource(item && item.resourceId)
+        ? markOnRequest(item)
+        : item;
+    });
+    var closed = concluded || [];
+    if (!active.length && !closed.length) {
       var emptyMsg = getDateRange()
         ? L.listEmptyRange ||
           L.listEmpty ||
@@ -1222,21 +1493,26 @@
         '<p class="esperienze-list__status">' + emptyMsg + "</p>";
       return;
     }
-    el.innerHTML =
-      '<div class="esperienze-list__grid" role="list">' +
-      items
-        .map(function (item, index) {
-          return (
-            '<div role="listitem">' +
-            renderItem(item, index, showImages) +
-            "</div>"
-          );
-        })
-        .join("") +
-      "</div>";
+    var html = "";
+    if (active.length) {
+      html += renderGrid(active, showImages, 0);
+    }
+    if (closed.length) {
+      html +=
+        '<section class="esperienze-concluded" aria-labelledby="esperienze-concluded-title">' +
+        '<h2 id="esperienze-concluded-title" class="esperienze-concluded__title">' +
+        escapeHtml(L.concludedTitle || "Esperienze concluse") +
+        "</h2>" +
+        '<p class="esperienze-concluded__lead">' +
+        concludedLeadHtml() +
+        "</p>" +
+        renderGrid(closed, showImages, active.length) +
+        "</section>";
+    }
+    el.innerHTML = html;
 
-    items.forEach(function (item) {
-      if (!item) return;
+    active.concat(closed).forEach(function (item) {
+      if (!item || item.concluded) return;
       var card = el.querySelector(
         '.esperienze-card[data-resource-id="' + item.resourceId + '"]'
       );
@@ -1315,47 +1591,107 @@
 
     return listWithFallback().then(function (resources) {
       var range = getDateRange();
+      var wantConcluded = showConcludedBox();
       var stubs = resources
         .map(function (r) {
           return stubFromResource(r, today, augustMode, range);
         })
-        .filter(Boolean)
-        .sort(function (a, b) {
-          var pa = pinRank(a.resourceId);
-          var pb = pinRank(b.resourceId);
-          if (pa !== pb) return pa - pb;
-          return String(a.name).localeCompare(String(b.name), loc);
+        .filter(Boolean);
+
+      var concluded = [];
+      var activeStubs = stubs.filter(function (item) {
+        if (wantConcluded && isConcludedResource(item.resourceId)) {
+          concluded.push(markConcluded(item));
+          return false;
+        }
+        return true;
+      });
+
+      activeStubs.sort(function (a, b) {
+        var pa = pinRank(a.resourceId);
+        var pb = pinRank(b.resourceId);
+        if (pa !== pb) return pa - pb;
+        return String(a.name).localeCompare(String(b.name), loc);
+      });
+
+      function finish(activeItems, concludedItems) {
+        var kept = activeItems.map(function (item) {
+          return isOnRequestResource(item && item.resourceId)
+            ? markOnRequest(item)
+            : item;
         });
+        if (range) {
+          kept = kept.filter(function (item) {
+            return (
+              item &&
+              (item.specialAugust ||
+                item.upcoming ||
+                item.comingSoon ||
+                item.onRequest)
+            );
+          });
+        }
+        var sorted = sortItems(kept).map(serializeCard);
+        var closed = sortConcluded(concludedItems).map(serializeCard);
+        writeCache(sorted, closed);
+        render(sorted, false, closed);
+      }
+
+      function serializeCard(item) {
+        return {
+          resourceId: item.resourceId,
+          name: item.name,
+          description: item.description,
+          photo: item.photo,
+          sortKey: item.sortKey,
+          dateLabels: item.dateLabels,
+          upcoming: item.upcoming,
+          specialAugust: item.specialAugust,
+          concluded: !!item.concluded,
+          comingSoon: !!item.comingSoon,
+          onRequest: !!item.onRequest,
+          onRequestText: item.onRequestText || "",
+        };
+      }
+
+      var seenIds = stubs.map(function (item) {
+        return item.resourceId;
+      });
 
       /* Full catalog: text-first paint, then date patches. Windowed pages wait
          until dates are filtered so the list doesn't flash unrelated cards. */
       if (!range) {
-        render(stubs, false);
+        render(activeStubs, false, sortConcluded(concluded));
       }
 
-      return enrichPendingDates(stubs, apiKey).then(function (items) {
-        var kept = items;
-        if (range) {
-          /* Windowed landing: only bookable-in-range (+ August specials). */
-          kept = items.filter(function (item) {
-            return item && (item.specialAugust || item.upcoming);
-          });
-        }
-        var sorted = sortItems(kept).map(function (item) {
-          return {
-            resourceId: item.resourceId,
-            name: item.name,
-            description: item.description,
-            photo: item.photo,
-            sortKey: item.sortKey,
-            dateLabels: item.dateLabels,
-            upcoming: item.upcoming,
-            specialAugust: item.specialAugust,
-          };
-        });
-        writeCache(sorted);
-        /* Re-sort may reorder cards — keep text-first then hydrate images. */
-        render(sorted, false);
+      var missingPromise = wantConcluded
+        ? loadMissingConcluded(apiKey, seenIds, today, augustMode, range)
+        : Promise.resolve([]);
+      var missingSoonPromise = loadMissingComingSoon(
+        apiKey,
+        seenIds,
+        today,
+        augustMode,
+        range
+      );
+      var missingOnRequestPromise = loadMissingOnRequest(
+        apiKey,
+        seenIds,
+        today,
+        augustMode,
+        range
+      );
+
+      return Promise.all([
+        enrichPendingDates(activeStubs, apiKey),
+        missingPromise,
+        missingSoonPromise,
+        missingOnRequestPromise,
+      ]).then(function (parts) {
+        finish(
+          parts[0].concat(parts[2], parts[3]),
+          concluded.concat(parts[1])
+        );
       });
     });
   }
@@ -1369,7 +1705,7 @@
         if (!forceRefresh) {
           var cached = readCache();
           if (cached) {
-            render(cached, false);
+            render(cached.items, false, cached.concluded);
             return;
           }
         }

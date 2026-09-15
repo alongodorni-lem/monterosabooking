@@ -1577,8 +1577,62 @@ h1.hero__claim {
   color: #c62828;
 }
 
+.esperienze-card__on-request {
+  margin: 0 0 0.85rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #c62828;
+}
+
+.esperienze-card__on-request a {
+  color: #c62828;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
 .esperienze-card__actions {
   margin-top: auto;
+}
+
+.esperienze-card--concluded {
+  opacity: 0.96;
+  background: #fbfaf6;
+}
+
+.esperienze-card__dates--concluded {
+  color: var(--ink-soft);
+  font-weight: 600;
+  font-style: italic;
+}
+
+.esperienze-concluded {
+  margin-top: 2.5rem;
+  padding: 1.5rem 1.25rem 1.35rem;
+  border: 1px solid rgba(74, 107, 62, 0.22);
+  border-radius: 12px;
+  background: var(--cream);
+}
+
+.esperienze-concluded__title {
+  margin: 0 0 0.45rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.4vw, 1.7rem);
+  color: var(--green-dark);
+  line-height: 1.25;
+}
+
+.esperienze-concluded__lead {
+  margin: 0 0 1.25rem;
+  max-width: 46rem;
+  color: var(--ink-soft);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.esperienze-concluded__lead a {
+  color: var(--green-mid);
+  font-weight: 700;
 }
 
 @media (max-width: 720px) {
